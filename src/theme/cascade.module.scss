@@ -1,0 +1,35 @@
+.cascade {
+  [data-cascade] {
+    @for $i from 1 through 10 {
+      $scale: math.div(100 - ($i * 2), 100);
+      $top: $i * 16;
+
+      &:nth-child(#{$i}) {
+        [data-cascade-scale] {
+          top: #{$top}px;
+          height: calc(100% - #{$top}px);
+        }
+      }
+
+      &:nth-last-child(#{$i}) {
+        [data-cascade-scale] {
+          @include transform(scale(#{$scale}));
+        }
+      }
+    }
+
+    &:last-child {
+      [data-cascade-scale] {
+        @include transform(scale(1));
+      }
+    }
+
+    &:only-of-type {
+      [data-cascade-scale] {
+        top: 0;
+        height: 100%;
+        @include border-radius(0);
+      }
+    }
+  }
+}

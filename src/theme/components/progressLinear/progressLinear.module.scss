@@ -1,0 +1,84 @@
+@import '../../main.scss';
+
+.progressLinear {
+  height: 0.25em;
+  color: var(--vkit-color-default);
+  background-color: var(--vkit-color-contrast-1);
+  @include border-radius(5px);
+
+  &.indeterminate {
+    background-size: 200% 100%;
+    background-image: linear-gradient(
+      to right,
+      transparent 50%,
+      currentColor 50%,
+      currentColor 60%,
+      transparent 60%,
+      transparent 71.5%,
+      currentColor 71.5%,
+      currentColor 84%,
+      transparent 84%
+    );
+    @include animation(animation-progress-linear 2.5s infinite linear);
+
+    @include keyFrames(animation-progress-linear) {
+      0% {
+        background-size: 200% 100%;
+        background-position: left -31.25% top 0%;
+      }
+      50% {
+        background-size: 800% 100%;
+        background-position: left -49% top 0%;
+      }
+      100% {
+        background-size: 400% 100%;
+        background-position: left -102% top 0%;
+      }
+    }
+  }
+
+  .resize {
+    position: relative;
+    max-width: 100%;
+    min-width: 0%;
+    height: 0.25em;
+    display: block;
+    background-color: var(--vkit-color-default);
+    @include border-radius(5px);
+    @include transition(width 0.4s linear);
+
+    @each $name, $value in $colorsDefaultMarkupTint {
+      &.#{$name} {
+        background-color: $value;
+      }
+    }
+
+    &.default {
+      background-color: var(--vkit-color-default);
+    }
+
+    &.visiblePercent {
+      &::before {
+        content: attr(data-resize);
+        background-color: var(--vkit-color-default);
+        color: $colorLightContrast;
+        position: absolute;
+        right: -12px;
+        top: -22px;
+        font-size: 10px;
+        padding: 3px;
+        @include border-radius(50%);
+      }
+
+      &:after {
+        content: '';
+        top: -6px;
+        position: absolute;
+        right: -5px;
+        border-left: 6px solid transparent;
+        border-right: 6px solid transparent;
+        border-top: 6px solid var(--vkit-color-default);
+      }
+    }
+  }
+}

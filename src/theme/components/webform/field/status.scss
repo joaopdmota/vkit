@@ -1,0 +1,71 @@
+@import '../../../utils/color.scss';
+
+@mixin style-status($color, $color-alpha) {
+  .container {
+    .field {
+      border-color: $color;
+      @include box-shadow(0 0 0 4px $color-alpha);
+
+      .iconStatus {
+        span {
+          display: flex;
+        }
+
+        svg {
+          fill: $color;
+        }
+
+        @include transform(scale(1));
+      }
+    }
+
+    .textHelper {
+      color: $color;
+    }
+  }
+}
+
+.fieldStatus {
+  .container {
+    .field {
+      .iconStatus {
+        align-items: center;
+        display: flex;
+        flex: 0 0;
+        justify-content: center;
+        width: 0;
+        @include transition(transform 0.3s);
+        @include transform(scale(0));
+
+        svg {
+          fill: color(light, $colorsDefaultMarkupTint);
+        }
+      }
+    }
+  }
+
+  &.status {
+    .container {
+      .field {
+        .iconStatus {
+          width: 16px;
+          margin-right: 16px;
+        }
+      }
+    }
+  }
+
+  &.success {
+    @include style-status(
+      color(success, $colorsDefaultMarkupTint),
+      #{rgba(color(success, $colorsDefaultMarkupTint), 0.15)}
+    );
+  }
+
+  &.error {
+    @include style-status(
+      color(danger, $colorsDefaultMarkupTint),
+      #{rgba(color(danger, $colorsDefaultMarkupTint), 0.15)}
+    );
+  }
+}

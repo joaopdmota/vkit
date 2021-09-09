@@ -1,0 +1,16 @@
+@import '../../main.scss';
+@import './field/default.scss';
+@import './field/clearable.scss';
+@import './field/multiline.scss';
+@import './field/size.scss';
+@import './field/status.scss';
+@import './field/textHelper.scss';
+
+.textField {
+  @extend .fieldDefault;
+  @extend .fieldClearable;
+  @extend .fieldMultiline;
+  @extend .fieldSize;
+  @extend .fieldStatus;
+  @extend .fieldTextHelper;
+}

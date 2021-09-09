@@ -1,0 +1,38 @@
+@import '../../../main.scss';
+@import '../field/default.scss';
+@import '../field/clearable.scss';
+
+.search {
+  @extend .fieldDefault;
+  @extend .fieldClearable;
+
+  .container {
+    .field {
+      @include box-shadow(none);
+      border-color: inherit;
+      margin: 8px;
+      min-height: 36px;
+      padding-left: 8px;
+
+      .iconCustom {
+        margin-right: 8px;
+        width: 16px;
+      }
+
+      .inputContent {
+        &::after,
+        .input {
+          font-size: 16px;
+        }
+      }
+    }
+  }
+
+  @include mobile {
+    .container {
+      .field {
+        margin-top: 0;
+      }
+    }
+  }
+}

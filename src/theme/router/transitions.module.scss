@@ -1,0 +1,24 @@
+@import '../autoprefixer.scss';
+@import './animations/slide.scss';
+@import './animations/fade.scss';
+
+.transitions {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  z-index: 2;
+
+  .wrapper {
+    $transitionDuration: 0.3s;
+
+    @include transition(transform $transitionDuration, opacity $transitionDuration);
+    background-color: var(--vkit-color-contrast);
+    height: 100%;
+    left: 0;
+    top: 0;
+    width: 100%;
+  }
+
+  @extend .transitionFade;
+  @extend .transitionSlide;
+}

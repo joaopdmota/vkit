@@ -1,0 +1,94 @@
+@import '../../main.scss';
+@import '../../utils/color.scss';
+
+.inputBox {
+  position: relative;
+  display: inline-block;
+
+  .content {
+    display: flex;
+
+    .box {
+      width: 28px;
+      height: 28px;
+      cursor: pointer;
+      position: relative;
+      border: 1px solid color(light, $colorsDefaultMarkupTint);
+      background-color: var(--vkit-color-contrast-1);
+      @include transition(all 0.2s);
+      @include border-radius(50%);
+    }
+
+    &:hover .box {
+      border-color: color(light, $colorsDefaultMarkupTint);
+    }
+
+    .label {
+      align-items: center;
+      border-color: color(light, $colorsDefaultMarkupTint);
+      display: flex;
+      padding: 0 8px;
+    }
+  }
+
+  .input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+    display: none;
+
+    &:checked + .content .box {
+      border-color: var(--vkit-color-default);
+      background-color: var(--vkit-color-default);
+    }
+
+    &:focus + .content .box {
+      border-color: var(--vkit-color-default);
+    }
+
+    &:disabled + .content .box {
+      border-color: var(--vkit-color-contrast-6);
+      background-color: var(--vkit-color-contrast-2);
+      cursor: default;
+    }
+  }
+
+  &.small .content .box {
+    width: 18px;
+    height: 18px;
+  }
+
+  &.medium .content .box {
+    width: 28px;
+    height: 28px;
+  }
+
+  &.large .content .box {
+    width: 32px;
+    height: 32px;
+  }
+
+  &.error {
+    .content {
+      .box {
+        border-color: color(danger, $colorsDefaultMarkupTint);
+        @include box-shadow(0 0 0 4px rgba(color(danger, $colorsDefaultMarkupTint), 0.15));
+      }
+
+      span {
+        color: color(danger, $colorsDefaultMarkupTint);
+      }
+    }
+
+    input:checked + .content {
+      .box {
+        border-color: color(danger, $colorsDefaultMarkupTint);
+        background-color: color(danger, $colorsDefaultMarkupTint);
+      }
+    }
+  }
+
+  &.textLeft .content {
+    @include flex-direction(row-reverse);
+  }
+}

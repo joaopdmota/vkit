@@ -1,0 +1,133 @@
+import * as Field from './container'
+
+import React, { FocusEvent, useEffect, useState } from 'react'
+
+import { EventFieldType } from '../builder/types'
+import { StatusEnum } from '../builder/enums'
+import TextFieldType from './types/textField.type'
+import { TypeEnum } from './enums'
+import { WrapField } from '../builder/container/field'
+import { classesBuilder } from 'shared/utils'
+import style from 'theme/components/webform/textField.module.scss'
+
+const TextField: React.FC<TextFieldType> = ({
+  clearable,
+  disabled,
+  icon,
+  label,
+  large,
+  medium,
+  multiline,
+  onBlur,
+  onChange,
+  onFocus,
+  onKeyDown,
+  onKeyPress,
+  onKeyUp,
+  placeholder,
+  required,
+  shadow,
+  small,
+  status,
+  textHelper,
+  textHelperTop,
+  type = 'text',
+  value,
+  double,
+  step,
+  min,
+  max,
+}) => {
+  const [ttfTextHelper, setTtfTextHelper] = useState<string>()
+  const [ttfValue, setTtfValue] = useState<number | string | { min: number; max: number } | null>(
+    value || null,
+  )
+  const [isTtfFocus, setTtfFocus] = useState<boolean>(false)
+  const [ttfStatus, setTtfStatus] = useState<StatusEnum>()
+
+  useEffect(() => {
+    setTtfTextHelper(textHelper)
+    setTtfStatus(status)
+    if (value) setTtfValue(value)
+  }, [value, textHelper, status])
+
+  const handles: EventFieldType = {
+    onBlur: (event: FocusEvent<HTMLInputElement>): void => {
+      setTtfFocus(false)
+      onBlur?.(event)
+    },
+    onChange,
+    onFocus: (event: FocusEvent<HTMLInputElement>): void => {
+      setTtfFocus(true)
+      onFocus?.(event)
+    },
+    onKeyDown,
+    onKeyPress,
+    onKeyUp,
+  }
+
+  const ttfProps = {
+    [ttfStatus as string]: ttfStatus,
+    clearable: ttfValue && clearable,
+    disabled,
+    focus: isTtfFocus,
+    icon,
+    large,
+    medium,
+    multiline,
+    shadow,
+    small,
+    status: ttfStatus,
+    textField: 'textField',
+    textHelperTop,
+    type,
+  }
+
+  const ComponentField =
+    {
+      cep: Field.Cep,
+      cnpj: Field.Cnpj,
+      cpf: Field.Cpf,
+      date: Field.Date,
+      number: Field.Number,
+      password: Field.Password,
+      range: Field.Range,
+      text: Field.Text,
+    }[type as TypeEnum] || Field.Text
+
+  return (
+    <WrapField
+      className={classesBuilder(style, ttfProps)}
+      label={label}
+      required={required}
+      style={style}
+      textHelper={ttfTextHelper}
+      textHelperTop={textHelperTop}
+    >
+      <ComponentField
+        clearable={clearable}
+        disabled={disabled}
+        icon={icon}
+        large={large}
+        medium={medium}
+        multiline={multiline}
+        placeholder={placeholder}
+        required={required}
+        setTtfStatus={setTtfStatus}
+        setTtfTextHelper={setTtfTextHelper}
+        setTtfValue={setTtfValue}
+        small={small}
+        status={ttfStatus}
+        statusOrigin={status}
+        step={step}
+        double={double}
+        value={ttfValue}
+        min={min}
+        max={max}
+        {...handles}
+      />
+    </WrapField>
+  )
+}
+
+export default TextField

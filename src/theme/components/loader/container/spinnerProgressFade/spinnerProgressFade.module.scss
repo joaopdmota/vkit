@@ -1,0 +1,42 @@
+@import '../../../../main.scss';
+@import '../../../../utils/color.scss';
+
+.spinnerProgressFade {
+  width: 30px;
+  height: 30px;
+  border-width: 3px;
+  background: linear-gradient(var(--vkit-color-contrast-1) 30%, transparent 80%) 0 0/50% 100% no-repeat;
+
+  &.default {
+    background: linear-gradient(var(--vkit-color-default) 30%, transparent 80%) 0 0/50% 100% no-repeat;
+  }
+
+  @each $name,
+  $value in $colorsDefaultMarkupTint {
+    &.#{$name} {
+      background: linear-gradient(color($name, $colorsDefaultMarkupTint) 30%, transparent 80%) 0 0/50% 100% no-repeat;
+    }
+  }
+
+  &.full {
+    border-width: 5px;
+    height: 60px;
+    width: 60px;
+  }
+
+  @include mask(radial-gradient(farthest-side,
+      transparent calc(100% - 5px - 0.5px),
+      $colorDarkBlackless calc(100% - 5px + 0.5px)));
+  @include animation(spin 1.5s linear infinite);
+  @include border-radius(50%);
+
+  @include keyFrames(spin) {
+    0% {
+      transform: rotate(0deg);
+    }
+
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+}

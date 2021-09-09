@@ -1,0 +1,103 @@
+@import '../../main.scss';
+@import '../../utils/color.scss';
+
+.menu {
+  display: flex;
+  align-items: flex-start;
+  width: 250px;
+  font-family: 'Ubuntu-bold';
+  overflow: hidden;
+  @include transition(width 0.2s linear);
+  @include flex-direction(column);
+
+  .wrapper {
+    width: 100%;
+    @include box-sizing(border-box);
+
+    .listItems {
+      .title {
+        padding: 8px 16px;
+        color: var(--vkit-color-default);
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        width: 210px;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        @include transition(padding 0.2s linear, width 0.2s linear);
+      }
+
+      .item {
+        height: 100%;
+        padding: 16px 15px 16px 14px;
+        @include box-sizing(border-box);
+
+        &.active {
+          border-right: 4px solid var(--vkit-color-default);
+          background: rgba($colorDefault, 0.1);
+
+          .itemRoute {
+            span {
+              svg {
+                fill: var(--vkit-color-default);
+              }
+            }
+
+            .label {
+              color: var(--vkit-color-default);
+            }
+          }
+        }
+
+        .itemRoute {
+          display: flex;
+          align-items: center;
+          text-align: left;
+          background: unset;
+          cursor: pointer;
+
+          span {
+            svg {
+              fill: color(light, $colorsDefaultMarkupTint);
+            }
+          }
+          .label {
+            font-family: 'WorkSans-regular';
+            font-weight: 600;
+            margin-left: 8px;
+            font-size: 14px;
+            width: 190px;
+            opacity: 1;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            color: var(--vkit-color-contrast-9);
+            @include transition(width 0.2s linear, opacity 0.2s ease-in-out);
+          }
+        }
+      }
+    }
+  }
+
+  &:not(.expand) {
+    width: 50px;
+
+    .wrapper {
+      .listItems {
+        .title {
+          width: 1px;
+          overflow: hidden;
+          padding-right: 11px;
+          padding-left: 18px;
+        }
+        .item {
+          .itemRoute {
+            .label {
+              opacity: 0;
+            }
+          }
+        }
+      }
+    }
+  }
+}

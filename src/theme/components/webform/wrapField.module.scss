@@ -1,0 +1,8 @@
+@import '../../main.scss';
+@import './field/default.scss';
+@import './field/size.scss';
+
+.wrapField {
+  @extend .fieldDefault;
+  @extend .fieldSize;
+}

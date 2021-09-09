@@ -1,0 +1,40 @@
+@import '../../main.scss';
+@import '../../utils/color.scss';
+
+.icon {
+  align-items: center;
+  display: flex;
+  fill: var(--vkit-color-contrast-5);
+
+  @each $name, $value in $colorsDefaultMarkupTint {
+    &.#{$name} {
+      fill: $value;
+
+      &:not(.solo) {
+        background-color: color($name, $colorsDefaultMarkup);
+      }
+    }
+  }
+
+  &.default {
+    fill: var(--vkit-color-default);
+
+    &:not(.solo) {
+      background-color: var(--vkit-color-default-8);
+    }
+  }
+
+  .iconCustom {
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+
+    $iconsCustom: 'pdf' 'excel' 'word';
+
+    @each $name in $iconsCustom {
+      &.icon#{$name} {
+        background-image: url('../../assets/icons/#{$name}.svg');
+      }
+    }
+  }
+}

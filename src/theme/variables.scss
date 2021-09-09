@@ -1,0 +1,77 @@
+$fonts: (
+  ubuntu: (
+    light: 'Ubuntu-Light',
+    lightItalic: 'Ubuntu-LightItalic',
+    medium: 'Ubuntu-Medium',
+    mediumItalic: 'Ubuntu-MediumItalic',
+    regular: 'Ubuntu-Regular',
+    italic: 'Ubuntu-Italic',
+    bold: 'Ubuntu-Bold',
+    boldItalic: 'Ubuntu-BoldItalic',
+  ),
+  worksans: (
+    light: 'WorkSans-Light',
+    lightItalic: 'WorkSans-LightItalic',
+    medium: 'WorkSans-Medium',
+    mediumItalic: 'WorkSans-MediumItalic',
+    regular: 'WorkSans-Regular',
+    italic: 'WorkSans-Italic',
+    bold: 'WorkSans-Bold',
+    boldItalic: 'WorkSans-BoldItalic',
+  ),
+);
+
+$colorsDefaultMarkup: (
+  light: #ecf0f5,
+  danger: #ffe3e2,
+  info: #dff9fd,
+  success: #eff7da,
+  warning: #fff6c9,
+);
+
+$colorsDefaultMarkupTint: (
+  light: #8997a6,
+  danger: #ff413a,
+  info: #29d7f2,
+  success: #93c90a,
+  warning: #ecaa00,
+);
+
+$colorDefault: #007bff;
+$colorLightContrast: #f7f8f9;
+$colorDarkContrast: #1e222d;
+$colorDarkBlackless: #000000;
+
+@each $fontFamily, $map in $fonts {
+  @each $key, $value in $map {
+    @font-face {
+      font-family: '#{$value}';
+      src: url('assets/fonts/#{$fontFamily}/#{$value}.ttf');
+    }
+  }
+}
+
+:root {
+  --vkit-bg-image: url('assets/images/bg-full-light.png');
+  --vkit-logo-150x150: url('assets/images/logo-150x150.png');
+
+  --vkit-color-default: #{$colorDefault};
+  --vkit-color-contrast: #{$colorLightContrast};
+  --vkit-color-blackless: #{lighten($colorDarkBlackless, 80%)};
+
+  @for $i from 1 through 9 {
+    --vkit-color-default-#{$i}: #{lighten($colorDefault, $i * 5)};
+    --vkit-color-contrast-#{$i}: #{darken($colorLightContrast, $i * 5)};
+  }
+}
+
+[data-theme='dark'] {
+  --vkit-bg-image: url('assets/images/bg-full-dark.png');
+
+  --vkit-color-contrast: #{$colorDarkContrast};
+  --vkit-color-blackless: #{lighten($colorDarkBlackless, 8%)};
+
+  @for $i from 1 through 9 {
+    --vkit-color-contrast-#{$i}: #{lighten($colorDarkContrast, $i * 5)};
+  }
+}

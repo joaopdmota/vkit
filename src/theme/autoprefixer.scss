@@ -1,0 +1,87 @@
+@import './utils/browserify.scss';
+
+@mixin animation($parameters) {
+  @include browserify(animation, $parameters, 'chrome' 'firefox' 'opera');
+}
+
+@mixin border-radius($parameters) {
+  @include browserify(border-radius, $parameters, 'chrome' 'firefox');
+}
+
+@mixin box-shadow($parameters...) {
+  @include browserify(box-shadow, $parameters, 'chrome' 'firefox');
+}
+
+@mixin box-sizing($parameters) {
+  @include browserify(box-sizing, $parameters, 'chrome' 'firefox');
+}
+
+@mixin filter($parameters) {
+  @include browserify(filter, $parameters, 'chrome' 'firefox');
+}
+
+@mixin transform($parameters) {
+  @include browserify(transform, $parameters, 'chrome' 'firefox' 'opera');
+}
+
+@mixin transformOrigin($parameters...) {
+  @include browserify(transform-origin, $parameters, 'chrome' 'firefox' 'opera');
+}
+
+@mixin transition($parameters...) {
+  @include browserify(transition, $parameters, 'chrome' 'firefox' 'opera');
+}
+
+@mixin setTimeout($parameters, $duration) {
+  @include browserify(transition-property, $parameters, 'chrome' 'firefox' 'opera');
+  @include browserify(transition-duration, $duration, 'chrome' 'firefox' 'opera');
+}
+
+@mixin user-select-none {
+  @include browserify(user-select, none, 'chrome' 'firefox' 'opera');
+}
+
+@mixin flex-direction($direction) {
+  @include browserify(flex-direction, $direction, 'chrome' 'firefox' 'explorer');
+}
+
+@mixin mask($parameters) {
+  @include browserify(mask, $parameters, 'chrome' 'firefox');
+}
+
+@mixin blurBackdrop($parameter) {
+  @include browserify(backdrop-filter, blur($parameter), 'chrome');
+
+  @supports not ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
+    background: #{rgba($colorDarkBlackless, 0.5)};
+  }
+}
+
+@mixin appearance($parameter) {
+  @include browserify(appearance, $parameter, 'chrome' 'firefox' 'explorer');
+}
+
+@mixin tap-highlight-color($parameter) {
+  @include browserify(tap-highlight-color, $parameter, 'chrome' 'firefox' 'explorer');
+}
+
+@mixin keyFrames($nameAnimate) {
+  @-webkit-keyframes #{$nameAnimate} {
+    @content;
+  }
+  @-moz-keyframes #{$nameAnimate} {
+    @content;
+  }
+  @-o-keyframes #{$nameAnimate} {
+    @content;
+  }
+  @keyframes #{$nameAnimate} {
+    @content;
+  }
+}
+
+@mixin mobile($mobileScreenWidth: 768px) {
+  @media screen and (max-width: $mobileScreenWidth) {
+    @content;
+  }
+}

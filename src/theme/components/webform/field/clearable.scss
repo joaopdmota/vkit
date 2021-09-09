@@ -1,0 +1,34 @@
+.fieldClearable {
+  .container {
+    .field {
+      .iconClerable {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 16px;
+        margin-right: 16px;
+        cursor: pointer;
+        @include transition(transform 0.3s);
+        @include transform(scale(0));
+
+        span {
+          display: flex;
+        }
+
+        svg {
+          fill: color(light, $colorsDefaultMarkupTint);
+        }
+      }
+    }
+  }
+
+  &.clearable {
+    .container {
+      .field {
+        .iconClerable {
+          @include transform(scale(1));
+        }
+      }
+    }
+  }
+}

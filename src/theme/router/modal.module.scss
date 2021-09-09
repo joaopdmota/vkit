@@ -1,0 +1,72 @@
+@use "sass:math";
+@import '../autoprefixer.scss';
+
+.modal {
+  height: 100%;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 15;
+
+  .modalBox {
+    $transitionDuration: 0.3s;
+
+    @include transformOrigin(top center);
+    @include flex-direction(column);
+    @include transition(
+      top $transitionDuration,
+      opacity $transitionDuration,
+      transform $transitionDuration,
+      border-radius $transitionDuration
+    );
+    @include border-radius(8px 8px 0 0);
+    align-self: stretch;
+    background-color: var(--vkit-color-contrast);
+    top: 100%;
+    display: flex;
+    display: inline-block;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: 15;
+    width: 100%;
+    height: 100%;
+
+    @include mobile {
+      @include border-radius(24px 24px 0 0);
+    }
+
+    .header {
+      border-bottom: 1px solid var(--vkit-color-contrast-1);
+      color: var(--vkit-color-contrast-9);
+      padding-bottom: 16px;
+      margin: 0 16px;
+
+      .swipe {
+        width: 100%;
+        height: 16px;
+
+        &::before {
+          @include border-radius(50px);
+          background: var(--vkit-color-contrast-1);
+          content: '';
+          display: block;
+          height: 4px;
+          margin: 8px auto 0;
+          width: 80px;
+        }
+      }
+
+      .buttonClose {
+        padding-right: 16px;
+      }
+    }
+  }
+
+  &.open {
+    .modalBox {
+      opacity: 1;
+    }
+  }
+}

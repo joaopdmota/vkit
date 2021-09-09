@@ -1,0 +1,8 @@
+export { default as Cep } from './cep'
+export { default as Cnpj } from './cnpj'
+export { default as Cpf } from './cpf'
+export { default as Date } from './date'
+export { default as Number } from './number'
+export { default as Password } from './password'
+export { default as Range } from './range'
+export { default as Text } from './text'

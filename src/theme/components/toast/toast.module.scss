@@ -1,0 +1,170 @@
+@import '../../main.scss';
+
+.toast {
+  z-index: 3;
+
+  &.static {
+    position: relative;
+    width: 100%;
+  }
+
+  &:not(&.static) {
+    position: fixed;
+    width: 400px;
+    padding: 8px;
+  }
+
+  $aligns: 'left' 'right' 'center';
+  $positions: 'top' 'bottom' 'center';
+
+  @for $i from 1 through length($positions) {
+    $position: #{nth($positions, $i)};
+
+    &.position_#{$position} {
+      @if $i < 3 {
+        #{$position}: 0;
+
+        .container {
+          .layer {
+            &.show {
+              #{$position}: 0 !important;
+            }
+          }
+        }
+      } @else {
+        &:not(&.static) {
+          top: 50%;
+          @include transform(translateY(-50%));
+        }
+
+        .container {
+          .layer {
+            opacity: 0;
+
+            &.show {
+              opacity: 1;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  @for $i from 1 through length($aligns) {
+    $align: #{nth($aligns, $i)};
+    &.align_#{$align} {
+      @if $i < 3 {
+        #{$align}: 0;
+
+        .container {
+          .layer {
+            #{$align}: -108%;
+
+            &.show {
+              #{$align}: 0;
+            }
+          }
+        }
+      } @else {
+        &:not(&.static) {
+          left: 50%;
+          @include transform(translateX(-50%));
+        }
+      }
+    }
+  }
+
+  &:not(&.static) {
+    &.position_center {
+      &.align_center {
+        top: 50%;
+        left: 50%;
+        @include transform(translate(-50%, -50%));
+      }
+    }
+  }
+
+  .container {
+    width: 100%;
+    position: relative;
+    z-index: 1;
+
+    .node {
+      position: relative;
+
+      .layer {
+        position: relative;
+        background-color: var(--vkit-color-contrast);
+        overflow: hidden;
+        box-sizing: border-box;
+        margin-bottom: 8px;
+        @include transition(
+          height 0.5s ease,
+          top 0.5s ease,
+          right 0.5s ease,
+          bottom 0.5s ease,
+          left 0.5s ease,
+          opacity 0.8s ease-in-out
+        );
+
+        &.outlined {
+          border: 1px solid var(--vkit-color-contrast-3);
+        }
+
+        &.rounded {
+          @include border-radius(5px);
+        }
+
+        &.shadow {
+          @for $i from 0 through 10 {
+            &.elevation#{$i} {
+              @include box-shadow(0 #{$i}px #{$i + 10}px var(--vkit-color-blackless));
+            }
+          }
+        }
+
+        .context {
+          padding: 16px;
+          overflow: hidden;
+
+          .action {
+            float: right;
+            margin-left: 8px;
+          }
+        }
+
+        .timeDuration {
+          height: 0.1em;
+          color: var(--vkit-color-default);
+          background-color: var(--vkit-color-contrast-1);
+
+          .progress {
+            position: relative;
+            width: 100%;
+            height: 0.1em;
+            display: block;
+            background-color: var(--vkit-color-default);
+
+            @each $name, $value in $colorsDefaultMarkupTint {
+              &.#{$name} {
+                background-color: $value;
+              }
+            }
+          }
+        }
+      }
+
+      .layerEmpty {
+        overflow: hidden;
+        height: 0 !important;
+        @include transition(height 0.5s ease);
+      }
+    }
+  }
+
+  &:not(&.static) {
+    @include mobile {
+      width: calc(100% - 16px);
+    }
+  }
+}

@@ -1,0 +1,57 @@
+.tabs {
+  .tabsContent {
+    box-sizing: border-box;
+    margin: 8px;
+    position: relative;
+    height: 32px;
+    display: flex;
+    align-items: stretch;
+
+    .tabsBox {
+      position: absolute;
+      display: flex;
+      justify-content: center;
+      align-items: stretch;
+      width: 100%;
+
+      .button {
+        @include border-radius(50px);
+        @include transition(background-color 0.3s);
+        align-items: center;
+        background-color: transparent;
+        color: var(--vkit-color-default-1);
+        cursor: pointer;
+        display: flex;
+        font-family: 'Ubuntu-bold';
+        font-size: 14px;
+        justify-content: center;
+        padding: 8px;
+        width: 100%;
+        white-space: nowrap;
+        z-index: 1;
+
+        &:not(:last-of-type) {
+          margin-right: 12px;
+        }
+
+        &:not(.active):hover {
+          background-color: var(--vkit-color-contrast-2);
+        }
+      }
+    }
+
+    .lavalamp {
+      @include border-radius(50px);
+      background-color: var(--vkit-color-default-8);
+      height: 100%;
+      width: 100px;
+      position: absolute;
+      top: 0;
+      z-index: 0;
+
+      &.animate {
+        @include transition(left 0.3s, width 0.3s);
+      }
+    }
+  }
+}

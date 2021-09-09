@@ -1,0 +1,223 @@
+@import '../../main.scss';
+
+.wrapper {
+  width: max-content;
+
+  &.full {
+    width: 100%;
+
+    button {
+      width: 100%;
+    }
+  }
+
+  &.center {
+    text-align: center;
+  }
+
+  .tabMenu {
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+
+    .tabsWrapper {
+      display: flex;
+      position: relative;
+      align-items: stretch;
+      width: 100%;
+    }
+
+    &.default {
+      @extend .rounded;
+    }
+
+    &.rounded {
+      .tabsWrapper {
+        margin: 8px;
+      }
+
+      @include border-radius(50px);
+      border: 1px solid var(--vkit-color-contrast-1);
+
+      button {
+        z-index: 1;
+        @include border-radius(50px);
+
+        &:not(:last-of-type) {
+          margin-right: 12px;
+        }
+
+        &:not(.disabled):not(.focus) {
+          &:hover {
+            background-color: var(--vkit-color-contrast-1);
+          }
+        }
+      }
+    }
+
+    &.outlined {
+      border-bottom: 2px solid var(--vkit-color-contrast-1);
+
+      button {
+        border-bottom: 2px solid transparent;
+
+        &:not(.disabled):not(.focus) {
+          &:hover {
+            > span {
+              svg {
+                fill: var(--vkit-color-contrast-4);
+              }
+            }
+
+            color: var(--vkit-color-contrast-4);
+            border-bottom: 2px solid var(--vkit-color-contrast-4);
+          }
+        }
+      }
+    }
+
+    &.solo {
+      border-bottom: 0;
+
+      button {
+        &:not(.disabled):not(.focus) {
+          &:hover {
+            > span {
+              svg {
+                fill: var(--vkit-color-contrast-4);
+              }
+            }
+
+            color: var(--vkit-color-contrast-4);
+          }
+        }
+      }
+    }
+
+    button {
+      background: unset;
+      font-family: 'Ubuntu-bold';
+      font-size: 14px;
+      padding: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--vkit-color-contrast-9);
+      width: 100%;
+
+      > span {
+        pointer-events: none;
+      }
+
+      &.disabled {
+        cursor: not-allowed;
+        color: var(--vkit-color-contrast-5);
+      }
+
+      &.top {
+        @include flex-direction(column-reverse);
+
+        > span {
+          margin-bottom: 8px;
+        }
+      }
+
+      &.right {
+        > span {
+          margin-left: 8px;
+        }
+      }
+
+      &.left {
+        @include flex-direction(row-reverse);
+
+        > span {
+          margin-right: 8px;
+        }
+      }
+
+      &.bottom {
+        @include flex-direction(column);
+
+        > span {
+          margin-top: 8px;
+        }
+      }
+
+      &:hover {
+        &:not(.disabled) {
+          cursor: pointer;
+        }
+      }
+
+      &:not(.disabled),
+      &.focus {
+        color: var(--vkit-color-default-1);
+
+        > span {
+          svg {
+            fill: var(--vkit-color-default-1);
+          }
+        }
+      }
+    }
+
+    .animation {
+      &.default {
+        @extend .rounded;
+      }
+
+      &.rounded {
+        background-color: var(--vkit-color-default-8);
+        position: absolute;
+        height: 100%;
+        top: 0;
+        z-index: 0;
+        @include border-radius(50px);
+      }
+
+      &.outlined {
+        background-color: var(--vkit-color-default-1);
+        position: absolute;
+        height: 2px;
+        bottom: 0;
+        z-index: 0;
+        border-radius: 8px;
+      }
+    }
+
+    .transition {
+      @include transition(all 0.3s ease);
+    }
+  }
+
+  .tabView {
+    padding: 10px 0;
+
+    .tabContent {
+      display: none;
+
+      &.active {
+        display: block;
+      }
+    }
+  }
+
+  @include mobile {
+    width: 100%;
+
+    .tabMenu {
+      overflow-x: auto;
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
+    }
+
+    button {
+      flex-wrap: nowrap;
+      white-space: nowrap;
+    }
+  }
+}

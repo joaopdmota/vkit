@@ -1,0 +1,128 @@
+@import '../../main.scss';
+
+.tooltip {
+  position: relative;
+
+  .children {
+    width: max-content;
+  }
+
+  .layer {
+    background-color: var(--vkit-color-contrast);
+    border: 1px solid var(--vkit-color-contrast-3);
+    position: fixed;
+    z-index: 4;
+    padding: 20px;
+    min-width: 120px;
+    max-width: 300px;
+    display: flex;
+    @include animation(fadeIn 0.5s);
+    @include border-radius(5px);
+    @include box-shadow(0 0 8px var(--vkit-color-blackless));
+    @include mobile(768px) {
+      max-width: calc(100% / 2);
+    }
+
+    @include keyFrames(fadeIn) {
+      0% {
+        opacity: 0;
+      }
+
+      100% {
+        opacity: 1;
+      }
+    }
+
+    .text {
+      width: max-content;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 4;
+      -webkit-box-orient: vertical;
+      color: var(--vkit-color-contrast-9);
+    }
+
+    &::before,
+    &::after {
+      content: '';
+      position: absolute;
+    }
+
+    &.positionBottom,
+    &.positionTop {
+      &::before,
+      &::after {
+        right: calc(50% - 10px);
+      }
+    }
+
+    &.positionBottom {
+      &::before,
+      &::after {
+        top: -11px;
+        border-left: 10px solid transparent;
+        border-right: 10px solid transparent;
+        border-bottom: 10px solid var(--vkit-color-contrast-3);
+      }
+
+      &::after {
+        border-bottom: 10px solid var(--vkit-color-contrast);
+        padding-top: 1px;
+      }
+    }
+
+    &.positionTop {
+      &::before,
+      &::after {
+        bottom: -11px;
+        border-left: 10px solid transparent;
+        border-right: 10px solid transparent;
+        border-top: 10px solid var(--vkit-color-contrast-3);
+      }
+
+      &::after {
+        border-top: 10px solid var(--vkit-color-contrast);
+        padding-top: 1px;
+      }
+    }
+
+    &.positionLeft,
+    &.positionRight {
+      &::before,
+      &::after {
+        top: calc(50% - 10px);
+      }
+    }
+
+    &.positionLeft {
+      &::before,
+      &::after {
+        right: -10px;
+        border-top: 10px solid transparent;
+        border-bottom: 10px solid transparent;
+        border-left: 10px solid var(--vkit-color-contrast-3);
+      }
+
+      &::after {
+        border-left: 10px solid var(--vkit-color-contrast);
+        padding-left: 1px;
+      }
+    }
+
+    &.positionRight {
+      &::before,
+      &::after {
+        left: -11px;
+        border-top: 10px solid transparent;
+        border-bottom: 10px solid transparent;
+        border-right: 10px solid var(--vkit-color-contrast-3);
+      }
+
+      &::after {
+        border-right: 10px solid var(--vkit-color-contrast);
+        padding-right: 1px;
+      }
+    }
+  }
+}

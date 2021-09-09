@@ -1,0 +1,50 @@
+@import '../../../../main.scss';
+@import '../../../../utils/color.scss';
+
+.dotLoader {
+  text-align: center;
+  width: auto;
+
+  .dot {
+    width: 10px;
+    height: 10px;
+    background-color: var(--vkit-color-contrast-1);
+    display: inline-block;
+    @include border-radius(100%);
+    @include animation(bounceDelay 1.4s infinite ease-in-out both);
+
+    &.default {
+      background-color: var(--vkit-color-default);
+    }
+
+    @each $name,
+    $value in $colorsDefaultMarkupTint {
+      &.#{$name} {
+        background-color: color($name, $colorsDefaultMarkupTint);
+      }
+    }
+
+    @include keyFrames(bounceDelay) {
+
+      0%,
+      80%,
+      100% {
+        @include transform(scale(0));
+      }
+
+      40% {
+        @include transform(scale(1));
+      }
+    }
+
+    $animationsList: -0.32s -0.16s;
+
+    @each $animation in $animationsList {
+      $i: index($animationsList, $animation);
+
+      &:nth-child(#{$i}) {
+        animation-delay: $animation;
+      }
+    }
+  }
+}

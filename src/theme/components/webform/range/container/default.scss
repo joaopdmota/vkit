@@ -1,0 +1,151 @@
+.rangeDefault {
+  position: relative;
+
+  .sliderTooltips {
+    @include transition(opacity 0.3s);
+    height: 0;
+    opacity: 0;
+    pointer-events: none;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 2;
+
+    .sliderTooltip {
+      @include border-radius(5px);
+      @include transition(bottom 0.3s);
+      background: var(--vkit-color-contrast-9);
+      border: 1px solid var(--vkit-color-contrast);
+      bottom: -15px;
+      color: var(--vkit-color-contrast);
+      display: inline-block;
+      font-size: 14px;
+      padding: 4px 8px;
+      position: absolute;
+    }
+  }
+
+  &:hover {
+    .sliderTooltips {
+      opacity: 1;
+
+      .sliderTooltip {
+        bottom: 0;
+      }
+    }
+  }
+
+  .slider {
+    height: 16px;
+    margin-top: 4px;
+    position: relative;
+    width: 100%;
+    z-index: 4;
+
+    .sliderTrack,
+    .sliderRange {
+      @include center-y;
+    }
+
+    .sliderTrack,
+    .sliderRange {
+      border-radius: 10px;
+    }
+
+    .sliderTrack {
+      background-color: var(--vkit-color-contrast-5);
+      width: 100%;
+      z-index: 1;
+      height: 3px;
+    }
+
+    .sliderRange {
+      @include transition(background-color 0.3s);
+      background-color: var(--vkit-color-default);
+      height: 6px;
+      z-index: 2;
+    }
+
+    .thumb,
+    .thumb::-webkit-slider-thumb {
+      @include appearance(none);
+      @include tap-highlight-color(transparent);
+    }
+
+    .thumb {
+      @include center-y;
+      height: 0;
+      margin: 0 -8px;
+      outline: none;
+      pointer-events: none;
+      width: calc(100% + 16px);
+      z-index: 4;
+
+      &:focus {
+        z-index: 6;
+      }
+
+      @include thumb-by-browser {
+        @include transition(background-color 0.3s);
+        background-color: var(--vkit-color-default);
+        border-radius: 50%;
+        border: none;
+        cursor: pointer;
+        height: 16px;
+        pointer-events: all;
+        position: relative;
+        width: 16px;
+      }
+
+      &.thumbIntangible {
+        @include thumb-by-browser {
+          pointer-events: none;
+        }
+      }
+    }
+
+    span {
+      display: none;
+    }
+
+    .thumb:hover ~ span {
+      display: block;
+    }
+  }
+
+  &.disabled {
+    .sliderRange {
+      background-color: var(--vkit-color-contrast-5);
+    }
+
+    .slider {
+      .thumb:disabled {
+        @include thumb-by-browser {
+          background-color: var(--vkit-color-contrast-5);
+        }
+      }
+    }
+  }
+
+  .traces {
+    @include box-sizing(border-box);
+    display: flex;
+    height: 4px;
+    justify-content: space-between;
+    margin-top: 4px;
+    width: 100%;
+
+    .trace {
+      background-color: var(--vkit-color-contrast-5);
+      width: 1px;
+    }
+  }
+
+  .limitText {
+    color: var(--vkit-color-contrast-9);
+    display: flex;
+    margin-top: 5px;
+    font-size: 14px;
+    justify-content: space-between;
+  }
+}

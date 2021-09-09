@@ -1,0 +1,23 @@
+@import '../../../../main.scss';
+
+.logo {
+  width: 30px;
+  height: 30px;
+  background-size: cover;
+  background-image: var(--vkit-logo-150x150);
+  @include animation(pulse-animation 1.5s infinite);
+
+  @keyframes pulse-animation {
+    0% {
+      @include transform(scale(1));
+    }
+
+    50% {
+      @include transform(scale(1.2));
+    }
+
+    100% {
+      @include transform(scale(1));
+    }
+  }
+}

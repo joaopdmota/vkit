@@ -1,0 +1,26 @@
+.transitionShowHide {
+  .showHide {
+    display: block;
+    height: 0;
+    overflow: hidden;
+    position: relative;
+    @include transition(all 0.3s ease);
+    width: 100%;
+    opacity: 0;
+
+    .contentShowHide {
+      display: block;
+      @include transform(translateY(-10%));
+      @include transition(all 0.3s ease);
+      width: 100%;
+    }
+
+    &.visible {
+      opacity: 1;
+
+      .contentShowHide {
+        @include transform(translateY(0));
+      }
+    }
+  }
+}

@@ -1,0 +1,55 @@
+@import '../../main.scss';
+
+.box {
+  display: flex;
+  align-self: stretch;
+  overflow: hidden;
+  background-color: var(--vkit-color-contrast-1);
+  @include flex-direction(column);
+
+  .wrapper {
+    background-color: var(--vkit-color-contrast);
+    overflow: hidden;
+    box-sizing: content-box;
+  }
+
+  &.outlined {
+    border: 1px solid var(--vkit-color-contrast-3);
+  }
+
+  &.rounded {
+    @include border-radius(9px);
+  }
+
+  &.sheet {
+    &.rounded {
+      .wrapper {
+        @include border-radius(5px);
+      }
+    }
+
+    @for $i from 0 through 24 {
+      &.elevation#{$i} {
+        padding: #{$i}px;
+
+        @if $i > 0 {
+          border-width: 0;
+
+          &.outlined {
+            .wrapper {
+              border: 1px solid var(--vkit-color-contrast-3);
+            }
+          }
+        }
+      }
+    }
+  }
+
+  &.card {
+    @for $i from 0 through 10 {
+      &.elevation#{$i} {
+        @include box-shadow(0 #{$i}px #{$i + 10}px var(--vkit-color-blackless));
+      }
+    }
+  }
+}

@@ -1,0 +1,98 @@
+@use "sass:math";
+@import '../../main.scss';
+@import '../../utils/color.scss';
+@import '../../utils/shineSkeleton.scss';
+
+.image {
+  overflow: hidden;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+
+  &.emptyImage {
+    display: flex;
+    justify-content: center;
+    background-color: var(--vkit-color-contrast-2);
+
+    > span {
+      svg {
+        fill: var(--vkit-color-contrast-5);
+      }
+    }
+  }
+
+  $sizes: 'minor' 'small' 'medium' 'larger' 'xLarger';
+  @for $i from 1 through length($sizes) {
+    &.#{nth($sizes, $i)} {
+      width: #{$i * 20}px;
+      height: #{$i * 20}px;
+
+      &.emptyImage {
+        > span {
+          @include transform(scale(math.div($i, 2)));
+        }
+      }
+
+      &.alt {
+        > span {
+          @include transform(scale(math.div($i, 2)));
+        }
+      }
+    }
+  }
+
+  &.alt {
+    display: flex;
+    align-items: center;
+
+    @each $name, $color in $colorsDefaultMarkup {
+      $i: index($colorsDefaultMarkup, $name $color);
+      &.color#{$i} {
+        background-color: $color;
+        color: color($name, $colorsDefaultMarkupTint);
+      }
+    }
+
+    &.color0 {
+      background-color: var(--vkit-color-default);
+      color: $colorLightContrast;
+    }
+
+    > span {
+      font-family: 'Ubuntu-bold';
+    }
+  }
+
+  &.async {
+    background-color: var(--vkit-color-contrast-2);
+    position: relative;
+    @include transform(translateX(0));
+
+    &::after {
+      content: '';
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      @include shineSkeleton(1.5s, shineLight);
+    }
+  }
+
+  &.rounded {
+    @include border-radius(10%);
+  }
+
+  &.circle {
+    @include border-radius(50%);
+  }
+
+  &.shadow {
+    @for $i from 0 through 10 {
+      &.elevation#{$i} {
+        @include box-shadow(0 #{$i}px #{$i + 10}px var(--vkit-color-blackless));
+      }
+    }
+  }
+}

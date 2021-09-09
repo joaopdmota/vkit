@@ -1,0 +1,15 @@
+@import '../../main.scss';
+
+.container {
+  @include flex-direction(column);
+  align-self: stretch;
+  display: flex;
+  flex-grow: 1;
+  background-color: var(--vkit-color-contrast);
+
+  .wrapper {
+    background-color: inherit;
+    height: 100%;
+    overflow: hidden;
+  }
+}

@@ -1,0 +1,1 @@
+export const DEFAULT_SCROLLBAR_HEIGHT = 116

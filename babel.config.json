@@ -1,0 +1,55 @@
+{
+  "presets": [
+    [
+      "@babel/preset-react",
+      {
+        "throwIfNamespace": false,
+        "flow": true,
+        "typescript": true,
+        "runtime": "classic"
+      }
+    ],
+    "@babel/env",
+    "@babel/preset-typescript"
+  ],
+  "plugins": [
+    [
+      "module-resolver",
+      {
+        "root": ["./src"],
+        "alias": {
+          "components": "./src/components",
+          "context": "./src/context",
+          "modules": "./src/modules",
+          "services": "./src/services",
+          "shared": "./src/shared",
+          "theme": "./src/theme",
+          "assets": "./src/theme/assets",
+          "router": "./src/router"
+        }
+      }
+    ],
+    [
+      "@babel/plugin-transform-runtime",
+      {
+        "regenerator": true
+      }
+    ]
+  ],
+  "env": {
+    "production": {
+      "compact": true,
+      "comments": false,
+      "minified": true,
+      "plugins": [["transform-remove-console"]]
+    }
+  },
+  "ignore": [
+    "node_modules",
+    "**/*.stories.*",
+    "**/__tests__",
+    "**/*.spec.*",
+    "**/*.md",
+    "src/**/index.d.ts"
+  ]
+}

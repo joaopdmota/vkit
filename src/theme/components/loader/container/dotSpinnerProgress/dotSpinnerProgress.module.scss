@@ -1,0 +1,81 @@
+@import '../../../../main.scss';
+@import '../../../../utils/color.scss';
+
+.dotSpinnerProgress {
+  width: 30px;
+  height: 30px;
+  $animation: -1.1;
+  $animationFrame: -0.1;
+
+  @for $i from 1 through 12 {
+
+    .dot:nth-child(#{$i}) {
+      transform: rotate(#{$i * 30}deg);
+
+      &:before {
+        @if ($i > 2) {
+          $animation: $animation - $animationFrame;
+          animation-delay: #{$animation}s;
+        }
+
+        @else {
+          animation-delay: $animation;
+        }
+      }
+    }
+  }
+
+
+  &.full {
+    height: 50px;
+    width: 50px;
+    position: relative;
+  }
+
+  .dot {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+
+    &:before {
+      content: '';
+      display: block;
+      margin: 0 auto;
+      width: 20%;
+      height: 20%;
+      background-color: var(--vkit-color-contrast-1);
+      @include border-radius(100%);
+      @include animation(circleFadeDelay 1.2s infinite ease-in-out both);
+
+      @include keyFrames(circleFadeDelay) {
+
+        0%,
+        39%,
+        100% {
+          opacity: 0;
+        }
+
+        40% {
+          opacity: 1;
+        }
+      }
+    }
+
+    &.default {
+      &:before {
+        background-color: var(--vkit-color-default);
+      }
+    }
+
+    @each $name,
+    $value in $colorsDefaultMarkupTint {
+      &.#{$name} {
+        &:before {
+          background-color: color($name, $colorsDefaultMarkupTint);
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,97 @@
+@import '../../main.scss';
+
+.floatLayer {
+  align-self: stretch;
+  display: flex;
+  position: relative;
+  width: 100%;
+
+  .box {
+    @include flex-direction(column);
+    @include transform(translateY(-30px));
+    @include transition(transform 0.3s, opacity 0.3s);
+    background-color: var(--vkit-color-contrast-1);
+    box-sizing: content-box;
+    display: flex;
+    margin-top: 8px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: 10;
+
+    .title {
+      box-sizing: border-box;
+      margin: auto;
+      font-weight: bold;
+      padding: 16px 8px;
+      text-align: center;
+      width: 100%;
+      display: none;
+
+      &:empty {
+        padding: 0;
+      }
+    }
+  }
+
+  &.show {
+    .box {
+      @include transform(translateY(0));
+      opacity: 1;
+    }
+  }
+
+  &.outlined {
+    .box {
+      border: 1px solid var(--vkit-color-contrast-5);
+    }
+  }
+
+  &.rounded {
+    .box {
+      @include border-radius(9px);
+    }
+  }
+
+  &.full {
+    .box {
+      width: 100%;
+    }
+  }
+
+  @for $i from 0 through 10 {
+    &.elevation#{$i} {
+      .box {
+        @include box-shadow(0 #{$i}px #{$i + 10}px var(--vkit-color-blackless));
+      }
+    }
+  }
+
+  .close {
+    position: absolute;
+    right: 0;
+    z-index: 1;
+    margin: 8px;
+  }
+
+  @include mobile {
+    align-items: center;
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    left: 16px;
+    position: fixed;
+    top: 0;
+    z-index: 10;
+    max-width: calc(100% - 32px);
+
+    .box {
+      position: relative;
+      margin: 0;
+
+      .title {
+        display: block;
+      }
+    }
+  }
+}

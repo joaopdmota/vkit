@@ -1,0 +1,10 @@
+@import '../autoprefixer.scss';
+
+.transitionRouterPage {
+  align-self: stretch;
+  display: flex;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+}

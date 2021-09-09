@@ -1,0 +1,8 @@
+@import '../../main.scss';
+
+.row {
+  display: flex;
+  align-self: stretch;
+  padding: 16px;
+  @include flex-direction(column);
+}

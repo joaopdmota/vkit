@@ -1,0 +1,64 @@
+@import '../../../../main.scss';
+
+.scrollbarContext {
+  position: relative;
+  overflow: hidden;
+
+  .scrollbar {
+    position: absolute;
+    z-index: 3;
+    top: 0;
+    right: 0;
+    height: 100%;
+    padding: 0 0.5%;
+
+    &.onlyWheel {
+      visibility: hidden;
+    }
+
+    .track {
+      position: absolute;
+      top: 0;
+      right: 5px;
+      width: 2px;
+      height: 100%;
+
+      &:hover {
+        .thumbDraggable {
+          width: 6px;
+          left: -2px;
+        }
+      }
+
+      .thumbDrag,
+      .thumbDraggable {
+        position: relative;
+        width: 4px;
+        height: 10px;
+        min-height: 10px;
+        left: -1px;
+        z-index: 4;
+        background-color: transparent;
+        display: block;
+        @include border-radius(5px);
+      }
+
+      .thumbDraggable {
+        position: absolute;
+        top: 0;
+        background-color: var(--vkit-color-default);
+        z-index: 3;
+        @include transition(width 0.4s ease-in-out, left 0.4s ease-in-out);
+      }
+    }
+  }
+
+  .content {
+    overflow: hidden;
+    position: relative;
+
+    .children {
+      position: relative;
+    }
+  }
+}

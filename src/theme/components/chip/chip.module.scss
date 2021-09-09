@@ -1,0 +1,220 @@
+@import '../../main.scss';
+@import '../../utils/color.scss';
+
+.chip {
+  position: relative;
+  overflow: hidden;
+  user-select: none;
+  display: flex;
+  font-family: 'Ubuntu-regular';
+  letter-spacing: 0.03rem;
+  align-items: center;
+  justify-content: center;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  @include border-radius(3px);
+  @include transition(0.3s);
+
+  &.bold {
+    font-family: 'Ubuntu-bold';
+  }
+
+  &:not(.reverse) {
+    @include flex-direction(row);
+
+    > span {
+      margin-right: 4px;
+    }
+
+    .action {
+      margin-left: 4px;
+    }
+  }
+
+  &.reverse {
+    @include flex-direction(row-reverse);
+
+    > span {
+      margin-left: 4px;
+    }
+
+    .action {
+      margin-right: 4px;
+    }
+  }
+
+  .action {
+    &.pointer {
+      cursor: pointer;
+    }
+  }
+
+  &.iconOnly {
+    padding: 1px;
+  }
+
+  &.full {
+    width: 100%;
+  }
+
+  &.uppercase {
+    text-transform: uppercase;
+  }
+
+  &.rounded {
+    @include border-radius(50px);
+  }
+
+  &.shadow {
+    &:not(.solo) {
+      @include box-shadow(0px 2px 3px var(--vkit-color-blackless));
+    }
+    &.solo {
+      text-shadow: 0px 2px 3px var(--vkit-color-blackless);
+    }
+  }
+
+  $sizes: 'minor' 'small' 'medium' 'larger' 'xLarger';
+  @for $i from 1 through length($sizes) {
+    &.#{nth($sizes, $i)} {
+      @if $i == 1 {
+        $size: 8px;
+        font-size: $size;
+        &:not(.iconOnly) {
+          > span {
+            svg {
+              width: $size;
+              height: 9px;
+            }
+          }
+        }
+      } @else if $i == 2 {
+        $size: 12px;
+        font-size: $size;
+        &:not(.iconOnly) {
+          > span {
+            svg {
+              width: $size;
+              height: $size;
+            }
+          }
+        }
+      } @else {
+        $size: #{$i * 4.8}px;
+        font-size: $size;
+        &:not(.iconOnly) {
+          > span {
+            svg {
+              width: $size;
+              height: $size;
+            }
+          }
+        }
+      }
+      &:not(.iconOnly) {
+        padding: #{$i * 2}px #{$i * 3}px;
+      }
+    }
+  }
+
+  @each $name, $value in $colorsDefaultMarkupTint {
+    &.#{$name} {
+      &:not(.invertColor) {
+        color: $value;
+
+        &:not(.solo) {
+          background-color: color($name, $colorsDefaultMarkup);
+
+          &:hover {
+            background-color: darken(color($name, $colorsDefaultMarkup), 2%);
+          }
+        }
+        &.outlined {
+          border: 1px solid $value;
+        }
+      }
+      &.invertColor {
+        color: darken(color($name, $colorsDefaultMarkup), 10%);
+
+        &:not(.solo) {
+          color: $colorLightContrast;
+          background-color: $value;
+
+          &:hover {
+            background-color: darken($value, 2%);
+          }
+
+          > span {
+            svg {
+              fill: $colorLightContrast;
+            }
+          }
+        }
+        &.solo {
+          svg {
+            fill: darken(color($name, $colorsDefaultMarkup), 10%);
+          }
+        }
+        &.outlined {
+          border: 1px solid color($name, $colorsDefaultMarkup);
+        }
+      }
+    }
+  }
+
+  &.default {
+    &:not(.invertColor) {
+      color: var(--vkit-color-default);
+
+      &.outlined {
+        border: 1px solid var(--vkit-color-default);
+      }
+
+      &:not(.solo) {
+        color: $colorLightContrast;
+        background-color: var(--vkit-color-default);
+
+        &:hover {
+          background-color: var(--vkit-color-default-1);
+        }
+
+        &.outlined {
+          border: 1px solid var(--vkit-color-default-5);
+        }
+
+        > span {
+          svg {
+            fill: $colorLightContrast;
+          }
+        }
+      }
+    }
+    &.invertColor {
+      color: var(--vkit-color-default-5);
+
+      &.outlined {
+        border: 1px solid var(--vkit-color-default-5);
+      }
+
+      &:not(.solo) {
+        color: var(--vkit-color-default);
+        background-color: var(--vkit-color-default-8);
+
+        &:hover {
+          background-color: var(--vkit-color-default-7);
+        }
+
+        &.outlined {
+          border: 1px solid var(--vkit-color-default);
+        }
+      }
+      &.solo {
+        > span {
+          svg {
+            fill: var(--vkit-color-default-5);
+          }
+        }
+      }
+    }
+  }
+}

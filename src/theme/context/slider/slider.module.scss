@@ -1,0 +1,187 @@
+@use "sass:math";
+@import '../../main.scss';
+
+.slider {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+
+  &.overlay {
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+    }
+
+    &.auto {
+      &::after {
+        background-color: var(--vkit-color-contrast);
+      }
+    }
+
+    &.dark {
+      &::after {
+        background-color: $colorDarkContrast;
+      }
+    }
+
+    &.light {
+      &::after {
+        background-color: $colorLightContrast;
+      }
+    }
+
+    @for $i from 0 through 9 {
+      &.elevation#{$i} {
+        &::after {
+          opacity: math.div($i, 10);
+        }
+      }
+    }
+  }
+
+  .wrapper {
+    @include transform(translate(0px, 0px));
+    @include transition(transform 0.4s linear);
+  }
+
+  .indicators {
+    position: absolute;
+    text-align: center;
+    z-index: 1;
+
+    .delimiter {
+      position: relative;
+      width: 8px;
+      height: 8px;
+      cursor: pointer;
+      overflow: hidden;
+      background-color: var(--vkit-color-default-5);
+      @include border-radius(20px);
+      @include transition(width 0.4s ease, height 0.4s ease, background 0.5s ease-in-out);
+
+      &.active {
+        background-color: var(--vkit-color-default);
+
+        .progress {
+          position: absolute;
+          left: 0;
+          bottom: 0;
+          background-color: var(--vkit-color-default-3);
+          width: 100%;
+          height: 100%;
+        }
+      }
+    }
+
+    &.top,
+    &.bottom {
+      width: 100%;
+      top: 0;
+
+      .delimiter {
+        display: inline-block;
+
+        &:not(:last-child) {
+          margin-right: 8px;
+        }
+
+        &.active {
+          width: 30px;
+        }
+      }
+    }
+
+    &.bottom {
+      top: unset;
+      bottom: 0;
+    }
+
+    &.left,
+    &.right {
+      top: 50%;
+      left: 0;
+      padding: 4px;
+      @include transform(translateY(-50%));
+
+      .delimiter {
+        display: block;
+
+        &:not(:last-child) {
+          margin-bottom: 8px;
+        }
+
+        &.active {
+          height: 30px;
+        }
+      }
+    }
+
+    &.right {
+      left: unset;
+      right: 0;
+    }
+  }
+
+  .arrowA,
+  .arrowB {
+    position: absolute;
+    background-color: var(--vkit-color-contrast-1);
+    padding: 8px;
+    opacity: 0.8;
+    z-index: 1;
+    @include border-radius(50px);
+  }
+
+  &.axisX {
+    .arrowA,
+    .arrowB {
+      top: 50%;
+      @include transform(translateY(-50%));
+    }
+    .arrowA {
+      right: -100px;
+      @include transition(right 0.4s ease);
+    }
+    .arrowB {
+      left: -100px;
+      @include transition(left 0.4s ease);
+    }
+    &:hover {
+      .arrowA {
+        right: 10px;
+      }
+      .arrowB {
+        left: 10px;
+      }
+    }
+  }
+
+  &.axisY {
+    .arrowA,
+    .arrowB {
+      left: 50%;
+      @include transform(translateX(-50%));
+    }
+    .arrowA {
+      top: -100px;
+      @include transition(top 0.4s ease);
+    }
+    .arrowB {
+      bottom: -100px;
+      @include transition(bottom 0.4s ease);
+    }
+    &:hover {
+      .arrowA {
+        top: 10px;
+      }
+      .arrowB {
+        bottom: 10px;
+      }
+    }
+  }
+}

@@ -1,0 +1,157 @@
+@import '../../main.scss';
+@import '../../utils/color.scss';
+
+.dayNight {
+  width: 65px;
+  user-select: none;
+
+  .timeCircle {
+    cursor: pointer;
+    position: relative;
+    background: linear-gradient(
+      to bottom,
+      var(--vkit-color-default-1),
+      var(--vkit-color-default-9)
+    );
+    width: 50px;
+    height: 50px;
+    border: 4px solid $colorLightContrast;
+    overflow: hidden;
+    padding: 0px;
+    margin: 0 auto;
+    margin-bottom: 10px;
+    text-align: center;
+    @include border-radius(50%);
+    @include box-shadow(0 0 5px var(--vkit-color-blackless));
+
+    .sun {
+      margin-top: 20px;
+      background: color(warning, $colorsDefaultMarkup);
+      width: 30%;
+      height: 30%;
+      position: relative;
+      left: 35%;
+      top: 15%;
+      @include border-radius(50%);
+      @include transition(all 1.1s 0.4s ease);
+    }
+
+    .moon {
+      position: absolute;
+      margin-top: 20px;
+      width: 22.5%;
+      height: 22.5%;
+      position: relative;
+      left: 180%;
+      margin-left: -50px;
+      top: -120%;
+      overflow: hidden;
+      @include border-radius(50%);
+      @include box-shadow(inset 2px -2px 6px 0 $colorLightContrast);
+      @include transition(all 1s 0s ease);
+    }
+
+    .stars {
+      position: absolute;
+      width: 50px;
+      height: 35px;
+      opacity: 0;
+      top: 0;
+      left: 0;
+      overflow: hidden;
+      @include transition(all 0.8s 0s ease);
+
+      > div:nth-child(n) {
+        position: absolute;
+        background: radial-gradient($colorLightContrast, $colorDarkContrast);
+        overflow: hidden;
+        width: 1px;
+        height: 1px;
+        margin-left: 20%;
+        margin-top: -20%;
+        @include border-radius(50%);
+        @include box-shadow(0 0 10px $colorLightContrast);
+        @include transition(all 1s 0s ease);
+      }
+
+      > div:nth-child(1) {
+        left: 25%;
+        top: 30%;
+      }
+      > div:nth-child(2) {
+        left: 55%;
+        top: 20%;
+      }
+      > div:nth-child(3) {
+        left: 26%;
+        top: 70%;
+      }
+      > div:nth-child(4) {
+        left: 40%;
+        top: 45%;
+      }
+      > div:nth-child(5) {
+        left: 15%;
+        top: 55%;
+      }
+      > div:nth-child(6) {
+        left: 40%;
+        top: 10%;
+      }
+      > div:nth-child(7) {
+        left: 80%;
+        top: 55%;
+      }
+    }
+
+    .water {
+      position: absolute;
+      background: repeating-radial-gradient(
+          ellipse farthest-corner at center -400%,
+          color(warning, $colorsDefaultMarkup) 30%,
+          var(--vkit-color-default-4) 90%
+        )
+        repeat scroll 0 0 var(--vkit-color-default-4);
+      width: 100%;
+      height: 20px;
+      bottom: -5px;
+      @include transition(all 1.1s ease);
+    }
+  }
+
+  &.night {
+    .timeCircle {
+      background: linear-gradient(to bottom, $colorDarkContrast, #285a7b);
+      border-color: lighten($colorDarkContrast, 20%);
+
+      .sun {
+        top: 70%;
+        left: 20%;
+        @include transition(all 1.1s 0s ease);
+      }
+      .moon {
+        left: 155%;
+        top: -83%;
+        @include transition(all 1.1s 0.4s ease);
+      }
+      .stars {
+        opacity: 1;
+        @include transition(all 3s 0.4s ease);
+
+        > div:nth-child(n) {
+          margin-left: 0;
+          margin-top: 0;
+          @include transition(all 1s 0.4s ease-out);
+        }
+      }
+      .water {
+        background: repeating-radial-gradient(
+            ellipse farthest-corner at center -400%,
+            #7fa1bb 30%,
+            #1d425a 90%
+          )
+          repeat scroll 0 0 #1d425a;
+      }
+    }
+  }
+}

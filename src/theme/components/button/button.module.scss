@@ -1,0 +1,263 @@
+@import '../../main.scss';
+@import '../../utils/color.scss';
+
+.button {
+  text-decoration: none;
+  outline: none;
+  position: relative;
+  user-select: none;
+  display: flex;
+  border: none;
+  background: unset;
+  font-family: 'Ubuntu-regular';
+  letter-spacing: 0.03rem;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  @include border-radius(3px);
+
+  &.pointer {
+    cursor: pointer;
+  }
+
+  &.bold {
+    font-family: 'Ubuntu-bold';
+  }
+
+  &.iconLeft {
+    @include flex-direction(row);
+
+    > span,
+    .loader {
+      margin-right: 4px;
+    }
+  }
+
+  &.iconRight {
+    @include flex-direction(row-reverse);
+
+    > span,
+    .loader {
+      margin-left: 4px;
+    }
+  }
+
+  &.iconOnly {
+    padding: 1px;
+  }
+
+  &.full {
+    width: 100%;
+  }
+
+  &.uppercase {
+    text-transform: uppercase;
+  }
+
+  &.rounded {
+    @include border-radius(50px);
+  }
+
+  &.shadow {
+    &:not(.solo) {
+      @include box-shadow(0px 2px 3px var(--vkit-color-blackless));
+    }
+    &.solo {
+      text-shadow: 0px 2px 3px var(--vkit-color-blackless);
+    }
+  }
+
+  $sizes: 'minor' 'small' 'medium' 'larger' 'xLarger';
+  @for $i from 1 through length($sizes) {
+    &.#{nth($sizes, $i)} {
+      @if $i == 1 {
+        $size: 8px;
+        font-size: $size;
+
+        svg,
+        .loader > div {
+          width: $size;
+          height: 9px;
+        }
+
+        .loader {
+          @include transform(scale(0.25));
+        }
+      } @else if $i == 2 {
+        $size: 12px;
+        font-size: $size;
+
+        svg,
+        .loader > div {
+          width: $size;
+          height: $size;
+        }
+
+        .loader {
+          @include transform(scale(0.4));
+        }
+      } @else {
+        $size: #{$i * 4.8}px;
+        font-size: $size;
+
+        svg,
+        .loader > div {
+          width: $size;
+          height: $size;
+        }
+
+        .loader {
+          @include transform(scale(0.5));
+        }
+      }
+      &:not(.iconOnly) {
+        padding: #{$i * 2}px #{$i * 4}px;
+      }
+    }
+  }
+
+  &:not(.loading) {
+    @each $name, $value in $colorsDefaultMarkupTint {
+      &.#{$name} {
+        &:not(.invertColor) {
+          color: $value;
+
+          &:not(.solo) {
+            background-color: color($name, $colorsDefaultMarkup);
+
+            &:hover {
+              background-color: darken(color($name, $colorsDefaultMarkup), 10%);
+            }
+          }
+          &.outlined {
+            border: 1px solid $value;
+          }
+        }
+        &.invertColor {
+          color: darken(color($name, $colorsDefaultMarkup), 10%);
+
+          &:not(.solo) {
+            color: $colorLightContrast;
+            background-color: $value;
+
+            &:hover {
+              background-color: darken($value, 10%);
+            }
+
+            svg {
+              fill: $colorLightContrast;
+            }
+          }
+          &.solo {
+            svg {
+              fill: darken(color($name, $colorsDefaultMarkup), 10%);
+            }
+          }
+          &.outlined {
+            border: 1px solid color($name, $colorsDefaultMarkup);
+          }
+        }
+      }
+    }
+
+    &.default {
+      &:not(.invertColor) {
+        color: var(--vkit-color-default);
+
+        &.outlined {
+          border: 1px solid var(--vkit-color-default);
+        }
+
+        &:not(.solo) {
+          color: $colorLightContrast;
+          background-color: var(--vkit-color-default);
+
+          &:hover {
+            background-color: var(--vkit-color-default-2);
+          }
+
+          svg {
+            fill: $colorLightContrast;
+          }
+
+          &.outlined {
+            border: 1px solid var(--vkit-color-default-5);
+          }
+        }
+      }
+      &.invertColor {
+        color: var(--vkit-color-default-5);
+
+        &.outlined {
+          border: 1px solid var(--vkit-color-default-5);
+        }
+
+        &:not(.solo) {
+          color: var(--vkit-color-default);
+          background-color: var(--vkit-color-default-8);
+
+          &:hover {
+            background-color: var(--vkit-color-default-7);
+          }
+
+          &.outlined {
+            border: 1px solid var(--vkit-color-default);
+          }
+        }
+        &.solo {
+          svg {
+            fill: var(--vkit-color-default-5);
+          }
+        }
+      }
+    }
+  }
+
+  &.disabled {
+    cursor: not-allowed;
+    color: var(--vkit-color-contrast-5);
+    border: 1px solid var(--vkit-color-contrast-5);
+    @include box-shadow(unset);
+  }
+
+  &.loading {
+    cursor: wait;
+    color: $colorLightContrast;
+    background-color: color(light, $colorsDefaultMarkupTint);
+  }
+
+  &.solo {
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  .rippleEffect {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    background-color: var(--vkit-color-contrast);
+    @include animation(ripple 600ms linear);
+    @include transform(scale(0));
+    @include border-radius(50px);
+
+    @include keyFrames(ripple) {
+      0% {
+        @include transform(scale(1));
+        opacity: 0.4;
+      }
+
+      50% {
+        @include transform(scale(10));
+        opacity: 0.2;
+      }
+
+      100% {
+        @include transform(scale(35));
+        opacity: 0;
+      }
+    }
+  }
+}

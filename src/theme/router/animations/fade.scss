@@ -1,0 +1,10 @@
+.transitionFade {
+  &.fade {
+    opacity: 0;
+    @include transition(opacity 0.3s);
+
+    &.show {
+      opacity: 1;
+    }
+  }
+}

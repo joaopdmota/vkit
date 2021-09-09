@@ -1,0 +1,42 @@
+@import '../../../../main.scss';
+@import '../../../../utils/color.scss';
+
+.spinnerProgress {
+  width: 25px;
+  height: 25px;
+  @include border-radius(50%);
+  border: 4px solid #{lighten(color(light, $colorsDefaultMarkupTint), 20%)};
+  border-top: 4px solid color(light, $colorsDefaultMarkup);
+
+  &.default {
+    border: 4px solid #{lighten($colorDefault, 20%)};
+    border-top: 4px solid $colorDefault;
+  }
+
+  @each $name,
+  $value in $colorsDefaultMarkupTint {
+    &.#{$name} {
+      border: 4px solid #{lighten(color($name, $colorsDefaultMarkupTint), 20%)};
+      border-top: 4px solid color($name, $colorsDefaultMarkupTint);
+    }
+  }
+
+  &.full {
+    border-width: 8px;
+    border-top-width: 8px;
+    width: 40px;
+    height: 40px;
+  }
+
+  @include animation(spin 1s linear infinite);
+
+  @include keyFrames(spin) {
+    0% {
+      @include transform(rotate(0deg));
+    }
+
+    100% {
+      @include transform(rotate(360deg));
+    }
+  }
+}

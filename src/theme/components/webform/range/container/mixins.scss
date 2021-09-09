@@ -1,0 +1,15 @@
+@mixin center-y {
+  @include transform(translateY(-50%));
+  position: absolute;
+  top: 50%;
+}
+
+@mixin thumb-by-browser {
+  &::-webkit-slider-thumb {
+    @content;
+  }
+
+  &::-moz-range-thumb {
+    @content;
+  }
+}

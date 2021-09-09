@@ -1,0 +1,53 @@
+@import '../../main.scss';
+
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-wrap: nowrap;
+  user-select: none;
+
+  .history {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: nowrap;
+    white-space: nowrap;
+    cursor: pointer;
+
+    &:not(:last-child) {
+      padding-right: 8px;
+
+      color: var(--vkit-color-contrast-9);
+
+      .icon {
+        svg {
+          fill: var(--vkit-color-contrast-9);
+        }
+      }
+    }
+
+    &:last-child,
+    &:hover {
+      color: var(--vkit-color-default);
+
+      .icon {
+        svg {
+          fill: var(--vkit-color-default);
+        }
+      }
+    }
+
+    .icon {
+      padding-right: 8px;
+    }
+  }
+
+  @include mobile {
+    overflow-x: auto;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+}

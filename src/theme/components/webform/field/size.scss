@@ -1,0 +1,57 @@
+@mixin size($diff: 0) {
+  .label {
+    font-size: $diff + 16px;
+    margin-bottom: $diff + 10px;
+  }
+
+  .container {
+    .field {
+      min-height: ($diff * 4) + 49px;
+      padding-left: $diff + 16px;
+
+      .iconCustom {
+        margin-right: $diff + 12px;
+        width: $diff + 16px;
+      }
+
+      .inputContent {
+        &::after,
+        .input {
+          font-size: $diff + 16px;
+        }
+      }
+    }
+  }
+}
+
+.fieldSize {
+  &.small {
+    @include size(-2);
+
+    .container {
+      .field {
+        min-height: 46px;
+      }
+    }
+  }
+
+  &.mediun {
+    @include size(0);
+  }
+
+  &.large {
+    @include size(2);
+
+    &.multiline {
+      .container {
+        .field {
+          .inputContent {
+            .input {
+              padding: 18px 0;
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,72 @@
+@import '../../main.scss';
+
+.dialog {
+  background-color: var(--vkit-color-contrast);
+  width: 90%;
+  max-height: 90%;
+  position: fixed;
+  z-index: 3;
+  overflow: hidden;
+  top: 50%;
+  left: 50%;
+  @include transform(translate(-50%, -50%) scale(0));
+  @include transition(transform 0.1s ease);
+
+  &.show {
+    @include transform(translate(-50%, -50%) scale(1));
+  }
+
+  &.outlined {
+    border: 1px solid var(--vkit-color-contrast-3);
+  }
+
+  &.persistent {
+    @include transform(translate(-50%, -50%) scale(1.1));
+  }
+
+  &.rounded {
+    @include border-radius(5px);
+  }
+
+  &.shadow {
+    @for $i from 0 through 10 {
+      &.elevation#{$i} {
+        @include box-shadow(0 #{$i}px #{$i + 10}px var(--vkit-color-blackless));
+      }
+    }
+  }
+
+  $sizes: 'minor' 'small' 'medium' 'larger' 'xLarger';
+
+  @for $i from 1 through length($sizes) {
+    &.#{nth($sizes, $i)} {
+      max-width: #{$i * 150}px;
+    }
+  }
+
+  .close {
+    position: absolute;
+    right: 0;
+    z-index: 1;
+    margin: 8px;
+  }
+
+  .title {
+    border-bottom: 1px solid var(--vkit-color-contrast-1);
+    padding-bottom: 16px;
+    margin: 24px 16px 0 16px;
+
+    &.hide {
+      display: none;
+    }
+  }
+
+  .body {
+    min-height: 60px;
+    padding: 16px;
+
+    .context {
+      padding-right: 16px;
+    }
+  }
+}

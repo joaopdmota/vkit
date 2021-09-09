@@ -1,0 +1,17 @@
+@mixin pulseLayer($animationName: shineLight) {
+  background: radial-gradient(
+      circle,
+      transparent 0%,
+      transparent 35%,
+      var(--vkit-color-contrast) 100%
+    )
+    center/500%;
+  @include animation($animationName 0.5s alternate infinite);
+  @include transition(background 0.5s);
+
+  @include keyFrames($animationName) {
+    100% {
+      background-size: 100%;
+    }
+  }
+}

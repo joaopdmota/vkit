@@ -1,0 +1,47 @@
+@import '../../../main.scss';
+@import '../field/default.scss';
+@import '../field/clearable.scss';
+@import '../field/size.scss';
+@import '../field/status.scss';
+@import '../field/textHelper.scss';
+@import './showHide.scss';
+@import './tabs.scss';
+
+.select {
+  @extend .fieldDefault;
+  @extend .fieldClearable;
+  @extend .fieldSize;
+  @extend .fieldStatus;
+  @extend .fieldTextHelper;
+  @extend .transitionShowHide;
+  @extend .tabs;
+
+  .listCheckbox {
+    pointer-events: none;
+  }
+
+  .iconSelect {
+    @include transition(transform 0.3s);
+    display: flex;
+    width: 16px;
+    margin-right: 16px;
+    justify-content: center;
+
+    &.rotate {
+      @include transform(rotate(180deg));
+    }
+  }
+
+  .list {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    background-color: var(--vkit-color-contrast);
+  }
+
+  @include mobile {
+    .list {
+      flex-direction: column-reverse;
+    }
+  }
+}

@@ -1,0 +1,30 @@
+.fieldMultiline {
+  &.multiline {
+    .container {
+      .field {
+        .inputContent {
+          overflow: hidden;
+
+          &::after {
+            content: attr(data-replicated-value) ' ';
+            grid-area: 1 / 1 / 2 / 2;
+            visibility: hidden;
+            white-space: pre-wrap;
+          }
+
+          .input {
+            resize: none;
+            overflow: hidden;
+          }
+
+          &::after,
+          .input {
+            font: inherit;
+            padding: 15px 0;
+            overflow-wrap: anywhere;
+          }
+        }
+      }
+    }
+  }
+}

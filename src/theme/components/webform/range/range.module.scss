@@ -1,0 +1,13 @@
+@import '../../../main.scss';
+@import '../../../utils/color.scss';
+
+@import './container/mixins.scss';
+@import './container/default.scss';
+@import './container/size.scss';
+@import './container/status.scss';
+
+.range {
+  @extend .rangeDefault;
+  @extend .rangeSize;
+  @extend .rangeStatus;
+}

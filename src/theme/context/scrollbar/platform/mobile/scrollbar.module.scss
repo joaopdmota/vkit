@@ -1,0 +1,23 @@
+@import '../../../../main.scss';
+
+.scrollbarContext {
+  position: relative;
+  overflow: hidden;
+
+  .content {
+    position: relative;
+    overflow-x: hidden;
+    overflow-y: auto;
+    touch-action: pan-y;
+
+    &.onlyWheel {
+      &::-webkit-scrollbar {
+        display: none;
+      }
+    }
+
+    .children {
+      position: relative;
+    }
+  }
+}

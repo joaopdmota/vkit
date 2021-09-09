@@ -1,0 +1,56 @@
+@use "sass:math";
+@mixin size($diff: 0) {
+  .slider {
+    @include transition(height 0.3s, margin-top 0.3s);
+    height: $diff + 16px;
+    margin-top: $diff + 4px;
+
+    .sliderRange {
+      height: $diff + 6px;
+    }
+
+    .sliderTrack {
+      height: $diff + 3px;
+    }
+
+    .thumb {
+      $marginY: (math.div($diff, 2)) + -8px;
+
+      @include transition(width 0.3s, margin 0.3s);
+      margin: 0 $marginY;
+      width: calc(100% + #{($diff + 16px)});
+
+      @include thumb-by-browser {
+        @include transition(width 0.3s, width 0.3s);
+        height: $diff + 16px;
+        width: $diff + 16px;
+      }
+    }
+  }
+
+  .traces {
+    @include transition(height 0.3s, margin-top 0.3s);
+    height: $diff + 4px;
+    margin-top: $diff + 4px;
+  }
+
+  .limitText {
+    @include transition(font-size 0.3s, margin-top 0.3s);
+    font-size: $diff + 14px;
+    margin-top: $diff + 5px;
+  }
+}
+
+.rangeSize {
+  &.small {
+    @include size(-2);
+  }
+
+  &.mediun {
+    @include size(0);
+  }
+
+  &.large {
+    @include size(2);
+  }
+}

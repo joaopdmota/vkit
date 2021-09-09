@@ -1,0 +1,51 @@
+@import '../../main.scss';
+@import '../../utils/color.scss';
+
+.badge {
+  color: color(light, $colorsDefaultMarkup);
+  min-width: 20px;
+  height: 20px;
+  font-size: 12px;
+  text-align: center;
+  font-family: 'Ubuntu-bold';
+  z-index: 1;
+  padding: 3px 6px;
+  text-align: center;
+  position: absolute;
+  box-sizing: border-box;
+  @include border-radius(10px);
+
+  @each $name, $value in $colorsDefaultMarkupTint {
+    &.#{$name} {
+      background-color: $value;
+    }
+  }
+
+  &.default {
+    background-color: var(--vkit-color-default);
+  }
+
+  &.positionLeft,
+  &.positionRight {
+    right: calc(100% - 4px);
+
+    &.alignTop {
+      bottom: calc(100% - 4px);
+    }
+
+    &.alignBottom {
+      top: calc(100% - 4px);
+    }
+  }
+
+  &.positionRight {
+    right: auto;
+    left: calc(100% - 4px);
+  }
+
+  &.dot {
+    min-width: 10px;
+    height: 10px;
+    display: block;
+  }
+}

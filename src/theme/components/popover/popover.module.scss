@@ -1,0 +1,275 @@
+@import '../../main.scss';
+
+.popover {
+  position: relative;
+  width: 21px;
+  max-width: 21px;
+  height: 22px;
+  max-height: 22px;
+
+  .more {
+    height: 22px;
+    width: 21px;
+    max-width: 21px;
+    max-height: 22px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: row nowrap;
+    flex-shrink: 0;
+    background-color: transparent;
+    position: relative;
+    z-index: 1;
+    @include transition(0.5s ease-in-out);
+
+    &.focus {
+      z-index: 3;
+      @include border-radius(10px);
+
+      @for $i from 1 through 3 {
+        span:nth-child(#{$i}) {
+          @if $i == 2 {
+            opacity: 0;
+          } @else {
+            left: 25%;
+            height: 2px;
+            width: 50%;
+            @include transform(rotate(45deg));
+          }
+          @if $i == 3 {
+            @include transform(rotate(-45deg));
+          }
+        }
+      }
+    }
+
+    &.vertical {
+      @include transform(rotate(90deg));
+    }
+
+    span {
+      background-color: var(--vkit-color-default);
+      position: absolute;
+      height: 5px;
+      width: 5px;
+      opacity: 1;
+      left: 0;
+      @include transition(0.25s ease-in-out);
+      @include border-radius(4px);
+    }
+
+    @for $i from 0 through 3 {
+      span:nth-child(#{$i + 1}) {
+        left: #{$i * 8}px;
+      }
+    }
+  }
+
+  .trigger {
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    left: 0;
+    padding: 0;
+    background: 0;
+    border: 0;
+    cursor: pointer;
+    width: 100%;
+    height: 100%;
+    @include border-radius(10px);
+  }
+
+  .layer {
+    width: 200px;
+    height: 116px;
+    background-color: var(--vkit-color-contrast);
+    border: 1px solid var(--vkit-color-contrast-3);
+    position: fixed;
+    z-index: 4;
+    @include border-radius(5px);
+    @include box-shadow(0 0 8px var(--vkit-color-blackless));
+
+    .items {
+      .item {
+        .action {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 19px 10px 19px 20px;
+          width: 100%;
+          background: 0;
+
+          &:hover {
+            cursor: pointer;
+            background-color: var(--vkit-color-contrast-1);
+          }
+
+          &.only {
+            height: 86px;
+          }
+
+          .label {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            max-width: 65%;
+            flex: 1;
+            text-align: left;
+            color: var(--vkit-color-contrast-9);
+          }
+
+          &.left {
+            .label {
+              margin-left: 15px;
+            }
+          }
+
+          &.right {
+            @include flex-direction(row-reverse);
+
+            .label {
+              margin-right: 15px;
+            }
+          }
+        }
+
+        &:not(:last-child) {
+          .separator {
+            display: block;
+            width: 100%;
+            border-top: 1px solid var(--vkit-color-contrast-1);
+          }
+        }
+      }
+    }
+
+    &::before,
+    &::after {
+      content: '';
+      position: absolute;
+    }
+
+    &.positionBottom {
+      &::before,
+      &::after {
+        top: -11px;
+        border-left: 10px solid transparent;
+        border-right: 10px solid transparent;
+        border-bottom: 10px solid var(--vkit-color-contrast-3);
+      }
+      &::after {
+        border-bottom: 10px solid var(--vkit-color-contrast);
+        padding-top: 1px;
+      }
+    }
+
+    &.positionBottom,
+    &.positionTop {
+      margin-top: 10px;
+
+      &.alignLeft {
+        margin-left: -176px;
+
+        &::before,
+        &::after {
+          right: 4px;
+        }
+      }
+      &.alignCenter {
+        margin-left: -92px;
+
+        &::before,
+        &::after {
+          right: 88px;
+        }
+      }
+      &.alignRight {
+        margin-left: -4px;
+
+        &::before,
+        &::after {
+          left: 4px;
+        }
+      }
+    }
+
+    &.positionTop {
+      &::before,
+      &::after {
+        bottom: -11px;
+        border-left: 10px solid transparent;
+        border-right: 10px solid transparent;
+        border-top: 10px solid var(--vkit-color-contrast-3);
+      }
+      &::after {
+        border-top: 10px solid var(--vkit-color-contrast);
+        padding-top: 1px;
+      }
+    }
+
+    &.positionTop {
+      margin-top: -152px;
+    }
+
+    &.positionLeft {
+      &::before,
+      &::after {
+        right: -10px;
+        border-top: 10px solid transparent;
+        border-bottom: 10px solid transparent;
+        border-left: 10px solid var(--vkit-color-contrast-3);
+      }
+      &::after {
+        border-left: 10px solid var(--vkit-color-contrast);
+        padding-left: 1px;
+      }
+    }
+
+    &.positionLeft,
+    &.positionRight {
+      margin-left: -211px;
+
+      &.alignTop {
+        margin-top: -116px;
+
+        &::before,
+        &::after {
+          bottom: 4px;
+        }
+      }
+      &.alignCenter {
+        margin-top: -72px;
+
+        &::before,
+        &::after {
+          top: 50px;
+        }
+      }
+      &.alignBottom {
+        margin-top: -26px;
+
+        &::before,
+        &::after {
+          top: 4px;
+        }
+      }
+    }
+
+    &.positionRight {
+      margin-left: 32px;
+
+      &::before,
+      &::after {
+        left: -11px;
+        border-top: 10px solid transparent;
+        border-bottom: 10px solid transparent;
+        border-right: 10px solid var(--vkit-color-contrast-3);
+      }
+      &::after {
+        border-right: 10px solid var(--vkit-color-contrast);
+        padding-right: 1px;
+      }
+    }
+  }
+}

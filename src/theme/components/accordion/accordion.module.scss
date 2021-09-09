@@ -1,0 +1,107 @@
+@import '../../main.scss';
+
+.accordion {
+  position: relative;
+  width: 300px;
+  display: flex;
+
+  &.cellSpacing {
+    padding: 8px;
+  }
+
+  &.single {
+    border-top: 1px solid var(--vkit-color-contrast-2);
+    border-bottom: 1px solid var(--vkit-color-contrast-2);
+  }
+
+  &:not(:last-child) {
+    border-bottom: 1px solid var(--vkit-color-contrast-2);
+  }
+
+  &:not(.disabled) {
+    .title {
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+
+  &.disabled {
+    cursor: not-allowed;
+
+    .title {
+      .label {
+        color: var(--vkit-color-contrast-2);
+      }
+
+      .icon {
+        pointer-events: none;
+
+        svg {
+          fill: var(--vkit-color-contrast-2);
+        }
+      }
+    }
+  }
+
+  @include flex-direction(column);
+
+  @include mobile {
+    width: 100%;
+  }
+
+  &.full {
+    width: 100%;
+  }
+
+  &.open {
+    .icon {
+      svg {
+        transform: rotateZ(180deg);
+      }
+    }
+
+    .body {
+      padding-bottom: 10px;
+    }
+  }
+
+  .title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 0px;
+
+    .label {
+      display: flex;
+      width: 100%;
+      justify-content: space-between;
+      align-items: center;
+      box-sizing: content-box;
+      color: var(--vkit-color-contrast-9);
+    }
+
+    .icon {
+      svg {
+        @include transition(0.3s ease);
+        fill: var(--vkit-color-contrast-9);
+
+        &:hover {
+          fill: var(--vkit-color-contrast-9);
+        }
+      }
+    }
+  }
+
+  .body {
+    box-sizing: border-box;
+    overflow: hidden;
+    @include transition(max-height 0.3s ease);
+  }
+
+  .scrollbarPadding {
+    > div {
+      padding-right: 8px;
+    }
+  }
+}

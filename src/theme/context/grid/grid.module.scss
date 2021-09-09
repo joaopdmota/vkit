@@ -1,0 +1,49 @@
+@import '../../main.scss';
+
+.grid {
+  display: flex;
+
+  &.wrap {
+    flex-wrap: wrap;
+  }
+
+  &:not(.wrap) {
+    flex-wrap: nowrap;
+  }
+
+  &.growing {
+    flex-grow: 1;
+  }
+
+  &.stretch {
+    align-self: stretch;
+  }
+
+  $flexDirection: (
+    row: row,
+    rowReverse: row-reverse,
+    column: column,
+    columnReverse: column-reverse,
+  );
+
+  @each $className, $direction in $flexDirection {
+    .#{$className} {
+      @include flex-direction(#{$direction});
+    }
+  }
+
+  $values: flex-start flex-end center space-between space-around;
+  $alignContent: 'left' 'right' 'center' 'justify' 'justifyCenter';
+  $alignItems: 'top' 'bottom' 'center';
+
+  @for $i from 1 through length($values) {
+    &.alignContent_#{nth($alignContent, $i)} {
+      justify-content: #{nth($values, $i)};
+    }
+    @if ($i <= 3) {
+      &.alignItems_#{nth($alignItems, $i)} {
+        align-items: #{nth($values, $i)};
+      }
+    }
+  }
+}

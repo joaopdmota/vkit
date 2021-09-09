@@ -1,0 +1,335 @@
+@use "sass:math";
+@import '../../../main.scss';
+
+.structurePage {
+  width: 100%;
+
+  @mixin logo {
+    width: 50px;
+    height: 50px;
+    position: relative;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-image: var(--vkit-logo-150x150);
+    background-position: center center;
+    @include box-sizing(border-box);
+  }
+
+  &.menuExpand {
+    .sidebar {
+      width: 250px;
+
+      .sidebarWrapper {
+        .themeMode {
+          left: 95px;
+        }
+      }
+    }
+
+    .pageWrapper {
+      width: calc(100% - 250px);
+    }
+  }
+
+  &:not(.menuExpand) {
+    .sidebar {
+      width: 50px;
+
+      .menuTrigger {
+        > button {
+          span {
+            svg {
+              @include transform(rotate(-180deg));
+            }
+          }
+        }
+      }
+
+      .sidebarWrapper {
+        .logo {
+          left: -16px;
+          @include transform(scale(0.5));
+        }
+
+        .user {
+          padding-right: 2px;
+        }
+
+        .themeMode {
+          padding-right: 5px;
+          left: -10px;
+          @include transform(scale(0.5));
+        }
+
+        .infoFooter {
+          .question {
+            display: block;
+          }
+          .text {
+            display: none;
+          }
+        }
+      }
+    }
+
+    .pageWrapper {
+      width: calc(100% - 50px);
+    }
+  }
+
+  &.menuHovered {
+    .sidebar {
+      width: 250px;
+
+      .menuTrigger {
+        > button {
+          span {
+            svg {
+              @include transform(rotate(-180deg));
+            }
+          }
+        }
+      }
+
+      .sidebarWrapper {
+        .logo {
+          left: 0;
+          @include transform(scale(1));
+        }
+
+        .themeMode {
+          left: 95px;
+          @include transform(scale(1));
+        }
+
+        .infoFooter {
+          .question {
+            display: none;
+          }
+          .text {
+            display: block;
+          }
+        }
+      }
+    }
+
+    .pageWrapper {
+      width: calc(100% - 50px);
+    }
+  }
+
+  .header {
+    background-image: linear-gradient(-180deg, var(--vkit-color-blackless), transparent);
+    position: absolute;
+    z-index: 2;
+    width: calc(100% - 32px);
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 16px;
+    top: 0;
+    @include transition(top 0.2s ease);
+
+    &.hide {
+      top: -50px;
+    }
+
+    .logo {
+      top: -5px;
+      @include logo();
+    }
+  }
+
+  .sidebar {
+    position: absolute;
+    top: 0;
+    z-index: 2;
+    min-height: 300px;
+    background-color: var(--vkit-color-contrast-1);
+    @include transition(width 0.2s linear);
+
+    .menuTrigger {
+      position: absolute;
+      right: 0;
+      top: 0;
+      padding-top: 8px;
+      height: 100%;
+      z-index: 2;
+      width: 1px;
+      box-shadow: 1px 2px 3px var(--vkit-color-blackless);
+      border-left: 1px solid var(--vkit-color-contrast);
+      background-color: var(--vkit-color-contrast-2);
+
+      > button {
+        position: absolute;
+        right: -11px;
+        box-shadow: 0 1px 3px var(--vkit-color-blackless);
+        background-color: var(--vkit-color-contrast);
+        border: 1px solid var(--vkit-color-contrast-2);
+
+        span {
+          svg {
+            @include transform(rotate(0deg));
+            @include transition(transform 0.2s ease);
+          }
+        }
+
+        &:hover {
+          background-color: var(--vkit-color-default);
+
+          span {
+            svg {
+              fill: $colorLightContrast;
+            }
+          }
+        }
+      }
+    }
+
+    .sidebarWrapper {
+      overflow: hidden;
+
+      .logo {
+        @include logo();
+        width: 80px;
+        height: 80px;
+        left: 0;
+        margin: 0 auto;
+        @include transform(scale(1));
+        @include transition(transform 0.2s linear, left 0.2s linear);
+      }
+
+      .user {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 32px;
+        margin: 16px 0;
+      }
+
+      .themeMode {
+        position: absolute;
+        bottom: 75px;
+        padding: 8px 0 16px 0;
+        @include transform(scale(1));
+        @include transition(transform 0.2s linear, left 0.2s linear);
+      }
+
+      .infoFooter {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        height: 70px;
+        padding: 8px 0;
+        white-space: nowrap;
+        border-top: 1px solid var(--vkit-color-contrast-2);
+
+        .question {
+          padding: 0 13px;
+          display: none;
+        }
+      }
+    }
+  }
+
+  .pageWrapper {
+    position: absolute;
+    right: 0;
+    @include transition(width 0.2s linear);
+
+    .pages {
+      align-self: stretch;
+      display: flex;
+      height: 100vh;
+      overflow: hidden;
+      position: relative;
+      width: 100%;
+    }
+  }
+
+  &.mobile {
+    .sidebar {
+      padding: 0 !important;
+      @include transform(translate(-250px, 0px));
+    }
+
+    .startSwipe {
+      width: 10px;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      right: -10px;
+    }
+
+    .pageWrapper {
+      width: 100%;
+
+      > div {
+        z-index: 1;
+      }
+    }
+  }
+
+  [data-cascade-scale] {
+    position: relative;
+    overflow: hidden;
+  }
+}
+
+[data-cascade] {
+  [data-cascade-scale] {
+    $transitionDuration: 0.3s;
+
+    @include transformOrigin(top center);
+    @include transition(
+      top $transitionDuration,
+      opacity $transitionDuration,
+      transform $transitionDuration,
+      border-radius $transitionDuration
+    );
+    @include border-radius(8px);
+  }
+
+  @for $i from 1 through 10 {
+    $scale: math.div(100 - (($i - 1) * 2), 100);
+    $top: $i * 16;
+
+    &:nth-child(#{$i}) {
+      [data-cascade-scale] {
+        height: calc(100vh - #{$top}px);
+        top: #{$top}px;
+      }
+    }
+
+    &:nth-last-child(#{$i}) {
+      [data-cascade-scale] {
+        @include transform(scale(#{$scale}));
+      }
+    }
+  }
+
+  &:last-child {
+    [data-cascade-scale] {
+      @include transform(scale(1));
+      @include border-radius(8px 8px 0 0);
+    }
+  }
+
+  &:only-of-type {
+    [data-cascade-scale] {
+      top: 0;
+      height: 100vh;
+      @include border-radius(0);
+    }
+  }
+
+  @include mobile {
+    [data-cascade-scale] {
+      @include border-radius(24px 24px 0 0);
+    }
+  }
+}

@@ -1,0 +1,21 @@
+@mixin shineSkeleton($timerLapse, $animationName) {
+  background-image: linear-gradient(
+    90deg,
+    var(--vkit-color-contrast-2),
+    var(--vkit-color-contrast-1),
+    var(--vkit-color-contrast-2)
+  );
+
+  @include transform(translateX(-100%));
+  @include animation($animationName $timerLapse linear 0.5s infinite);
+
+  @include keyFrames($animationName) {
+    0% {
+      @include transform(translateX(-100%));
+    }
+    60%,
+    100% {
+      @include transform(translateX(100%));
+    }
+  }
+}

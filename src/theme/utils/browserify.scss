@@ -1,0 +1,17 @@
+@use "sass:map";
+
+$prefixByBrowser: (
+  chrome: '-webkit-',
+  firefox: '-moz-',
+  opera: '-o-',
+  explorer: '-ms-',
+);
+
+@mixin browserify($attribute, $parameters, $browsers: 'chrome' 'firefox' 'opera' 'explorer') {
+  @each $browser in $browsers {
+    $prefix: map-get($prefixByBrowser, $browser);
+    #{$prefix}#{$attribute}: $parameters;
+  }
+
+  #{$attribute}: $parameters;
+}

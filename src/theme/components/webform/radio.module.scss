@@ -1,0 +1,37 @@
+@import '../../main.scss';
+@import '../../utils/color.scss';
+@import './inputBox.scss';
+
+.radio {
+  @extend .inputBox;
+
+  .content .box {
+    @include border-radius(50%);
+
+    &::after {
+      @include border-radius(50%);
+      @include transform(translate(-50%, -50%));
+      @include transition(width 0.3s, padding 0.3s);
+      background-color: var(--vkit-color-contrast-2);
+      content: '';
+      left: 50%;
+      padding: 0;
+      position: absolute;
+      top: 50%;
+    }
+  }
+
+  .input {
+    &:checked + .content .box {
+      &::after {
+        padding: 25%;
+      }
+    }
+
+    &:disabled + .content .box {
+      &::after {
+        background-color: var(--vkit-color-contrast-2);
+      }
+    }
+  }
+}

@@ -1,0 +1,25 @@
+@mixin status($color) {
+  &:not(.disabled) {
+    .slider {
+      .sliderRange {
+        background-color: $color;
+      }
+
+      .thumb {
+        @include thumb-by-browser {
+          background-color: $color;
+        }
+      }
+    }
+  }
+}
+
+.rangeStatus {
+  &.success {
+    @include status(color(success, $colorsDefaultMarkupTint));
+  }
+
+  &.error {
+    @include status(color(danger, $colorsDefaultMarkupTint));
+  }
+}
