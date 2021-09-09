@@ -2,7 +2,6 @@ import { useCallback, useEffect, useRef } from 'react'
 
 const useClickOnOutside = (
   fnCallback: Function,
-  canCallFnCallback: boolean,
 ): {
   ref: { current: HTMLDivElement | null }
 } => {
@@ -10,11 +9,12 @@ const useClickOnOutside = (
 
   const onClickOutside = useCallback(
     (event: MouseEvent): void => {
-      if (!(ref.current && ref.current.contains(event.target as Node)) && canCallFnCallback) {
-        fnCallback()
+      if (ref.current && ref.current.contains(event.target as Node)) {
+        return
       }
+      fnCallback()
     },
-    [fnCallback, ref, canCallFnCallback],
+    [fnCallback, ref],
   )
 
   useEffect(() => {

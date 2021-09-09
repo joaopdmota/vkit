@@ -46,14 +46,13 @@ const Loader: React.FC<LoaderType> = ({ label, type = 'spinnerProgressFade', ful
     }
   }
 
-  return (
-    <div className={classesBuilder(style, classNames)}>
-      {full && <Backdrop show />}
-      <div className={classesBuilder(style, wrapperClassnames)}>
-        {renderLoader(type)}
-        {full && <span className={style.label}>{label}</span>}
-      </div>
+  return (<div className={classesBuilder(style, classNames)}>
+    {full && <Backdrop show />}
+    <div className={classesBuilder(style, wrapperClassnames)}>
+      {renderLoader(type)}
+      {full && <span className={style.label}>{label}</span>}
     </div>
+  </div>
   )
 }
 

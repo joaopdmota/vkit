@@ -23,7 +23,7 @@ const useFloatLayer = ({
 } => {
   const { useOpen, useShow } = useShowOpen({ canShow })
 
-  const { ref: wrapperRef } = useClickOnOutside(() => closeClickOutside && onClose(), useShow)
+  const { ref: wrapperRef } = useClickOnOutside(() => closeClickOutside && onClose())
 
   const { getElementHeight, useHeight } = useFloatLayerHeight(height)
 

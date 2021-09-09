@@ -8,6 +8,7 @@
   $animationFrame: -0.1;
 
   @for $i from 1 through 12 {
+
     .dot:nth-child(#{$i}) {
       transform: rotate(#{$i * 30}deg);
 
@@ -15,12 +16,15 @@
         @if ($i > 2) {
           $animation: $animation - $animationFrame;
           animation-delay: #{$animation}s;
-        } @else {
+        }
+
+        @else {
           animation-delay: $animation;
         }
       }
     }
   }
+
 
   &.full {
     height: 50px;
@@ -46,6 +50,7 @@
       @include animation(circleFadeDelay 1.2s infinite ease-in-out both);
 
       @include keyFrames(circleFadeDelay) {
+
         0%,
         39%,
         100% {
@@ -64,7 +69,8 @@
       }
     }
 
-    @each $name, $value in $colorsDefaultMarkupTint {
+    @each $name,
+    $value in $colorsDefaultMarkupTint {
       &.#{$name} {
         &:before {
           background-color: color($name, $colorsDefaultMarkupTint);

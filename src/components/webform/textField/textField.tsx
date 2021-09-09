@@ -37,7 +37,6 @@ const TextField: React.FC<TextFieldType> = ({
   step,
   min,
   max,
-  iconDir = 'left',
 }) => {
   const [ttfTextHelper, setTtfTextHelper] = useState<string>()
   const [ttfValue, setTtfValue] = useState<number | string | { min: number; max: number } | null>(
@@ -106,7 +105,6 @@ const TextField: React.FC<TextFieldType> = ({
       textHelperTop={textHelperTop}
     >
       <ComponentField
-        iconDir={iconDir}
         clearable={clearable}
         disabled={disabled}
         icon={icon}

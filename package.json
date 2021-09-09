@@ -1,11 +1,12 @@
 {
   "name": "vkit",
-  "version": "0.1.2",
+  "version": "0.1.0",
   "author": "Vitta Saúde",
   "description": "Vkit Material Component Framework",
+  "private": true,
   "engines": {
-    "node": ">=14.17.6",
-    "yarn": ">=1.22.5"
+    "node": ">=14.16.1",
+    "yarn": ">=1.22.10"
   },
   "files": [
     "lib/components",
@@ -18,10 +19,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://gitlab.vitta.tools/front-end/vkit.git"
-  },
-  "bugs": {
-    "url": "https://gitlab.vitta.tools/front-end/vkit/-/issues"
+    "url": "git+ssh://git@bitbucket.org/vittapros/exodus.git"
   },
   "license": "MIT",
   "dependencies": {
@@ -52,8 +50,7 @@
     "lint": "eslint ./src/ --fix",
     "prettier:format": "prettier --write 'src/**/*.{ts,js,tsx,jsx,scss}'",
     "prettier:check": "prettier --check 'src/**/*.{ts,js,tsx,jsx,scss}'",
-    "branch-name-lint": "node branch-name-lint.config.js",
-    "release": "standard-version"
+    "branch-name-lint": "node branch-name-lint.config.js"
   },
   "eslintConfig": {
     "extends": [
@@ -110,7 +107,6 @@
     "babel-loader": "^8.2.2",
     "babel-plugin-module-resolver": "^4.1.0",
     "babel-plugin-transform-remove-console": "^6.9.4",
-    "commitizen": "^4.2.4",
     "css-loader": "^5.2.6",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.6",
@@ -123,7 +119,6 @@
     "lint-staged": "^11.1.2",
     "prettier": "2.3.2",
     "sass-loader": "^12.0.0",
-    "standard-version": "^9.3.1",
     "style-loader": "^2.0.0",
     "webpack": "^5.38.1",
     "webpack-cli": "^4.7.0",

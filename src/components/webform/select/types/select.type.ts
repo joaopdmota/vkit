@@ -1,5 +1,5 @@
-import { FieldClassesType, EventFieldType } from '../../builder/types'
-import { StatusEnum } from '../../builder/enums'
+import { FieldClassesType, EventFieldType } from 'components/webform/builder/types'
+import { StatusEnum } from 'components/webform/builder/enums'
 import SelectClassesType from './selectClasses.type'
 import DataType from './data.type'
 

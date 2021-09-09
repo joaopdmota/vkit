@@ -17,13 +17,15 @@
       background-color: var(--vkit-color-default);
     }
 
-    @each $name, $value in $colorsDefaultMarkupTint {
+    @each $name,
+    $value in $colorsDefaultMarkupTint {
       &.#{$name} {
         background-color: color($name, $colorsDefaultMarkupTint);
       }
     }
 
     @include keyFrames(bounceDelay) {
+
       0%,
       80%,
       100% {

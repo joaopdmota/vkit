@@ -13,7 +13,8 @@
     border-top: 4px solid $colorDefault;
   }
 
-  @each $name, $value in $colorsDefaultMarkupTint {
+  @each $name,
+  $value in $colorsDefaultMarkupTint {
     &.#{$name} {
       border: 4px solid #{lighten(color($name, $colorsDefaultMarkupTint), 20%)};
       border-top: 4px solid color($name, $colorsDefaultMarkupTint);

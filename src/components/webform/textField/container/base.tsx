@@ -12,7 +12,6 @@ const FieldBase: React.FC<FieldBaseType> = ({
   disabled,
   handleBeforeChange,
   icon,
-  iconDir = 'left',
   inputType = 'text',
   onBlur,
   onChange,
@@ -80,7 +79,6 @@ const FieldBase: React.FC<FieldBaseType> = ({
 
   return (
     <BaseField
-      iconDir={iconDir}
       clearable={clearable}
       contentRight={contentRight}
       disabled={disabled}

@@ -16,7 +16,7 @@ const SpinnerCircleProgressLoader: React.FC<LoaderSchemaType> = ({ full, color }
 
   const loaderClassNames = {
     dot: true,
-    [color || '']: color,
+    [color || '']: color
   }
 
   return (
