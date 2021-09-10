@@ -1,20 +1,15 @@
-image: node:latest
-
 stages:
   - setup
   - test
-  - release
-  - build
-  - publish
 
 install:
   stage: setup
-  only:
-    - merge_requests
-    - master
-    - /^v\d+.\d+.\d+/
   script:
     - yarn install --force
+  only:
+    - merge_requests
+    - /release\/\d+\.\d+\.\d+/
+    - master
   artifacts:
     paths:
       - node_modules/
@@ -22,52 +17,10 @@ install:
 
 prettier:
   stage: test
-  only:
-    - merge_requests
   script:
     - yarn prettier:check
 
 lint:
   stage: test
-  only:
-    - merge_requests
   script:
     - yarn lint
-
-release:
-  stage: release
-  only:
-    - master
-  before_script:
-    - git config --global user.name "${GITLAB_USER_NAME}"
-    - git config --global user.email "${GITLAB_USER_EMAIL}"
-    - git config receive.advertisePushOptions true
-    - git remote set-url origin https://gitlab-ci-token:rqZxrs9cjyNsNLGUcCzd@gitlab.vitta.tools/front-end/$CI_PROJECT_NAME.git
-    - git checkout $CI_COMMIT_BRANCH
-  script:
-    - git pull --rebase origin $CI_COMMIT_BRANCH
-    - yarn release
-    - git push origin --tags
-    - git fetch
-    - git checkout develop
-    - git fetch --tags --force
-    - git rebase $(git describe --tags $(git rev-list --tags --max-count=1)) -X theirs
-    - git push origin develop --no-verify -f
-
-build:
-  stage: build
-  only:
-    - /^v\d+.\d+.\d+/
-  script:
-    - yarn build
-  artifacts:
-    paths:
-      - lib/
-    expire_in: 1h
-
-publish:
-  stage: publish
-  only:
-    - /^v\d+.\d+.\d+/
-  script:
-    - yarn publish --verbose
