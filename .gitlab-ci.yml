@@ -5,7 +5,7 @@ stages:
 install:
   stage: setup
   script:
-    - yarn install --force
+    - npx yarn install --force
   only:
     - merge_requests
     - /release\/\d+\.\d+\.\d+/
@@ -18,9 +18,9 @@ install:
 prettier:
   stage: test
   script:
-    - yarn prettier:check
+    - npx yarn prettier:check
 
 lint:
   stage: test
   script:
-    - yarn lint
+    - npx yarn lint
