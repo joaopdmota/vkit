@@ -10,9 +10,7 @@ const useClickOnOutside = (
 
   const onClickOutside = useCallback(
     (event: MouseEvent): void => {
-      if (ref.current && ref.current.contains(event.target as Node)) {
-        return
-      } else if (canCallFnCallback) {
+      if (!(ref.current && ref.current.contains(event.target as Node)) && canCallFnCallback) {
         fnCallback()
       }
     },
