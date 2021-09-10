@@ -1,0 +1,26 @@
+stages:
+  - setup
+  - test
+
+install:
+  stage: setup
+  script:
+    - yarn install --force
+  only:
+    - merge_requests
+    - /release\/\d+\.\d+\.\d+/
+    - master
+  artifacts:
+    paths:
+      - node_modules/
+    expire_in: 2h
+
+prettier:
+  stage: test
+  script:
+    - yarn prettier:check
+
+lint:
+  stage: test
+  script:
+    - yarn lint
