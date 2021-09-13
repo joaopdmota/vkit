@@ -29,7 +29,6 @@
     @include animation(loaderTransition 2s infinite ease-in-out both);
 
     @include keyFrames(loaderTransition) {
-
       80%,
       100% {
         @include transform(rotate(360deg));
@@ -63,8 +62,7 @@
       }
     }
 
-    @each $name,
-    $value in $colorsDefaultMarkupTint {
+    @each $name, $value in $colorsDefaultMarkupTint {
       &.#{$name} {
         &:before {
           background-color: color($name, $colorsDefaultMarkupTint);
@@ -72,8 +70,6 @@
       }
     }
   }
-
-
 
   &.full {
     height: 50px;
