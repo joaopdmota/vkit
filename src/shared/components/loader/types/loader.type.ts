@@ -1,4 +1,3 @@
-
 type colors = 'danger' | 'info' | 'light' | 'success' | 'warning' | 'default'
 
 export type LoaderType = {

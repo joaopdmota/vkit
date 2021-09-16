@@ -10,7 +10,7 @@ const SpinnerProgressFade: React.FC<LoaderSchemaType> = ({ full, color }) => {
   const classNames = {
     full,
     spinnerProgressFade: true,
-    [color || '']: color
+    [color || '']: color,
   }
 
   return <div className={classesBuilder(style, classNames)} />
