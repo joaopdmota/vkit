@@ -22,7 +22,9 @@ const apiService = {
     params = {},
     onError = () => {},
   }: RequestType): Promise<any> {
-    const body = (options.method !== 'GET' && JSON.stringify(params)) || null
+    const body = params instanceof FormData
+      ? params
+      : (options.method !== 'GET' && JSON.stringify(params)) || null
 
     if (options.method === 'GET') {
       const args = Object.keys(params).map((key) => `${key}=${params[key]}`)
