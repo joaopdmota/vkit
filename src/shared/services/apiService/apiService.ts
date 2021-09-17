@@ -22,12 +22,26 @@ const apiService = {
     params = {},
     onError = () => {},
   }: RequestType): Promise<any> {
+    const mountQuery = (
+      paramsFilter: {[key: string]: string|string[]},
+      key: string
+    ): string => {
+      if (Array.isArray(paramsFilter[key])) {
+        const querys = (paramsFilter[key] as string[])
+          .map((item: string) => `${key}[]=${item}`, '')
+
+        return querys.join('&')
+      } else {
+        return `${key}=${params[key]}`
+      }
+    }
+
     const body = params instanceof FormData
       ? params
       : (options.method !== 'GET' && JSON.stringify(params)) || null
 
     if (options.method === 'GET') {
-      const args = Object.keys(params).map((key) => `${key}=${params[key]}`)
+      const args = Object.keys(params).map((key) => mountQuery(params, key))
       const queryString = `?${args.join('&')}`
       router += queryString
     }
