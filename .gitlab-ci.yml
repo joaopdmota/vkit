@@ -1,3 +1,5 @@
+image: node:14.16.1
+
 stages:
   - setup
   - test
@@ -5,7 +7,7 @@ stages:
 install:
   stage: setup
   script:
-    - npx yarn install --force
+    - yarn install --force
   only:
     - merge_requests
     - /release\/\d+\.\d+\.\d+/
@@ -17,10 +19,14 @@ install:
 
 prettier:
   stage: test
+  only:
+    - merge_requests
   script:
-    - npx yarn prettier:check
+    - yarn prettier:check
 
 lint:
   stage: test
+  only:
+    - merge_requests
   script:
-    - npx yarn lint
+    - yarn lint
