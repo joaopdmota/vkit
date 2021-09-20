@@ -2,7 +2,7 @@ import { useCallback, useEffect, useRef } from 'react'
 
 const useClickOnOutside = (
   fnCallback: Function,
-  canCallFnCallback: boolean
+  canCallFnCallback: boolean,
 ): {
   ref: { current: HTMLDivElement | null }
 } => {
