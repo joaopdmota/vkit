@@ -4,9 +4,9 @@
   "author": "Vitta Saúde",
   "description": "Vkit Material Component Framework",
   "private": true,
-  "engines": {
-    "node": ">=14.16.1",
-    "yarn": ">=1.22.5"
+  "publishConfig": {
+    "access": "public",
+    "vkit:registry": "https://gitlab.vitta.tools/api/v4/projects/83/packages/npm/"
   },
   "files": [
     "lib/components",
@@ -19,7 +19,10 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@bitbucket.org/vittapros/exodus.git"
+    "url": "https://gitlab.vitta.tools/front-end/vkit.git"
+  },
+  "bugs": {
+    "url": "https://gitlab.vitta.tools/front-end/vkit/-/issues"
   },
   "license": "MIT",
   "dependencies": {
@@ -50,7 +53,8 @@
     "lint": "eslint ./src/ --fix",
     "prettier:format": "prettier --write 'src/**/*.{ts,js,tsx,jsx,scss}'",
     "prettier:check": "prettier --check 'src/**/*.{ts,js,tsx,jsx,scss}'",
-    "branch-name-lint": "node branch-name-lint.config.js"
+    "branch-name-lint": "node branch-name-lint.config.js",
+    "semantic-release": "semantic-release"
   },
   "eslintConfig": {
     "extends": [
@@ -100,6 +104,9 @@
     "@babel/preset-typescript": "^7.13.0",
     "@commitlint/cli": "^13.1.0",
     "@commitlint/config-conventional": "^13.1.0",
+    "@semantic-release/git": "^10.0.0",
+    "@semantic-release/gitlab": "^6.2.2",
+    "@semantic-release/npm": "^8.0.0",
     "@types/enzyme": "^3.10.8",
     "@types/enzyme-adapter-react-16": "^1.0.6",
     "@typescript-eslint/eslint-plugin": "^4.26.0",
@@ -119,6 +126,7 @@
     "lint-staged": "^11.1.2",
     "prettier": "2.3.2",
     "sass-loader": "^12.0.0",
+    "semantic-release": "^18.0.0",
     "style-loader": "^2.0.0",
     "webpack": "^5.38.1",
     "webpack-cli": "^4.7.0",

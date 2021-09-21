@@ -1,17 +1,38 @@
-image: node:14.16.1
+default:
+  image: node:latest
+  before_script:
+    - npm ci --cache .npm --prefer-offline
+    - |
+      {
+        echo "@${CI_PROJECT_ROOT_NAMESPACE}:registry=${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/npm/"
+        echo "${CI_API_V4_URL#https?}/projects/${CI_PROJECT_ID}/packages/npm/:_authToken=\${CI_JOB_TOKEN}"
+      } | tee --append .npmrc
+  cache:
+    key: ${CI_COMMIT_REF_SLUG}
+    paths:
+      - .npm/
+
+workflow:
+  rules:
+    - if: $CI_COMMIT_BRANCH
+
+variables:
+  NPM_TOKEN: ${CI_JOB_TOKEN}
 
 stages:
   - setup
   - test
+  - release
 
 install:
   stage: setup
-  script:
-    - yarn install --force
   only:
     - merge_requests
+    - develop
     - /release\/\d+\.\d+\.\d+/
     - master
+  script:
+    - npm install --force
   artifacts:
     paths:
       - node_modules/
@@ -21,12 +42,23 @@ prettier:
   stage: test
   only:
     - merge_requests
+    - develop
   script:
-    - yarn prettier:check
+    - npm run prettier:check
 
 lint:
   stage: test
   only:
     - merge_requests
+    - develop
   script:
-    - yarn lint
+    - npm run lint
+
+publish:
+  stage: release
+  only:
+    - /release\/\d+\.\d+\.\d+/
+    - master
+  script:
+    - echo "//${CI_SERVER_HOST}/api/v4/projects/${CI_PROJECT_ID}/packages/npm/:_authToken=${CI_JOB_TOKEN}">.npmrc
+    - npm run build && npm run semantic-release && npm publish
