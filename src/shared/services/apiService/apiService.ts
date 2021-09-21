@@ -23,12 +23,11 @@ const apiService = {
     onError = () => {},
   }: RequestType): Promise<any> {
     const mountQuery = (
-      paramsFilter: {[key: string]: string|string[]},
-      key: string
+      paramsFilter: { [key: string]: string | string[] },
+      key: string,
     ): string => {
       if (Array.isArray(paramsFilter[key])) {
-        const querys = (paramsFilter[key] as string[])
-          .map((item: string) => `${key}[]=${item}`, '')
+        const querys = (paramsFilter[key] as string[]).map((item: string) => `${key}[]=${item}`, '')
 
         return querys.join('&')
       } else {
@@ -36,9 +35,10 @@ const apiService = {
       }
     }
 
-    const body = params instanceof FormData
-      ? params
-      : (options.method !== 'GET' && JSON.stringify(params)) || null
+    const body =
+      params instanceof FormData
+        ? params
+        : (options.method !== 'GET' && JSON.stringify(params)) || null
 
     if (options.method === 'GET') {
       const args = Object.keys(params).map((key) => mountQuery(params, key))
@@ -66,7 +66,7 @@ const apiService = {
 
       return data
     } catch (error) {
-      this.onError?.(error)
+      this.onError?.(error as Error)
     }
   },
 }
