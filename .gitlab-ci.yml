@@ -1,38 +1,24 @@
-default:
-  image: node:latest
-  before_script:
-    - npm ci --cache .npm --prefer-offline
-    - |
-      {
-        echo "@${CI_PROJECT_ROOT_NAMESPACE}:registry=${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/npm/"
-        echo "${CI_API_V4_URL#https?}/projects/${CI_PROJECT_ID}/packages/npm/:_authToken=\${CI_JOB_TOKEN}"
-      } | tee --append .npmrc
-  cache:
-    key: ${CI_COMMIT_REF_SLUG}
-    paths:
-      - .npm/
+image: node:latest
 
 workflow:
   rules:
     - if: $CI_COMMIT_BRANCH
 
-variables:
-  NPM_TOKEN: ${CI_JOB_TOKEN}
-
 stages:
   - setup
   - test
   - release
+  - build
+  - publish
 
 install:
   stage: setup
   only:
     - merge_requests
-    - develop
     - /release\/\d+\.\d+\.\d+/
     - master
   script:
-    - npm install --force
+    - yarn install --force
   artifacts:
     paths:
       - node_modules/
@@ -42,23 +28,48 @@ prettier:
   stage: test
   only:
     - merge_requests
-    - develop
   script:
-    - npm run prettier:check
+    - yarn prettier:check
 
 lint:
   stage: test
   only:
     - merge_requests
-    - develop
   script:
-    - npm run lint
+    - yarn lint
 
-publish:
+release:
   stage: release
   only:
-    - /release\/\d+\.\d+\.\d+/
     - master
+  before_script:
+    - git config --global user.name "${GITLAB_USER_NAME}"
+    - git config --global user.email "${GITLAB_USER_EMAIL}"
+    - git config receive.advertisePushOptions true
+    - git remote set-url origin https://gitlab-ci-token:rqZxrs9cjyNsNLGUcCzd@gitlab.vitta.tools/front-end/$CI_PROJECT_NAME.git
+    - git checkout $CI_COMMIT_BRANCH
   script:
-    - echo "//${CI_SERVER_HOST}/api/v4/projects/${CI_PROJECT_ID}/packages/npm/:_authToken=${CI_JOB_TOKEN}">.npmrc
-    - npm run build && npm run semantic-release && npm publish
+    - git pull --rebase origin $CI_COMMIT_BRANCH
+    - yarn release
+    - git push --follow-tags origin "$CI_COMMIT_BRANCH"
+    - git checkout develop
+    - git rebase master
+    - git push origin develop
+
+build:
+  stage: build
+  only:
+    - /release\/\d+\.\d+\.\d+/
+  script:
+    - yarn build
+  artifacts:
+    paths:
+      - lib/
+    expire_in: 1h
+
+publish:
+  stage: publish
+  only:
+    - /release\/\d+\.\d+\.\d+/
+  script:
+    - yarn publish --verbose
