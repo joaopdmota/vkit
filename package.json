@@ -3,10 +3,9 @@
   "version": "0.1.0",
   "author": "Vitta Saúde",
   "description": "Vkit Material Component Framework",
-  "private": true,
-  "publishConfig": {
-    "access": "public",
-    "vkit:registry": "https://gitlab.vitta.tools/api/v4/projects/83/packages/npm/"
+  "engines": {
+    "node": ">=14.17.6",
+    "yarn": ">=1.22.5"
   },
   "files": [
     "lib/components",
@@ -54,7 +53,7 @@
     "prettier:format": "prettier --write 'src/**/*.{ts,js,tsx,jsx,scss}'",
     "prettier:check": "prettier --check 'src/**/*.{ts,js,tsx,jsx,scss}'",
     "branch-name-lint": "node branch-name-lint.config.js",
-    "semantic-release": "semantic-release"
+    "release": "standard-version"
   },
   "eslintConfig": {
     "extends": [
@@ -104,9 +103,6 @@
     "@babel/preset-typescript": "^7.13.0",
     "@commitlint/cli": "^13.1.0",
     "@commitlint/config-conventional": "^13.1.0",
-    "@semantic-release/git": "^10.0.0",
-    "@semantic-release/gitlab": "^6.2.2",
-    "@semantic-release/npm": "^8.0.0",
     "@types/enzyme": "^3.10.8",
     "@types/enzyme-adapter-react-16": "^1.0.6",
     "@typescript-eslint/eslint-plugin": "^4.26.0",
@@ -114,6 +110,7 @@
     "babel-loader": "^8.2.2",
     "babel-plugin-module-resolver": "^4.1.0",
     "babel-plugin-transform-remove-console": "^6.9.4",
+    "commitizen": "^4.2.4",
     "css-loader": "^5.2.6",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.6",
@@ -126,7 +123,7 @@
     "lint-staged": "^11.1.2",
     "prettier": "2.3.2",
     "sass-loader": "^12.0.0",
-    "semantic-release": "^18.0.0",
+    "standard-version": "^9.3.1",
     "style-loader": "^2.0.0",
     "webpack": "^5.38.1",
     "webpack-cli": "^4.7.0",
