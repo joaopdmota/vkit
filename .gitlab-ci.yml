@@ -48,7 +48,6 @@ release:
     - git pull --rebase origin $CI_COMMIT_BRANCH
     - yarn release
     - git push origin --tags
-    # - git fetch --tags --force
 
 build:
   stage: build
