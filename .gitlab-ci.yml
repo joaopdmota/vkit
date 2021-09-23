@@ -52,7 +52,7 @@ release:
     - git checkout develop
     - git fetch --tags --force
     - git rebase $(git describe --tags $(git rev-list --tags --max-count=1)) -X theirs
-    - git push origin develop
+    - git push origin develop --no-verify -f
 
 build:
   stage: build
