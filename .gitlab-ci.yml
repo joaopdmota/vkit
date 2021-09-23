@@ -43,7 +43,6 @@ release:
   before_script:
     - git config --global user.name "${GITLAB_USER_NAME}"
     - git config --global user.email "${GITLAB_USER_EMAIL}"
-    - git config receive.advertisePushOptions true
     - git remote set-url origin https://gitlab-ci-token:rqZxrs9cjyNsNLGUcCzd@gitlab.vitta.tools/front-end/$CI_PROJECT_NAME.git
     - git checkout $CI_COMMIT_BRANCH
   script:
@@ -56,9 +55,9 @@ release:
     - git fetch --tags --force
     - git rebase $(git describe --tags $(git rev-list --tags --max-count=1))
     - git push origin develop --no-verify -f
-    # - git checkout $CI_COMMIT_BRANCH
-    # - git rebase develop
-    # - git push origin $CI_COMMIT_BRANCH -o ci.skip --no-verify
+    - git checkout $CI_COMMIT_BRANCH
+    - git rebase develop
+    - git push origin $CI_COMMIT_BRANCH -o ci.skip --no-verify
 
 build:
   stage: build
