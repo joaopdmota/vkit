@@ -43,11 +43,12 @@ release:
     - git config --global user.email "${GITLAB_USER_EMAIL}"
     - git config receive.advertisePushOptions true
     - git remote set-url origin https://gitlab-ci-token:rqZxrs9cjyNsNLGUcCzd@gitlab.vitta.tools/front-end/$CI_PROJECT_NAME.git
-    - git checkout HEAD:develop
+    - git fetch
+    - git checkout develop
   script:
     # - git pull --rebase origin $CI_COMMIT_BRANCH
     - yarn release
-    - git push --follow-tags origin HEAD:develop
+    - git push --follow-tags origin develop
 
 build:
   stage: build
