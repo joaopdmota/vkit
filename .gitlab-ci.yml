@@ -54,24 +54,18 @@ release:
     - git rebase $CI_COMMIT_BRANCH
     - git push origin develop
 
-build:
-  stage: build
-  only:
-    - master
-  tags:
-    - /^v[0-9]+.[0-9]+.[0-9]+$/
-  script:
-    - yarn build
-  artifacts:
-    paths:
-      - lib/
-    expire_in: 1h
+only on tags:
+  build:
+    stage: build
+    script:
+      - yarn build
+    artifacts:
+      paths:
+        - lib/
+      expire_in: 1h
 
-publish:
-  stage: publish
-  only:
-    - master
-  tags:
-    - /^v[0-9]+.[0-9]+.[0-9]+$/
-  script:
-    - yarn publish --verbose
+only on tags:
+  publish:
+    stage: publish
+    script:
+      - yarn publish --verbose
