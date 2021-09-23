@@ -61,6 +61,7 @@ const setEvents = (
   const addEvents = (): void => {
     if (!contentElement.onCustomEvents) {
       definePropertiesEvents()
+      onScroll?.({ screenTop: 0 })
     }
     const { onCustomEvents } = contentElement
     onCustomEvents.add()
