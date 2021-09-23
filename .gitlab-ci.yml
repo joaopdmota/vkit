@@ -12,6 +12,7 @@ install:
   only:
     - merge_requests
     - master
+    - /^v\d+.\d+.\d+/
   script:
     - yarn install --force
   artifacts:
@@ -37,8 +38,6 @@ release:
   stage: release
   only:
     - master
-  except:
-    - /^v[0-9]+.[0-9]+.[0-9]+$/
   before_script:
     - git config --global user.name "${GITLAB_USER_NAME}"
     - git config --global user.email "${GITLAB_USER_EMAIL}"
