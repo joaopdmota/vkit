@@ -56,12 +56,11 @@ release:
 
 build:
   stage: build
-  on:
-    push:
-      branches:
-        - '!*'
-      tags:
-        - 'v[0-9]+.[0-9]+.[0-9]+*'
+  only:
+    branches:
+      - '!*'
+    tags:
+      - 'v[0-9]+.[0-9]+.[0-9]+*'
   script:
     - yarn build
   artifacts:
@@ -71,11 +70,10 @@ build:
 
 publish:
   stage: publish
-  on:
-    push:
-      branches:
-        - '!*'
-      tags:
-        - 'v[0-9]+.[0-9]+.[0-9]+*'
+  only:
+    branches:
+      - '!*'
+    tags:
+      - 'v[0-9]+.[0-9]+.[0-9]+*'
   script:
     - yarn publish --verbose
