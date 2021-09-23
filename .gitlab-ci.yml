@@ -38,6 +38,8 @@ release:
   stage: release
   only:
     - master
+  except:
+    - tags
   before_script:
     - git config --global user.name "${GITLAB_USER_NAME}"
     - git config --global user.email "${GITLAB_USER_EMAIL}"
@@ -47,13 +49,16 @@ release:
   script:
     - git pull --rebase origin $CI_COMMIT_BRANCH
     - yarn release
-    - git push origin --tags
-    # - git fetch --tags --force
+    - git push --follow-tags origin $CI_COMMIT_BRANCH
+    - git fetch
+    - git checkout develop
+    - git rebase master
+    - git push origin develop
 
 build:
   stage: build
   only:
-    - /^v\d+.\d+.\d+/
+    - tags
   script:
     - yarn build
   artifacts:
@@ -64,6 +69,6 @@ build:
 publish:
   stage: publish
   only:
-    - /^v\d+.\d+.\d+/
+    - tags
   script:
     - yarn publish --verbose
