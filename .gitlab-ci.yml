@@ -56,9 +56,6 @@ release:
     - git fetch --tags --force
     - git rebase $(git describe --tags $(git rev-list --tags --max-count=1)) -X theirs
     - git push origin develop --no-verify -f
-    - git checkout $CI_COMMIT_BRANCH
-    - git rebase develop
-    - git push origin $CI_COMMIT_BRANCH -o ci.skip --no-verify
 
 build:
   stage: build
