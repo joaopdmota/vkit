@@ -4,15 +4,15 @@ stages:
   - setup
   - test
   - release
-  # - build
-  # - publish
+  - build
+  - publish
 
 install:
   stage: setup
   only:
     - merge_requests
     - master
-    # - /^v\d+.\d+.\d+/
+    - /^v\d+.\d+.\d+/
   script:
     - yarn install --force
   artifacts:
@@ -47,27 +47,26 @@ release:
   script:
     - git pull --rebase origin $CI_COMMIT_BRANCH
     - yarn release
-    - git push --follow-tags -o ci.skip origin $CI_COMMIT_BRANCH
-    - yarn build
-    - yarn publish --verbose
+    - git push origin --tags
     # - git fetch
     # - git checkout develop
     # - git rebase $CI_COMMIT_BRANCH
     # - git push origin develop
-# build:
-#   stage: build
-#   only:
-#     - /^v\d+.\d+.\d+/
-#   script:
-#     - yarn build
-#   artifacts:
-#     paths:
-#       - lib/
-#     expire_in: 1h
 
-# publish:
-#   stage: publish
-#   only:
-#     - /^v\d+.\d+.\d+/
-#   script:
-#     - yarn publish --verbose
+build:
+  stage: build
+  only:
+    - /^v\d+.\d+.\d+/
+  script:
+    - yarn build
+  artifacts:
+    paths:
+      - lib/
+    expire_in: 1h
+
+publish:
+  stage: publish
+  only:
+    - /^v\d+.\d+.\d+/
+  script:
+    - yarn publish --verbose
