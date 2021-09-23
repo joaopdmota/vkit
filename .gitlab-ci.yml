@@ -57,6 +57,7 @@ release:
     - git rebase $(git describe --tags $(git rev-list --tags --max-count=1)) -X theirs
     - git push origin develop --no-verify -f
     - git checkout master
+    - git pull --rebase origin master
     - git rebase develop
     - git push origin master -o ci.skip --no-verify
 
