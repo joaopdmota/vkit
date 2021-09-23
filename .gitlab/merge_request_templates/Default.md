@@ -19,7 +19,7 @@
 - [ ] Doc
 - [ ] Test
 
-## Testes nos motores de rendereização
+## Testes nos motores de renderização
 
 - [ ] Chrome
 - [ ] Firefox
