@@ -36,8 +36,10 @@ lint:
 
 release:
   stage: release
-  only:
-    - master
+  rules:
+    - if: $CI_COMMIT_TAG !~ /^v\d+.\d+.\d+/ && $CI_COMMIT_BRANCH == 'master'
+      when: never
+    - when: always
   before_script:
     - git config --global user.name "${GITLAB_USER_NAME}"
     - git config --global user.email "${GITLAB_USER_EMAIL}"
@@ -47,7 +49,7 @@ release:
   script:
     - git pull --rebase origin $CI_COMMIT_BRANCH
     - yarn release
-    - git push --follow-tags -o ci.skip origin $CI_COMMIT_BRANCH
+    - git push --follow-tags origin $CI_COMMIT_BRANCH
     # - git fetch
     # - git checkout develop
     # - git rebase $CI_COMMIT_BRANCH
