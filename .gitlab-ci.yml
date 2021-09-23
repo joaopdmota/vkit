@@ -42,7 +42,7 @@ release:
   only:
     - master
   except:
-    - /^v$/
+    - /^v+$/
   before_script:
     - git config --global user.name "${GITLAB_USER_NAME}"
     - git config --global user.email "${GITLAB_USER_EMAIL}"
@@ -61,7 +61,7 @@ release:
 build:
   stage: build
   only:
-    - /^v$/
+    - /^v+$/
   script:
     - yarn build
   artifacts:
@@ -72,6 +72,6 @@ build:
 publish:
   stage: publish
   only:
-    - /^v$/
+    - /^v+$/
   script:
     - yarn publish --verbose
