@@ -43,7 +43,6 @@ release:
   before_script:
     - git config --global user.name "${GITLAB_USER_NAME}"
     - git config --global user.email "${GITLAB_USER_EMAIL}"
-    - git config receive.advertisePushOptions true
     - git remote set-url origin https://gitlab-ci-token:rqZxrs9cjyNsNLGUcCzd@gitlab.vitta.tools/front-end/$CI_PROJECT_NAME.git
     - git checkout $CI_COMMIT_BRANCH
   script:
