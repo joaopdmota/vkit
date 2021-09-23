@@ -1,8 +1,8 @@
 image: node:latest
 
-workflow:
-  rules:
-    - if: $CI_COMMIT_BRANCH
+# workflow:
+#   rules:
+#     - if: $CI_COMMIT_BRANCH
 
 stages:
   - setup
@@ -42,7 +42,7 @@ release:
   only:
     - master
   except:
-    - tags
+    - /^v$/
   before_script:
     - git config --global user.name "${GITLAB_USER_NAME}"
     - git config --global user.email "${GITLAB_USER_EMAIL}"
@@ -55,13 +55,13 @@ release:
     - git push --follow-tags origin $CI_COMMIT_BRANCH
     - git fetch
     - git checkout develop
-    - git rebase master
+    - git rebase $CI_COMMIT_BRANCH
     - git push origin develop
 
 build:
   stage: build
   only:
-    - tags
+    - /^v$/
   script:
     - yarn build
   artifacts:
@@ -72,6 +72,6 @@ build:
 publish:
   stage: publish
   only:
-    - tags
+    - /^v$/
   script:
     - yarn publish --verbose
