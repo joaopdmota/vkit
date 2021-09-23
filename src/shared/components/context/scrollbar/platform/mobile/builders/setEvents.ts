@@ -4,7 +4,6 @@ import setEvents from '../actions/setEvents'
 
 export const addEvents = ({ contentElement }: ContentElementType, onScroll?: Function): void => {
   setEvents({ contentElement }, onScroll).addEvents()
-  onScroll?.({ screenTop: 0 })
 }
 
 export const removeEvents = ({ contentElement }: ContentElementType): void => {
