@@ -1,4 +1,5 @@
 import { useState, useCallback, useEffect } from 'react'
+import { useLocation } from 'react-router-dom'
 
 import { useHistoryNavigation } from 'shared/router'
 
@@ -10,6 +11,7 @@ interface SetPositionsInterface {
 
 const SetPositions = (menuRoutes: MenuRouteType[]): SetPositionsInterface => {
   const navigation = useHistoryNavigation()
+  const location = useLocation()
 
   const [currentRoutes, setRoutes] = useState<Array<any>>([])
 
@@ -45,12 +47,21 @@ const SetPositions = (menuRoutes: MenuRouteType[]): SetPositionsInterface => {
   )
 
   useEffect(() => {
-    if (!currentRoutes.length && menuRoutes.length) {
-      const currentRoute = window.location.pathname
+    const activeRoute = currentRoutes
+      .map((route) =>
+        route.submenu?.find(
+          ({ active, path }: { active: boolean; path: string }) =>
+            !active && path === location.pathname,
+        ),
+      )
+      .reduce((_, item) => item, null)
+
+    if ((!currentRoutes.length && menuRoutes.length) || activeRoute) {
+      const currentRoute = location.pathname
       const routes = updateRoutes(currentRoute)
       setRoutes(routes)
     }
-  }, [currentRoutes.length, updateRoutes, menuRoutes.length])
+  }, [currentRoutes, updateRoutes, menuRoutes.length, location])
 
   return {
     currentRoutes,
