@@ -56,8 +56,6 @@ release:
 
 build:
   stage: build
-  branches:
-    - '!*'
   tags:
     - 'v[0-9]+.[0-9]+.[0-9]+*'
   script:
@@ -69,8 +67,6 @@ build:
 
 publish:
   stage: publish
-  branches:
-    - '!*'
   tags:
     - 'v[0-9]+.[0-9]+.[0-9]+*'
   script:
