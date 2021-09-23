@@ -54,9 +54,9 @@ release:
     - git rebase $CI_COMMIT_BRANCH
     - git push origin develop
 
-only on tags:
-  build:
-    stage: build
+build:
+  stage: build
+  only on tags:
     script:
       - yarn build
     artifacts:
@@ -64,8 +64,7 @@ only on tags:
         - lib/
       expire_in: 1h
 
-only on tags:
-  publish:
-    stage: publish
-    script:
-      - yarn publish --verbose
+publish:
+  stage: publish
+  script:
+    - yarn publish --verbose
