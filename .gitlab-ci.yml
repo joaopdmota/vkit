@@ -4,15 +4,15 @@ stages:
   - setup
   - test
   - release
-  - build
-  - publish
+  # - build
+  # - publish
 
 install:
   stage: setup
   only:
     - merge_requests
     - master
-    - /^v\d+.\d+.\d+/
+    # - /^v\d+.\d+.\d+/
   script:
     - yarn install --force
   artifacts:
@@ -36,10 +36,8 @@ lint:
 
 release:
   stage: release
-  rules:
-    - if: $CI_COMMIT_TAG !~ /^v\d+.\d+.\d+/ && $CI_COMMIT_BRANCH == 'master'
-      when: always
-    - when: never
+  only:
+    - master
   before_script:
     - git config --global user.name "${GITLAB_USER_NAME}"
     - git config --global user.email "${GITLAB_USER_EMAIL}"
@@ -49,26 +47,27 @@ release:
   script:
     - git pull --rebase origin $CI_COMMIT_BRANCH
     - yarn release
-    - git push --follow-tags origin $CI_COMMIT_BRANCH
+    - git push --follow-tags -o ci.skip origin $CI_COMMIT_BRANCH
+    - yarn build
+    - yarn publish --verbose
     # - git fetch
     # - git checkout develop
     # - git rebase $CI_COMMIT_BRANCH
     # - git push origin develop
+# build:
+#   stage: build
+#   only:
+#     - /^v\d+.\d+.\d+/
+#   script:
+#     - yarn build
+#   artifacts:
+#     paths:
+#       - lib/
+#     expire_in: 1h
 
-build:
-  stage: build
-  only:
-    - /^v\d+.\d+.\d+/
-  script:
-    - yarn build
-  artifacts:
-    paths:
-      - lib/
-    expire_in: 1h
-
-publish:
-  stage: publish
-  only:
-    - /^v\d+.\d+.\d+/
-  script:
-    - yarn publish --verbose
+# publish:
+#   stage: publish
+#   only:
+#     - /^v\d+.\d+.\d+/
+#   script:
+#     - yarn publish --verbose
