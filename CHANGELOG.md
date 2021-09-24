@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### 0.1.6 (2021-09-24)
+
+
+### Features
+
+* params array in api service ([7282b1d](https://gitlab.vitta.tools/front-end/vkit/commit/7282b1d152c04ffa81564ae0175799d5a86ce43c))
+* params request by form data ([924ef1a](https://gitlab.vitta.tools/front-end/vkit/commit/924ef1a08f6747e09fd89a6813d3bef1d62a95b8))
+
+
+### Fixes
+
+* adding correct export to select component ([4c6ad50](https://gitlab.vitta.tools/front-end/vkit/commit/4c6ad50982f065a2620792a0232dd7995869ab69))
+* Adding iconDir props from textField to BaseField component ([5561642](https://gitlab.vitta.tools/front-end/vkit/commit/556164255484535bf144cbecee9701798995f15b))
+* adding location inside useEffect in menu component ([873d7f6](https://gitlab.vitta.tools/front-end/vkit/commit/873d7f66d5bd567e71d2f3f85831d14909cb42d4))
+* conflict ([0a1e1fb](https://gitlab.vitta.tools/front-end/vkit/commit/0a1e1fba69faa7d2229b6cafa4afbad8f1742d80))
+* linting all files ([51c3801](https://gitlab.vitta.tools/front-end/vkit/commit/51c3801fbc09eed8ad34cd32c5976880d1a52ad1))
+* style pages z-index ([faad8b9](https://gitlab.vitta.tools/front-end/vkit/commit/faad8b9b3320b28d66d7cc9f22668d91e4ac4d39))
+
 ### 0.1.5 (2021-09-24)
 
 
