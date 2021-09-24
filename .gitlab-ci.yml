@@ -18,7 +18,7 @@ install:
   artifacts:
     paths:
       - node_modules/
-    expire_in: 2h
+    expire_in: 1h
 
 prettier:
   stage: test
@@ -48,14 +48,13 @@ release:
   script:
     - git checkout $CI_COMMIT_BRANCH
     - git pull origin $CI_COMMIT_BRANCH
-    # - git push --tags
     - yarn release
     - git push --follow-tags origin $CI_COMMIT_BRANCH
     - git fetch
     - git checkout develop
     - git pull origin develop
     - git rebase $CI_COMMIT_BRANCH -X theirs
-    - git push origin develop --no-verify
+    - git push origin develop --no-verify -f
 
 build:
   stage: build
