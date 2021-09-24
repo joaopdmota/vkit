@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### 0.1.8 (2021-09-24)
+
+
+### Features
+
+* params array in api service ([7282b1d](https://gitlab.vitta.tools/front-end/vkit/commit/7282b1d152c04ffa81564ae0175799d5a86ce43c))
+
+
+### Fixes
+
+* adding location inside useEffect in menu component ([873d7f6](https://gitlab.vitta.tools/front-end/vkit/commit/873d7f66d5bd567e71d2f3f85831d14909cb42d4))
+
 ### [0.1.7](https://gitlab.vitta.tools/front-end/vkit/compare/v0.1.6...v0.1.7) (2021-09-24)
 
 ### 0.1.6 (2021-09-24)
