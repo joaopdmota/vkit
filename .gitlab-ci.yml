@@ -48,8 +48,9 @@ release:
   script:
     - git checkout $CI_COMMIT_BRANCH
     - git pull origin $CI_COMMIT_BRANCH
-    - yarn release
+    - yarn release --all
     - git push --follow-tags origin $CI_COMMIT_BRANCH
+    - git pull origin $CI_COMMIT_BRANCH
     - git fetch
     - git checkout develop
     - git pull origin develop
