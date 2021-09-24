@@ -39,7 +39,8 @@ release:
   only:
     - master
   except:
-    - tags
+    changes:
+      - CHANGELOG.md
   before_script:
     - git config --global user.name "${GITLAB_USER_NAME}"
     - git config --global user.email "${GITLAB_USER_EMAIL}"
@@ -47,8 +48,9 @@ release:
   script:
     - git checkout $CI_COMMIT_BRANCH
     - git pull origin $CI_COMMIT_BRANCH
+    # - git push --tags
     - yarn release
-    - git push --tags
+    - git push --follow-tags origin $CI_COMMIT_BRANCH
     - git fetch
     - git checkout develop
     - git pull origin develop
