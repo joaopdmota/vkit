@@ -48,10 +48,10 @@ release:
   script:
     - git checkout $CI_COMMIT_BRANCH
     - git pull origin $CI_COMMIT_BRANCH
-    - yarn release --all
+    - yarn release
     - git push --follow-tags origin $CI_COMMIT_BRANCH
+    - git fetch --all
     - git pull origin $CI_COMMIT_BRANCH
-    - git fetch
     - git checkout develop
     - git pull origin develop
     - git rebase $CI_COMMIT_BRANCH -X theirs
