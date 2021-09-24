@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.10](https://gitlab.vitta.tools/front-end/vkit/compare/v0.1.9...v0.1.10) (2021-09-24)
+
+### [0.1.9](https://gitlab.vitta.tools/front-end/vkit/compare/v0.1.8...v0.1.9) (2021-09-24)
+
 ### [0.1.8](https://gitlab.vitta.tools/front-end/vkit/compare/v0.1.6...v0.1.8) (2021-09-24)
 
 ### [0.1.7](https://gitlab.vitta.tools/front-end/vkit/compare/v0.1.6...v0.1.7) (2021-09-24)
