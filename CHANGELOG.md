@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### 0.1.9 (2021-09-24)
+
+
+### Fixes
+
+* adding location inside useEffect in menu component ([873d7f6](https://gitlab.vitta.tools/front-end/vkit/commit/873d7f66d5bd567e71d2f3f85831d14909cb42d4))
+
 ### 0.1.8 (2021-09-24)
 
 ### Features
