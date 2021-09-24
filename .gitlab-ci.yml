@@ -51,10 +51,10 @@ release:
     - yarn release
     - git push --follow-tags origin $CI_COMMIT_BRANCH
     - git fetch --all
-    - git pull origin $CI_COMMIT_BRANCH
     - git checkout develop
     - git pull origin develop
-    - git rebase $CI_COMMIT_BRANCH -X theirs
+    - git fetch --tags --force
+    - git rebase $(git describe --tags $(git rev-list --tags --max-count=1)) -X theirs
     - git push origin develop --no-verify -f
 
 build:
