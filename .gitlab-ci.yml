@@ -45,15 +45,15 @@ release:
     - git config --global user.email "${GITLAB_USER_EMAIL}"
     - git remote set-url origin https://gitlab-ci-token:rqZxrs9cjyNsNLGUcCzd@gitlab.vitta.tools/front-end/$CI_PROJECT_NAME.git
   script:
-    - git fetch
-    - git checkout develop
-    - yarn release
-    - git push --follow-tags origin develop
-    - git pull origin develop
     - git checkout $CI_COMMIT_BRANCH
     - git pull origin $CI_COMMIT_BRANCH
-    - git rebase develop -X theirs
-    - git push origin $CI_COMMIT_BRANCH -o ci.skip --no-verify
+    - yarn release
+    - git push --tags
+    - git fetch
+    - git checkout develop
+    - git pull origin develop
+    - git rebase $CI_COMMIT_BRANCH -X theirs
+    - git push origin develop --no-verify
 
 build:
   stage: build
