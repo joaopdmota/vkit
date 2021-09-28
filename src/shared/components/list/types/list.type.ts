@@ -22,5 +22,6 @@ export type ListType = {
   onPage?: Function
   onRefresher?: Function
   size: string | number
+  scrollTo?: number
   textToEmpty?: string
 }
