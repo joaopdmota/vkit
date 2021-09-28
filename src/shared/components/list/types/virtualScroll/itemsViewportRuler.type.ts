@@ -12,7 +12,6 @@ export type UseItemsVirtualizedType = {
   size: string | number
   innerHeight?: number
   onPage?: Function
-  scrollTo?: number
 }
 
 export type ScrollCallbackType = {
