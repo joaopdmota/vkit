@@ -2,7 +2,7 @@ const childProcess = require('child_process')
 const util = require('util')
 
 const options = {
-  prefixes: ['feature', 'hotfix', 'release', 'improvement', 'bugfix'],
+  prefixes: ['feature', 'feat', 'hotfix', 'bugfix', 'fix', 'release', 'improvement'],
   suggestions: {
     features: 'feature',
     feat: 'feature',
