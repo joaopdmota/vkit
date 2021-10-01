@@ -1,7 +1,7 @@
 declare type apolloServiceType = {
   config({}: any): {
     initClient: () => Promise<void>
-    resetApollo: ({}: unknown) => Promise<void>
+    resetApollo: ({}: any) => Promise<void>
   }
   client: any
 }
