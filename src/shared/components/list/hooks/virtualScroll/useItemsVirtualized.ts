@@ -1,5 +1,7 @@
 import { useCallback, useState, useRef, useEffect } from 'react'
 
+import getIsUserAgent from 'shared/utils/getIsUserAgent'
+
 import {
   UseItemsVirtualizedType,
   ScrollCallbackType,
@@ -28,10 +30,12 @@ const UseItemsVirtualized = ({
   size,
   innerHeight,
   onPage,
+  scrollTo,
 }: UseItemsVirtualizedType): UseItemsVirtualizedInterface => {
   const useRefScrollTop = useRef(0)
   const useRefPage = useRef(1)
   const useRefHasPaginated = useRef(!!onPage)
+  const useRefContentScrollElement = useRef<HTMLElement>()
 
   const [useScrollHeight, setScrollHeight] = useState<number>(0)
 
@@ -106,6 +110,7 @@ const UseItemsVirtualized = ({
           }
 
           useRefScrollTop.current = scrollTop
+          useRefContentScrollElement.current = contentElement
         }
       } else if (Array.isArray(items)) {
         setItemsLoader()
@@ -160,6 +165,18 @@ const UseItemsVirtualized = ({
       useRefPage.current = 1
     }
 
+    if (typeof scrollTo !== 'undefined' && scrollTo >= 0) {
+      if (getIsUserAgent('mobile')) {
+        const scrollElement = useRefContentScrollElement.current?.parentElement as HTMLElement
+        scrollElement?.scrollTo(0, scrollTo)
+      } else {
+        const scrollStyle = useRefContentScrollElement.current?.style
+        if (scrollStyle && scrollStyle.top) {
+          scrollStyle.top = `${scrollTo}px`
+        }
+      }
+    }
+
     useRefHasPaginated.current =
       scrollHeight === prevScrollHeight && useRefPage.current > 1 ? false : !!onPage
 
@@ -174,7 +191,7 @@ const UseItemsVirtualized = ({
 
     setScrollHeight(scrollHeight)
     setOrderItems()
-  }, [countItemsInViewport, height, itemInnerHeight, items, onPage, setOrderItems])
+  }, [countItemsInViewport, height, itemInnerHeight, items, onPage, scrollTo, setOrderItems])
 
   return {
     useHasProgressLoader,

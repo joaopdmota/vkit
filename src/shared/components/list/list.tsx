@@ -28,6 +28,7 @@ const List: React.FC<ListType> = ({
   onHover,
   onPage,
   size,
+  scrollTo,
   textToEmpty = DEFAULT_EMPTY_MSG,
 }) => {
   const items = (
@@ -48,6 +49,7 @@ const List: React.FC<ListType> = ({
     size,
     innerHeight,
     onPage,
+    scrollTo,
   })
 
   const getIsSetSort = (header: DataType): boolean => {

@@ -3,8 +3,8 @@ import Main from 'shared/components/context/main'
 import React from 'react'
 import StructureAuthType from './types/auth.type'
 
-const StructureAuth: React.FC<StructureAuthType> = ({ children, sound, translucent }) => (
-  <Main translucent={translucent} sound={sound} fullHeight>
+const StructureAuth: React.FC<StructureAuthType> = ({ children, translucent }) => (
+  <Main translucent={translucent} fullHeight>
     <Grid alignContent="center" alignItems="center" growing>
       {children}
     </Grid>

@@ -1,6 +1,6 @@
 {
   "name": "vkit",
-  "version": "0.2.0",
+  "version": "0.1.4",
   "author": "Vitta Saúde",
   "description": "Vkit Material Component Framework",
   "engines": {
@@ -53,7 +53,9 @@
     "prettier:format": "prettier --write 'src/**/*.{ts,js,tsx,jsx,scss}'",
     "prettier:check": "prettier --check 'src/**/*.{ts,js,tsx,jsx,scss}'",
     "branch-name-lint": "node branch-name-lint.config.js",
-    "release": "standard-version"
+    "release": "standard-version",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   },
   "eslintConfig": {
     "extends": [
@@ -61,6 +63,14 @@
       "react-app/jest"
     ],
     "overrides": [
+      {
+        "files": [
+          "**/*.stories.*"
+        ],
+        "rules": {
+          "import/no-anonymous-default-export": "off"
+        }
+      },
       {
         "files": [
           "**/*.stories.*"
@@ -79,7 +89,7 @@
     }
   },
   "lint-staged": {
-    "*.{js,jsx,ts,tsx}": "eslint --ext .jsx,.js,.ts,.tsx --max-warnings=0"
+    "src/**/*.{js,jsx,ts,tsx}": "eslint --ext .jsx,.js,.ts,.tsx --max-warnings=0"
   },
   "browserslist": {
     "production": [
@@ -103,6 +113,12 @@
     "@babel/preset-typescript": "^7.13.0",
     "@commitlint/cli": "^13.1.0",
     "@commitlint/config-conventional": "^13.1.0",
+    "@storybook/addon-actions": "^6.3.8",
+    "@storybook/addon-essentials": "^6.3.8",
+    "@storybook/addon-links": "^6.3.8",
+    "@storybook/node-logger": "^6.3.8",
+    "@storybook/preset-create-react-app": "^3.2.0",
+    "@storybook/react": "^6.3.8",
     "@types/enzyme": "^3.10.8",
     "@types/enzyme-adapter-react-16": "^1.0.6",
     "@typescript-eslint/eslint-plugin": "^4.26.0",
