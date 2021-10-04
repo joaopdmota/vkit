@@ -16,6 +16,7 @@ type StructureAuthType = {
     }
   }
   translucent?: boolean
+  baseUrl?: string
 }
 
 export default StructureAuthType
