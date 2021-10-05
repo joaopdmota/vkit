@@ -31,6 +31,7 @@ const Button: React.FC<ButtonType> = ({
   upperCase,
   size = 'medium',
   onClick,
+  submit,
 }) => {
   const { coords, isRippling, setCoords, setIsRippling, rippleEffectTimeRef } = usePositions()
 
@@ -83,6 +84,7 @@ const Button: React.FC<ButtonType> = ({
       disabled={disabled}
       onClick={ripple ? handleClick : onClick}
       className={classesBuilder(style, btnProps)}
+      {...(submit && { type: 'submit' })}
     >
       <>
         {loading ? (
