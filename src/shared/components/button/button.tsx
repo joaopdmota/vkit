@@ -43,7 +43,7 @@ const Button: React.FC<ButtonType> = ({
     [color || '']: !disabled && color,
     [size || '']: size,
     [`icon${getTextCapitalize(iconDir)}`]: iconDir && label,
-    pointer: isOnClick,
+    pointer: isOnClick || submit,
     disabled,
     full,
     iconOnly: !label,
