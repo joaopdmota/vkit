@@ -38,7 +38,6 @@ const StructurePage: React.FC<StructurePageType> = ({
     },
   },
   translucent,
-  baseUrl = '/',
 }) => {
   const {
     isMobile,
@@ -82,7 +81,7 @@ const StructurePage: React.FC<StructurePageType> = ({
   }
 
   return (
-    <RouterWapper basename={baseUrl}>
+    <RouterWapper>
       <Main translucent={translucent} fullHeight>
         <div data-cascade className={classesBuilder(style, classNamesStructure)}>
           <div data-cascade-scale>
