@@ -84,7 +84,7 @@ const Button: React.FC<ButtonType> = ({
       disabled={disabled}
       onClick={ripple ? handleClick : onClick}
       className={classesBuilder(style, btnProps)}
-      {...(submit && { type: 'submit' })}
+      type={submit ? 'submit' : 'button'}
     >
       <>
         {loading ? (
