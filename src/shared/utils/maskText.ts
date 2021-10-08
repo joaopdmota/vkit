@@ -1,4 +1,8 @@
 export default (value: string, format: string): string => {
+  if (!value || !format) {
+    return value
+  }
+
   let result = ''
   let indexFormatSplit = 0
   let indexValueSplit = 0

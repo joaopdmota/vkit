@@ -31,6 +31,7 @@ type ButtonType = ButtonClassType & {
     | 'spinnerProgress'
     | 'spinnerProgressFade'
   onClick?: () => void
+  submit?: boolean
 }
 
 export default ButtonType

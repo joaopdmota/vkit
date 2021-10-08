@@ -8,6 +8,7 @@ type TextFieldType = TextFieldClassesType &
   RangeFieldType & {
     type?: TypeEnum
     disabled?: boolean
+    mask?: string
   }
 
 export default TextFieldType

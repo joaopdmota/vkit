@@ -21,6 +21,7 @@ export type FieldBaseType = TextFieldType & {
   setTtfValue: Function
   statusOrigin?: StatusEnum
   contentRight?: ReactNode
+  mask?: string
 }
 
 export default FieldBaseType

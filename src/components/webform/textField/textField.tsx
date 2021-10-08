@@ -37,6 +37,7 @@ const TextField: React.FC<TextFieldType> = ({
   step,
   min,
   max,
+  mask,
   iconDir = 'left',
 }) => {
   const [ttfTextHelper, setTtfTextHelper] = useState<string>()
@@ -106,12 +107,16 @@ const TextField: React.FC<TextFieldType> = ({
       textHelperTop={textHelperTop}
     >
       <ComponentField
-        iconDir={iconDir}
         clearable={clearable}
         disabled={disabled}
+        double={double}
         icon={icon}
+        iconDir={iconDir}
         large={large}
+        mask={mask}
+        max={max}
         medium={medium}
+        min={min}
         multiline={multiline}
         placeholder={placeholder}
         required={required}
@@ -122,10 +127,7 @@ const TextField: React.FC<TextFieldType> = ({
         status={ttfStatus}
         statusOrigin={status}
         step={step}
-        double={double}
         value={ttfValue}
-        min={min}
-        max={max}
         {...handles}
       />
     </WrapField>
