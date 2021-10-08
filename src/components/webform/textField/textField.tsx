@@ -5,7 +5,6 @@ import React, { FocusEvent, useEffect, useState } from 'react'
 import { EventFieldType } from '../builder/types'
 import { StatusEnum } from '../builder/enums'
 import TextFieldType from './types/textField.type'
-import { TypeEnum } from './enums'
 import { WrapField } from '../builder/container/field'
 import { classesBuilder } from 'shared/utils'
 import style from 'theme/components/webform/textField.module.scss'
@@ -95,7 +94,7 @@ const TextField: React.FC<TextFieldType> = ({
       password: Field.Password,
       range: Field.Range,
       text: Field.Text,
-    }[type as TypeEnum] || Field.Text
+    }[type] || Field.Text
 
   return (
     <WrapField
