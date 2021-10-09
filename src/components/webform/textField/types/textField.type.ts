@@ -5,7 +5,7 @@ import TextFieldClassesType from './textFieldClasses.type'
 type TextFieldType = TextFieldClassesType &
   FieldType &
   RangeFieldType & {
-    type?: string
+    type?: 'cep' | 'cnpj' | 'cpf' | 'date' | 'number' | 'password' | 'range' | 'text'
     disabled?: boolean
     mask?: string
   }
