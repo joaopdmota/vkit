@@ -131,6 +131,7 @@ const Select: React.FC<SelectType> = ({
       value: useTerm,
       onChange,
     }),
+    value,
     autocomplete,
     clearable,
     contentRight: (
