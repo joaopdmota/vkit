@@ -3,13 +3,13 @@ import React, { useLayoutEffect, useRef, useState, ReactNode } from 'react'
 import classesBuilder from 'shared/utils/classesBuilder'
 import style from 'theme/components/tabs/components/toggleContent.module.scss'
 
-type ShowHideType = {
+type toggleContentType = {
   visible: boolean
   children: ReactNode
   order?: number
 }
 
-const ToggleContent: React.FC<ShowHideType> = ({ visible = false, children, order = 1 }) => {
+const ToggleContent: React.FC<toggleContentType> = ({ visible = false, children, order = 1 }) => {
   const [useShow, setShow] = useState(false)
   const [useVisibleOpacity, setVisibleOpacity] = useState(false)
 
