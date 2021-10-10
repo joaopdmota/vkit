@@ -49,7 +49,7 @@ const TextField: React.FC<TextFieldType> = ({
   useEffect(() => {
     setTtfTextHelper(textHelper)
     setTtfStatus(status)
-    if (value) setTtfValue(value)
+    if (value || value === '') setTtfValue(value)
   }, [value, textHelper, status])
 
   const handles: EventFieldType = {
@@ -127,6 +127,7 @@ const TextField: React.FC<TextFieldType> = ({
         statusOrigin={status}
         step={step}
         value={ttfValue}
+        textHelper={ttfTextHelper}
         {...handles}
       />
     </WrapField>
