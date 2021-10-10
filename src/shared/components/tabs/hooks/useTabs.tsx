@@ -19,19 +19,16 @@ const UseTabs = (
   const [useTabsStyle, setTabsStyle] = useState({})
   const [useTabs, setTabs] = useState<TabType[]>([])
 
-  const setActiveTabPosition = useCallback(
-    (activeIndex: number): void => {
-      setTimeout(() => {
-        const { offsetLeft, offsetWidth } = tabsRef.current[activeIndex]
+  const setActiveTabPosition = useCallback((activeIndex: number): void => {
+    setTimeout(() => {
+      const { offsetLeft, offsetWidth } = tabsRef.current[activeIndex]
 
-        setTabsStyle({
-          left: offsetLeft,
-          width: offsetWidth,
-        })
+      setTabsStyle({
+        left: offsetLeft,
+        width: offsetWidth,
       })
-    },
-    [],
-  )
+    })
+  }, [])
 
   useLayoutEffect(() => {
     const activeIndex = useTabs.length
