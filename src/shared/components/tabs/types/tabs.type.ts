@@ -3,13 +3,12 @@ import { MouseEventHandler, ReactElement } from 'react'
 export type TabType = {
   label?: string
   icon?: string
-  body: ReactElement
   active?: boolean
   disabled?: boolean
 }
 
 export type TabsType = {
-  activeElement: number
+  activeElement?: number
   iconDir?: string
   center?: boolean
   full?: boolean
@@ -17,5 +16,6 @@ export type TabsType = {
   solo?: boolean
   outlined?: boolean
   onChange?: MouseEventHandler<HTMLButtonElement>
+  elements: ReactElement[]
   actions: TabType[] | []
 }

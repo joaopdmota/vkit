@@ -1,0 +1,31 @@
+@import '../../../main.scss';
+
+.showHide {
+  display: block;
+  height: 0;
+  position: relative;
+  @include transition(opacity 0.3s ease);
+  width: 100%;
+  opacity: 0;
+
+  .contentShowHide {
+    display: block;
+    @include transform(translateX(-10%));
+    @include transition(transform 0.3s ease);
+    width: 100%;
+  }
+
+  &:last-of-type {
+    .contentShowHide {
+      @include transform(translateX(10%));
+    }
+  }
+
+  &.visible {
+    opacity: 1;
+
+    .contentShowHide {
+      @include transform(none);
+    }
+  }
+}
