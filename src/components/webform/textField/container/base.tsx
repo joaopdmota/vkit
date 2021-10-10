@@ -46,10 +46,11 @@ const FieldBase: React.FC<FieldBaseType> = ({
   })
 
   const treatValue = useCallback(
-    (newValue?: string, isValidated = false): void => {
+    (newValue?: string, isValidated = false): string => {
       const text: string = handleBeforeChange?.(newValue) ?? newValue
       if (isValidated) validateTextField(text)
       setTtfValue(text)
+      return text
     },
     [handleBeforeChange, validateTextField, setTtfValue],
   )
@@ -62,8 +63,8 @@ const FieldBase: React.FC<FieldBaseType> = ({
       onBlur?.(event.target.value, event)
     },
     onChange: (event: ChangeEvent<HTMLInputElement>): void => {
-      treatValue(event.target.value, isTtfValidated)
-      onChange?.(event.target.value, event)
+      const text = treatValue(event.target.value, isTtfValidated)
+      onChange?.(text, event)
     },
     onFocus,
     onKeyDown,
@@ -92,6 +93,10 @@ const FieldBase: React.FC<FieldBaseType> = ({
       style={style}
       tagName={TagName as TagNameEnum}
       value={value}
+      onClear={() => {
+        const text = treatValue('', isTtfValidated)
+        onChange?.(text, {})
+      }}
       {...handles}
     />
   )

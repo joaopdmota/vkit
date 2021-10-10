@@ -6,6 +6,7 @@ import { TextField } from 'components'
 
 const RangeDemo = () => {
   const [helper, setHelper] = useState('')
+  const [useValue, setValue] = useState('')
   const [options, setOptions] = useState({ type: 'text' })
 
   useEffect(() => {
@@ -32,7 +33,8 @@ const RangeDemo = () => {
           textHelper={helper}
           textHelperTop={options.textHelperTop}
           type={options.type}
-          value="teste"
+          value={useValue}
+          onChange={setValue}
           double
         />
       </div>
