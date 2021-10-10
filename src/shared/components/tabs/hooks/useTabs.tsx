@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, useRef } from 'react'
+import { useState, useLayoutEffect, useCallback, useRef } from 'react'
 
 import { TabType } from '../types/tabs.type'
 
@@ -20,32 +20,34 @@ const UseTabs = (
   const [useTabs, setTabs] = useState<TabType[]>([])
 
   const setActiveTabPosition = useCallback((activeIndex: number): void => {
-    const { offsetLeft, offsetWidth } = tabsRef.current[activeIndex]
+    setTimeout(() => {
+      const { offsetLeft, offsetWidth } = tabsRef.current[activeIndex]
 
-    setTabsStyle({
-      left: offsetLeft,
-      width: offsetWidth,
+      setTabsStyle({
+        left: offsetLeft,
+        width: offsetWidth,
+      })
     })
   }, [])
 
-  useEffect(() => {
-    if (!Object.keys(useTabsStyle).length) {
-      const defaultIndex = actions.length > active ? active : 0
+  useLayoutEffect(() => {
+    const activeIndex = useTabs.length
+      ? useTabs.findIndex((t: TabType) => t.active)
+      : actions.findIndex((t: TabType) => t.active)
+
+    if (!useTabs.length) {
+      const defaultIndex = activeIndex >= 0 ? activeIndex : actions.length > active ? active : 0
 
       const tabs = actions.map((element: TabType, index: number) => ({
         ...element,
         active: defaultIndex === index,
       }))
 
-      window.addEventListener('load', setActiveTabPosition.bind(null, defaultIndex))
-
       setTabs(tabs)
-
-      return () => {
-        window.removeEventListener('load', setActiveTabPosition.bind(null, defaultIndex))
-      }
+    } else {
+      setActiveTabPosition(activeIndex)
     }
-  }, [actions, solo, active, useTabsStyle, setActiveTabPosition])
+  }, [actions, active, setActiveTabPosition, useTabs])
 
   const changeTab = (event: Event, newIndex: number): void => {
     const target = event.target as HTMLButtonElement

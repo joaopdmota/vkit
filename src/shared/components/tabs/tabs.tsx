@@ -4,11 +4,11 @@ import classesBuilder from 'shared/utils/classesBuilder'
 
 import Icon from 'shared/components/icon'
 
-import TabItem from './tabItem'
-
 import { TabsType, TabType } from './types/tabs.type'
 
 import UseTabs from './hooks/useTabs'
+
+import ToggleContent from './components/toggleContent'
 
 import style from 'theme/components/tabs/tabs.module.scss'
 
@@ -22,6 +22,7 @@ const Tabs: React.FC<TabsType> = ({
   full,
   center,
   iconDir = 'right',
+  elements,
 }) => {
   const { changeTab, useTabs, useTabsStyle, tabsRef } = UseTabs(
     activeElement,
@@ -87,7 +88,9 @@ const Tabs: React.FC<TabsType> = ({
 
       <div className={style.tabView}>
         {useTabs.map((tab: TabType, index: number) => (
-          <TabItem {...tab} key={`tab-item-${index}`} />
+          <ToggleContent key={index} visible={tab?.active || false}>
+            {elements[index]}
+          </ToggleContent>
         ))}
       </div>
     </div>
