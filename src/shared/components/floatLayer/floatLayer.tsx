@@ -26,7 +26,9 @@ const FloatLayer: React.FC<FloatLayerType> = ({
 }) => {
   const isMobile = getIsUserAgent('mobile')
 
-  const { getElementHeight, wrapperRef, useHeight, useOpen, useShow } = useFloatLayer({
+  const {
+    getElementHeight,
+    wrapperRef, useHeight, useOpen, useShow, useWidth, useBottom } = useFloatLayer({
     canShow: show,
     height,
     onClose,
@@ -45,7 +47,13 @@ const FloatLayer: React.FC<FloatLayerType> = ({
   return useOpen ? (
     <div className={classesBuilder(style, classesNames)}>
       {isMobile ? <BackDrop show={useShow} blur /> : null}
-      <div ref={wrapperRef as LegacyRef<HTMLDivElement>} className={style.box} style={{ maxWidth }}>
+      <div
+        ref={wrapperRef as LegacyRef<HTMLDivElement>}
+        className={style.box}
+        style={{
+          bottom: useBottom,
+          maxWidth: maxWidth ?? useWidth }}
+      >
         {isMobile ? (
           <div className={style.close}>
             <Button icon="close-outline" onClick={onClose} />
