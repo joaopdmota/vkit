@@ -57,12 +57,11 @@ const useFloatLayerHeight = (
         setBottom('auto')
         setTimeout(() => {
           const floatLayerBox = divElement.getBoundingClientRect()
-          
+
           if (floatLayerBox.top + floatLayerBox.height >= window.innerHeight) {
             setBottom(10)
           }
         }, 300)
-          
       } else {
         setHeight(0)
       }

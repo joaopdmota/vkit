@@ -26,14 +26,13 @@ const FloatLayer: React.FC<FloatLayerType> = ({
 }) => {
   const isMobile = getIsUserAgent('mobile')
 
-  const {
-    getElementHeight,
-    wrapperRef, useHeight, useOpen, useShow, useWidth, useBottom } = useFloatLayer({
-    canShow: show,
-    height,
-    onClose,
-    closeClickOutside,
-  })
+  const { getElementHeight, wrapperRef, useHeight, useOpen, useShow, useWidth, useBottom } =
+    useFloatLayer({
+      canShow: show,
+      height,
+      onClose,
+      closeClickOutside,
+    })
 
   const classesNames = {
     [`elevation${elevation}`]: elevation,
@@ -52,7 +51,8 @@ const FloatLayer: React.FC<FloatLayerType> = ({
         className={style.box}
         style={{
           bottom: useBottom,
-          maxWidth: maxWidth ?? useWidth }}
+          maxWidth: maxWidth ?? useWidth,
+        }}
       >
         {isMobile ? (
           <div className={style.close}>
