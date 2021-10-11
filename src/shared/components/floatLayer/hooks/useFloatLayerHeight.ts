@@ -5,8 +5,12 @@ const useFloatLayerHeight = (
 ): {
   getElementHeight: ({}: HTMLDivElement) => void
   useHeight: number
+  useWidth: number
+  useBottom: number | 'auto'
 } => {
   const [useHeight, setHeight] = useState(0)
+  const [useWidth, setWidth] = useState(0)
+  const [useBottom, setBottom] = useState<number | 'auto'>('auto')
 
   const getDetailsHeight = (divElement: HTMLDivElement): number => {
     const headerIndex = 0
@@ -46,6 +50,18 @@ const useFloatLayerHeight = (
       if (divElement) {
         const contentHeight = height ?? defineHeight(divElement)
         setHeight(contentHeight)
+
+        const { width } = divElement.parentElement?.parentElement?.getBoundingClientRect() || {}
+        setWidth(width || 0)
+
+        setBottom('auto')
+        setTimeout(() => {
+          const floatLayerBox = divElement.getBoundingClientRect()
+
+          if (floatLayerBox.top + floatLayerBox.height >= window.innerHeight) {
+            setBottom(10)
+          }
+        }, 300)
       } else {
         setHeight(0)
       }
@@ -56,6 +72,8 @@ const useFloatLayerHeight = (
   return {
     getElementHeight,
     useHeight,
+    useWidth,
+    useBottom,
   }
 }
 
