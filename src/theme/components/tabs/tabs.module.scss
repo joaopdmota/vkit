@@ -1,8 +1,6 @@
 @import '../../main.scss';
 
 .wrapper {
-  width: max-content;
-
   &.full {
     width: 100%;
 
@@ -16,6 +14,7 @@
   }
 
   .tabMenu {
+    width: max-content;
     box-sizing: border-box;
     display: flex;
     justify-content: center;

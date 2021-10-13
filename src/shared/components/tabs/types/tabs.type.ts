@@ -1,4 +1,4 @@
-import { MouseEventHandler, ReactElement } from 'react'
+import { ReactElement } from 'react'
 
 export type TabType = {
   label?: string
@@ -15,7 +15,7 @@ export type TabsType = {
   rounded?: boolean
   solo?: boolean
   outlined?: boolean
-  onChange?: MouseEventHandler<HTMLButtonElement>
+  onChange?: (currentElement: number) => void
   elements: ReactElement[]
   actions: TabType[] | []
 }
