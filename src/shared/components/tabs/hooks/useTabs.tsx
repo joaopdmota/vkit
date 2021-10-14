@@ -26,7 +26,7 @@ const UseTabs = (
         left: offsetLeft,
         width: offsetWidth,
       })
-    })
+    }, 300)
   }, [])
 
   useLayoutEffect(() => {
