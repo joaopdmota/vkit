@@ -63,7 +63,7 @@
 
         &:not(.disabled):not(.focus) {
           &:hover {
-            >span {
+            > span {
               svg {
                 fill: var(--vkit-color-contrast-4);
               }
@@ -82,7 +82,7 @@
       button {
         &:not(.disabled):not(.focus) {
           &:hover {
-            >span {
+            > span {
               svg {
                 fill: var(--vkit-color-contrast-4);
               }
@@ -104,7 +104,7 @@
       justify-content: center;
       color: var(--vkit-color-contrast-9);
 
-      >span {
+      > span {
         pointer-events: none;
       }
 
@@ -116,13 +116,13 @@
       &.top {
         @include flex-direction(column-reverse);
 
-        >span {
+        > span {
           margin-bottom: 8px;
         }
       }
 
       &.right {
-        >span {
+        > span {
           margin-left: 8px;
         }
       }
@@ -130,7 +130,7 @@
       &.left {
         @include flex-direction(row-reverse);
 
-        >span {
+        > span {
           margin-right: 8px;
         }
       }
@@ -138,7 +138,7 @@
       &.bottom {
         @include flex-direction(column);
 
-        >span {
+        > span {
           margin-top: 8px;
         }
       }
@@ -153,7 +153,7 @@
       &.focus {
         color: var(--vkit-color-default-1);
 
-        >span {
+        > span {
           svg {
             fill: var(--vkit-color-default-1);
           }
