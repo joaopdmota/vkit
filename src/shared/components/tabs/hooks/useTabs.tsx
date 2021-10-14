@@ -3,7 +3,6 @@ import { useState, useLayoutEffect, useCallback, useRef } from 'react'
 import { TabType } from '../types/tabs.type'
 
 const UseTabs = (
-  active = 0,
   onChange: Function | undefined,
   actions: TabType[],
   solo: boolean,
@@ -27,27 +26,31 @@ const UseTabs = (
         left: offsetLeft,
         width: offsetWidth,
       })
-    })
+    }, 300)
   }, [])
 
   useLayoutEffect(() => {
-    const activeIndex = useTabs.length
-      ? useTabs.findIndex((t: TabType) => t.active)
-      : actions.findIndex((t: TabType) => t.active)
+    const currentActiveIndex = actions.findIndex((t: TabType) => t.active)
 
-    if (!useTabs.length) {
-      const defaultIndex = activeIndex >= 0 ? activeIndex : actions.length > active ? active : 0
+    const parsedCurrentActiveIndex = currentActiveIndex >= 0 ? currentActiveIndex : 0
 
-      const tabs = actions.map((element: TabType, index: number) => ({
-        ...element,
-        active: defaultIndex === index,
-      }))
+    const tabs = actions.map(({ disabled = false, icon, label }: TabType, index) => ({
+      active: parsedCurrentActiveIndex === index,
+      disabled,
+      icon,
+      label,
+    }))
 
+    const stringifiedActions = JSON.stringify(tabs)
+    const stringifiedUseTabs = JSON.stringify(useTabs)
+
+    const hasDiff = stringifiedActions !== stringifiedUseTabs
+
+    if (hasDiff) {
       setTabs(tabs)
-    } else {
-      setActiveTabPosition(activeIndex)
+      setActiveTabPosition(parsedCurrentActiveIndex)
     }
-  }, [actions, active, setActiveTabPosition, useTabs])
+  }, [actions, useTabs, setActiveTabPosition])
 
   const changeTab = (event: Event, newIndex: number): void => {
     const target = event.target as HTMLButtonElement
