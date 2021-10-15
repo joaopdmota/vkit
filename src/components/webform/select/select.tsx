@@ -1,5 +1,7 @@
-import React from 'react'
+import React, { useEffect, useCallback } from 'react'
 
+import { Row } from 'context'
+import { Loader } from 'components'
 import Field from 'components/webform/select/container/field'
 import { ListMultiple, ListSingle } from 'components/webform/select/container/list'
 import IconSelect from 'components/webform/select/container/iconSelect'
@@ -25,6 +27,7 @@ const Select: React.FC<SelectType> = ({
   icon,
   label,
   large,
+  loading,
   medium,
   multiple,
   onBlur,
@@ -44,6 +47,7 @@ const Select: React.FC<SelectType> = ({
   requestSearchParam,
   requestUri,
   required,
+  requiredSign,
   shadow,
   small,
   showTabSelecteds,
@@ -133,10 +137,21 @@ const Select: React.FC<SelectType> = ({
     }),
     autocomplete,
     clearable,
-    contentRight: (
+    contentRight: loading ? (
+      <Row
+        style={{
+          marginRight: 12,
+          padding: 0,
+          alignSelf: 'center',
+        }}
+      >
+        <Loader color="default" />
+      </Row>
+    ) : (
       <IconSelect onClick={handles.onClick} autocomplete={autocomplete} open={useShowList} />
     ),
     disabled,
+    loading,
     icon,
     onBlur: handles.onBlur,
     onClear: () => {
@@ -188,11 +203,38 @@ const Select: React.FC<SelectType> = ({
     useTermSelecteds,
   }
 
+  const setValueSingle = useCallback(
+    (newValue: string) => {
+      const canAdd = useSelecteds?.every((item) => item.value !== newValue)
+      if (canAdd) {
+        const selected = (data || []).find((item) => item.value === newValue)
+
+        if (selected) {
+          handles.onChange?.(selected, newValue, multiple)
+        } else {
+          onClear(multiple)
+        }
+      }
+    },
+    [handles, data, useSelecteds, multiple, onClear],
+  )
+
+  useEffect(() => {
+    if (value.length) {
+      if (!Array.isArray(value)) {
+        setValueSingle(value)
+      }
+    } else if (useSelecteds?.length) {
+      onClear(multiple && !autocomplete)
+    }
+  }, [value, autocomplete, multiple, onClear, setValueSingle, useSelecteds?.length])
+
   return (
     <WrapField
       className={classesBuilder(style, classNames)}
       label={label}
       required={required}
+      requiredSign={requiredSign}
       textHelper={useTextHelper}
       textHelperTop={textHelperTop}
       style={style}

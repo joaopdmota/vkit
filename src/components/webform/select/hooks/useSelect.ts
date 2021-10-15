@@ -35,6 +35,7 @@ const useSelect = ({
   onClear: Function
   setShowList: (...item: any) => void
   setStatus: Function
+  setSelecteds: Function
   setTextHelper: Function
   useSelecteds: DataType[] | null
   useShowList: boolean
@@ -128,6 +129,7 @@ const useSelect = ({
     onClear,
     setShowList,
     setStatus,
+    setSelecteds,
     setTextHelper,
     useSelecteds,
     useShowList,

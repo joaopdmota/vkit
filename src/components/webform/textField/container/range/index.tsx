@@ -69,7 +69,7 @@ const RangeField: React.FC<RangeFieldType> = ({
     const { max: newMax, min: newMin } = getValues(value, min, max, step)
     setMaxVal(newMax)
     setMinVal(newMin)
-  }, [min, max, value, step, double])
+  }, [min, max, value, step])
 
   useEffect(() => {
     onChange?.(double ? { min: minVal, max: maxVal } : maxVal)

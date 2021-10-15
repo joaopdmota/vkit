@@ -8,6 +8,7 @@ type TextFieldType = TextFieldClassesType &
     type?: 'cep' | 'cnpj' | 'cpf' | 'date' | 'number' | 'password' | 'range' | 'text'
     disabled?: boolean
     mask?: string
+    loading?: boolean
   }
 
 export default TextFieldType

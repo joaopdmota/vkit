@@ -1,83 +1,85 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 
-import { Content } from 'context'
-import Control from 'shared/utils/control.example'
-import { TextField } from 'components'
+import { TextField, Text } from 'components'
+import { Grid, Row } from 'context'
 
 const RangeDemo = () => {
-  const [helper, setHelper] = useState('')
-  const [useValue, setValue] = useState('')
-  const [options, setOptions] = useState({ type: 'text' })
-
-  useEffect(() => {
-    setHelper(options.helperChecked ? 'Teste de helper' : '')
-  }, [options.helperChecked])
-
-  const handleOptions = (option) => setOptions({ ...options, ...option })
+  const [useValue1, setValue1] = useState()
+  const [useValue2, setValue2] = useState()
+  const [useValue3, setValue3] = useState()
+  const [useValue4, setValue4] = useState()
+  const [useValue5, setValue5] = useState()
+  const [useValue6, setValue6] = useState()
+  const [useValue7, setValue7] = useState()
+  const [useValue8, setValue8] = useState()
+  const [useValue9, setValue9] = useState()
 
   return (
-    <div style={{ display: 'flex' }}>
-      <div style={{ width: '320px', padding: '15px' }}>
-        <TextField
-          clearable={options.clearable}
-          disabled={options.disabled}
-          icon={options.icon && 'person-outline'}
-          label="Isso é uma labe"
-          large={options.size === 'large'}
-          medium={options.size === 'medium'}
-          multiline={options.multiline}
-          placeholder={options.placeholder && 'isso é um teste'}
-          required={options.required}
-          small={options.size === 'small'}
-          status={options.status}
-          textHelper={helper}
-          textHelperTop={options.textHelperTop}
-          type={options.type}
-          value={useValue}
-          onChange={setValue}
-          double
-        />
-      </div>
+    <>
+      <Row>
+        <Text value="TextFields" title />
+      </Row>
+      <Grid wrap>
+        <Row>
+          <TextField label="Simples" value={useValue1} onChange={setValue1} />
+        </Row>
 
-      <div style={{ width: '320px', padding: '15px' }}>
-        <Content>
-          <Control
-            onChange={handleOptions}
-            options={options}
-            groups={[
-              {
-                title: 'Types',
-                tagName: 'Radio',
-                optionTarget: 'type',
-                items: ['cep', 'cnpj', 'cpf', 'date', 'password', 'range', 'text'],
-              },
+        <Row>
+          <TextField label="Multiline" value={useValue2} onChange={setValue2} multiline />
+        </Row>
 
-              {
-                title: 'Options',
-                tagName: 'Checkbox',
-                items: [
-                  'clearable',
-                  'textHelperTop',
-                  'disabled',
-                  'multiline',
-                  'required',
-                  'icon',
-                  'helperChecked',
-                  'placeholder',
-                ],
-              },
+        <Row>
+          <TextField label="Disabled" value={useValue3} onChange={setValue3} disabled />
+        </Row>
 
-              {
-                title: 'Options',
-                tagName: 'Radio',
-                optionTarget: 'size',
-                items: ['small', 'medium', 'large'],
-              },
-            ]}
+        <Row>
+          <TextField label="Mask - CNPJ" value={useValue4} onChange={setValue4} type="cnpj" />
+        </Row>
+
+        <Row>
+          <TextField label="Mask - CPF" value={useValue8} onChange={setValue8} type="cpf" />
+        </Row>
+
+        <Row>
+          <TextField
+            label="Custom"
+            value={useValue9}
+            onChange={setValue9}
+            placeholder="Digite uma mascára"
           />
-        </Content>
-      </div>
-    </div>
+        </Row>
+
+        <Row>
+          <TextField
+            label="Mask - Custom"
+            value={useValue5}
+            onChange={setValue5}
+            mask={useValue9}
+          />
+        </Row>
+
+        <Row>
+          <TextField label="Loading" value={useValue6} onChange={setValue6} loading />
+        </Row>
+      </Grid>
+
+      <Row>
+        <Text value="Ranges" title />
+      </Row>
+      <Grid>
+        <Row style={{ minWidth: 300 }}>
+          <TextField label="Simples" value={useValue7} onChange={setValue7} type="range" />
+        </Row>
+
+        <Row style={{ minWidth: 300 }}>
+          <TextField label="Double" type="range" double />
+        </Row>
+
+        <Row style={{ minWidth: 300 }}>
+          <TextField label="Step" type="range" double step={20} />
+        </Row>
+      </Grid>
+    </>
   )
 }
 

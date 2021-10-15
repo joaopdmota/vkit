@@ -14,6 +14,7 @@ type SelectType = EventFieldType &
     searchable?: boolean
     icon?: string
     label?: string
+    loading?: boolean
     multiple?: boolean
     placeholder?: string
     requestHeaders?: { [key: string]: string }
@@ -26,6 +27,7 @@ type SelectType = EventFieldType &
     requestSearchParam?: string
     requestUri?: string
     required?: boolean
+    requiredSign?: boolean
     showTabSelecteds?: boolean
     status?: StatusEnum
     textHelper?: string
