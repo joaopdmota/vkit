@@ -13,7 +13,6 @@ import ToggleContent from './components/toggleContent'
 import style from 'theme/components/tabs/tabs.module.scss'
 
 const Tabs: React.FC<TabsType> = ({
-  activeElement,
   onChange,
   actions = [],
   solo,
@@ -24,12 +23,7 @@ const Tabs: React.FC<TabsType> = ({
   iconDir = 'right',
   elements,
 }) => {
-  const { changeTab, useTabs, useTabsStyle, tabsRef } = UseTabs(
-    activeElement,
-    onChange,
-    actions,
-    !!solo,
-  )
+  const { changeTab, useTabs, useTabsStyle, tabsRef } = UseTabs(onChange, actions, !!solo)
 
   const defaultClassName = {
     default: !solo && !rounded && !outlined,

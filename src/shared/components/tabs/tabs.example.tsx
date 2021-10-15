@@ -6,11 +6,53 @@ import Button from 'shared/components/button'
 
 import Tabs from './'
 
+type tabElementType = {
+  label: string
+  icon: string
+  disabled?: boolean
+  active?: boolean
+}
+
 const TabsExample: React.FC = () => {
   const [showTabs, setTabs] = useState(false)
+  const [useTabs, setTabsElements] = useState<tabElementType[]>([
+    {
+      label: 'Tab 1',
+      icon: 'question-mark-outline',
+    },
+    {
+      label: 'Tab 2',
+      icon: 'question-mark-outline',
+    },
+    {
+      label: 'Tab 3',
+      icon: 'question-mark-outline',
+    },
+    {
+      label: 'Tab 4',
+      icon: 'question-mark-outline',
+    },
+    {
+      label: 'Tab 5',
+      icon: 'question-mark-outline',
+    },
+    {
+      label: 'Tab 6',
+      icon: 'question-mark-outline',
+    },
+  ])
 
   const handleTab = (): void => {
     setTabs(!showTabs)
+  }
+
+  const handleTabChange = (index: number): void => {
+    const tabs = useTabs.map((t, i) => ({
+      ...t,
+      active: index === i,
+    }))
+
+    setTabsElements(tabs)
   }
 
   return (
@@ -19,9 +61,11 @@ const TabsExample: React.FC = () => {
         <div>
           <Button label="Show tabs" onClick={handleTab} />
         </div>
+
         {showTabs && (
           <Row style={{ padding: '20px 0px 0px 0px' }}>
             <Tabs
+              onChange={(index: number) => handleTabChange(index)}
               elements={[
                 <Text
                   key={0}
@@ -101,32 +145,7 @@ const TabsExample: React.FC = () => {
                   iconDir="right"
                 />,
               ]}
-              actions={[
-                {
-                  label: 'Tab 1',
-                  icon: 'question-mark-outline',
-                },
-                {
-                  label: 'Tab 2',
-                  icon: 'question-mark-outline',
-                },
-                {
-                  label: 'Tab 3',
-                  icon: 'question-mark-outline',
-                },
-                {
-                  label: 'Tab 4',
-                  icon: 'question-mark-outline',
-                },
-                {
-                  label: 'Tab 5',
-                  icon: 'question-mark-outline',
-                },
-                {
-                  label: 'Tab 6',
-                  icon: 'question-mark-outline',
-                },
-              ]}
+              actions={useTabs}
             />
           </Row>
         )}
