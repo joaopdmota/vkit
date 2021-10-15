@@ -105,32 +105,26 @@ const TabsExample: React.FC = () => {
                 {
                   label: 'Tab 1',
                   icon: 'question-mark-outline',
-                  disabled: true,
                 },
                 {
                   label: 'Tab 2',
                   icon: 'question-mark-outline',
-                  disabled: true,
                 },
                 {
                   label: 'Tab 3',
                   icon: 'question-mark-outline',
-                  disabled: true,
                 },
                 {
                   label: 'Tab 4',
                   icon: 'question-mark-outline',
-                  disabled: true,
                 },
                 {
                   label: 'Tab 5',
                   icon: 'question-mark-outline',
-                  disabled: true,
                 },
                 {
                   label: 'Tab 6',
                   icon: 'question-mark-outline',
-                  active: true,
                 },
               ]}
             />

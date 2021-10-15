@@ -9,12 +9,16 @@ import { WrapField } from '../builder/container/field'
 import { classesBuilder } from 'shared/utils'
 import style from 'theme/components/webform/textField.module.scss'
 
+import { Loader } from 'components'
+import { Row } from 'context'
+
 const TextField: React.FC<TextFieldType> = ({
   clearable,
   disabled,
   icon,
   label,
   large,
+  loading,
   medium,
   multiline,
   onBlur,
@@ -126,9 +130,22 @@ const TextField: React.FC<TextFieldType> = ({
         status={ttfStatus}
         statusOrigin={status}
         step={step}
-        value={ttfValue}
         textHelper={ttfTextHelper}
+        value={ttfValue}
         {...handles}
+        {...(loading && {
+          contentRight: (
+            <Row
+              style={{
+                marginRight: 12,
+                padding: 0,
+                alignSelf: 'center',
+              }}
+            >
+              <Loader color="default" />
+            </Row>
+          ),
+        })}
       />
     </WrapField>
   )

@@ -23,6 +23,7 @@ ReactDOM.render(
     <StructurePage>
       <SliderExample />
       <BreadcrumbExample />
+      <TextFieldExample />
       <SelectExample />
       <FloatLayerExample />
       <TabsExample />
@@ -35,7 +36,6 @@ ReactDOM.render(
       <TextExample />
       <BoxExample />
       <ListExample />
-      <TextFieldExample />
     </StructurePage>
   </React.StrictMode>,
   document.getElementById('root'),

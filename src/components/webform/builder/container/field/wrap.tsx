@@ -7,6 +7,7 @@ type WrapFieldType = {
   footer?: ReactNode
   label?: string
   required?: boolean
+  requiredSign?: boolean
   style?: { [key: string]: string }
   textHelper?: string
   textHelperTop?: boolean
@@ -20,6 +21,7 @@ const WrapField: React.FC<WrapFieldType> = ({
   footer,
   label,
   required,
+  requiredSign,
   style,
   textHelper,
   textHelperTop,
@@ -30,7 +32,7 @@ const WrapField: React.FC<WrapFieldType> = ({
       {label && (
         <span className={style?.label}>
           {label}
-          {required && <span className={style?.requiredSign}>*</span>}
+          {(requiredSign || required) && <span className={style?.requiredSign}>*</span>}
         </span>
       )}
 
