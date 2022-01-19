@@ -27,7 +27,7 @@ const Dialog: React.FC<DialogType> = ({
   shadow,
   size = 'small',
   title,
-  onClose = () => {}
+  onClose = () => {},
 }) => {
   const {
     useOpenDialog,
