@@ -63,9 +63,7 @@ const apiService = {
         body,
       })
 
-      const bodyResponse = await response.text()
-
-      const responseData = bodyResponse ? await response.json() : {}
+      const responseData = response.status === 204 ? {} : await response.json()
 
       const data = response.ok ? responseData : fetchOnError(response)
 
