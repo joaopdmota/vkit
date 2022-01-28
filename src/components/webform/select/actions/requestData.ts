@@ -43,15 +43,15 @@ export const requestData = async ({
       params,
     })
 
-    const { array: items = [], path: pathFound } =
-      findArray(response, rootPath || '') || {}
+    const { array: items = [], path: pathFound } = findArray(response, rootPath || '') || {}
 
     const valuePath = responseValue.replace(`${pathFound}.`, '')
 
     const content = items.map((item: Object) => ({
-      text: typeof responseText === 'function'
-        ? responseText(item) :
-        getByPath(item, responseText.replace(`${pathFound}.`, '')),
+      text:
+        typeof responseText === 'function'
+          ? responseText(item)
+          : getByPath(item, responseText.replace(`${pathFound}.`, '')),
       value: getByPath(item, valuePath),
     }))
 
