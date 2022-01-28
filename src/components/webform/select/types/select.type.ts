@@ -21,7 +21,7 @@ type SelectType = EventFieldType &
     requestPageParam?: string
     requestParams?: { [key: string]: string }
     requestResponseRootPath?: string
-    requestResponseText?: string
+    requestResponseText?: string | ((item: any) => string)
     requestResponseValue?: string
     requestRouter?: string
     requestSearchParam?: string
