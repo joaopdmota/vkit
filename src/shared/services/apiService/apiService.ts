@@ -2,7 +2,7 @@ import { ApiServiceType, RequestType } from './types/apiService.type'
 
 const options: ApiServiceType = {
   headers: new Headers({}),
-  onError: ({ }) => { },
+  onError: ({}) => {},
   uri: '',
   timeout: 10000,
 }
@@ -20,7 +20,7 @@ const apiService = {
       mode: 'cors',
     },
     params = {},
-    onError = () => { },
+    onError = () => {},
   }: RequestType): Promise<any> {
     const mountQuery = (
       paramsFilter: { [key: string]: string | string[] },
@@ -65,9 +65,9 @@ const apiService = {
 
       const bodyResponse = await response.text()
 
-      const data = response.ok && bodyResponse
-        ? await response.json() || {}
-        : fetchOnError(response)
+      const responseData = bodyResponse ? await response.json() : {}
+
+      const data = response.ok ? responseData : fetchOnError(response)
 
       return data
     } catch (error) {
