@@ -3,6 +3,7 @@ import { requestData, deepCopy } from '../actions'
 
 interface useListInterface {
   autoRequest?: boolean
+  onRequestFinish?: Function
   setContentList: Function
   options: {
     requestPageParam?: string
@@ -17,7 +18,12 @@ interface useListInterface {
   }
 }
 
-const useAutoRequest = ({ autoRequest, setContentList, options }: useListInterface): void => {
+const useAutoRequest = ({
+  autoRequest,
+  onRequestFinish,
+  setContentList,
+  options,
+}: useListInterface): void => {
   const started = useRef<boolean>(false)
 
   useEffect((): void => {
@@ -54,7 +60,10 @@ const useAutoRequest = ({ autoRequest, setContentList, options }: useListInterfa
           uri: requestUri,
         })
 
-        setContentList(content?.length ? content : null)
+        const listContent = content?.length ? content : null
+
+        setContentList(listContent)
+        onRequestFinish?.(listContent, params)
       } catch (error) {
         setContentList(null)
       }
@@ -69,7 +78,7 @@ const useAutoRequest = ({ autoRequest, setContentList, options }: useListInterfa
     ) {
       loadPage()
     }
-  }, [autoRequest, options, setContentList])
+  }, [autoRequest, options, setContentList, onRequestFinish])
 }
 
 export default useAutoRequest

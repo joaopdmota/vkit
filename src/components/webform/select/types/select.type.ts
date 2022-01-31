@@ -33,5 +33,6 @@ type SelectType = EventFieldType &
     textHelper?: string
     textHelperTop?: boolean
     value: string | string[]
+    onRequestFinish?: Function
   }
 export default SelectType
