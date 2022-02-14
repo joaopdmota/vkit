@@ -27,6 +27,7 @@ const Dialog: React.FC<DialogType> = ({
   shadow,
   size = 'small',
   title,
+  onClose = () => {},
 }) => {
   const {
     useOpenDialog,
@@ -35,7 +36,7 @@ const Dialog: React.FC<DialogType> = ({
     useHeightBody,
     onOpenDialog,
     onCloseDialog,
-  } = UseDialog({ isAutoOpen: autoOpen, isSize: size })
+  } = UseDialog({ isAutoOpen: autoOpen, isSize: size, onClose })
 
   const classNamesDialog = {
     dialog: true,

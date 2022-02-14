@@ -18,6 +18,7 @@ type DialogType = {
   shadow?: boolean
   size?: 'minor' | 'small' | 'medium' | 'larger' | 'xLarger'
   title?: ReactElement | string
+  onClose?: Function
 }
 
 export default DialogType
