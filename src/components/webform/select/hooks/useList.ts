@@ -24,6 +24,7 @@ type useListType = requestType & {
   useSelecteds?: DataType[] | null
   listItemHeight: number
   value?: string | string[]
+  setSelecteds: Function
 }
 
 const useList = ({
@@ -41,8 +42,9 @@ const useList = ({
   requestSearchParam,
   requestUri,
   useSelecteds,
+  setSelecteds,
 }: useListType): {
-  getElement: ({}: HTMLDivElement) => void
+  getElement: Function
   isChecked: Function
   isFinished: boolean
   isRequestable: boolean
@@ -139,6 +141,15 @@ const useList = ({
     requestUri,
     useTerm,
   ])
+
+  useEffect(() => {
+    if (useSelecteds?.length || !value) {
+      return
+    }
+    const selecteds = (useContentList || [])
+      .filter((item) => (value || []).includes(item.value as string))
+    setSelecteds(selecteds)
+  }, [value, useContentList, setSelecteds, useSelecteds?.length])
 
   return {
     ...listSize,

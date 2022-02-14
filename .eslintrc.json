@@ -44,7 +44,6 @@
         "ignoreStrings": true
       }
     ],
-    "no-console": "error",
     "no-dupe-class-members": "error",
     "no-undef": "error",
     "react/static-property-placement": "error",
