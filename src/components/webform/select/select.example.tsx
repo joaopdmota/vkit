@@ -7,9 +7,9 @@ import Text from 'shared/components/text'
 import Select from './'
 
 const SelectExample: React.FC = () => {
-  const [useValue1, setValue1] = useState<string | string[]>('')
-  const [useValue2, setValue2] = useState<string | string[]>('')
-  const [useValue3, setValue3] = useState<string | string[]>('')
+  const [useValue1, setValue1] = useState<string | string[]>('text 0')
+  const [useValue2, setValue2] = useState<string | string[]>(['text '])
+  const [useValue3, setValue3] = useState<string | string[]>(['tt0372784'])
 
   return (
     <>
