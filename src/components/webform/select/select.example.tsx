@@ -57,7 +57,7 @@ const SelectExample: React.FC = () => {
             multiple
             autoRequest
             requestPageParam="page"
-            requestResponseText="Title"
+            requestResponseText={(item: any): string => `${item.Title} - ${item.Year}`}
             requestResponseValue="imdbID"
             requestRouter="/"
             requestResponseRootPath="Search"
