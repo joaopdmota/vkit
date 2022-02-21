@@ -69,7 +69,7 @@ const Select: React.FC<SelectType> = ({
     useStatus,
     useTextHelper,
     wrapperRef,
-    setSelecteds
+    setSelecteds,
   } = useSelect({
     autocomplete,
     onBlur,
@@ -80,7 +80,7 @@ const Select: React.FC<SelectType> = ({
     onKeyUp,
     status,
     textHelper,
-    value
+    value,
   })
 
   const {
@@ -115,7 +115,7 @@ const Select: React.FC<SelectType> = ({
     requestUri,
     value,
     useSelecteds,
-    setSelecteds
+    setSelecteds,
   })
 
   const classNames = {

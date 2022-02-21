@@ -146,8 +146,9 @@ const useList = ({
     if (useSelecteds?.length || !value) {
       return
     }
-    const selecteds = (useContentList || [])
-      .filter((item) => (value || []).includes(item.value as string))
+    const selecteds = (useContentList || []).filter((item) =>
+      (value || []).includes(item.value as string),
+    )
     setSelecteds(selecteds)
   }, [value, useContentList, setSelecteds, useSelecteds?.length])
 
