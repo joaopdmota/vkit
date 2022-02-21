@@ -20,6 +20,7 @@ type requestType = {
 
 type useListType = requestType & {
   autoRequest?: boolean
+  onRequestFinish?: Function
   data?: DataType[] | null
   useSelecteds?: DataType[] | null
   listItemHeight: number
@@ -29,6 +30,7 @@ type useListType = requestType & {
 
 const useList = ({
   autoRequest,
+  onRequestFinish,
   data,
   listItemHeight,
   value,
@@ -91,6 +93,7 @@ const useList = ({
     autoRequest,
     options: useOptions,
     setContentList,
+    onRequestFinish,
   })
 
   const { useTerm, setTerm, onSearch } = useSearch({

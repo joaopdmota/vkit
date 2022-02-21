@@ -51,23 +51,23 @@ const apiService = {
       window.stop()
     }, this.timeout)
 
-    const fetchOnError = (response: Response): {} => {
+    const fetchOnError = (response: Response): void => {
       onError?.(response)
-      return {}
     }
 
-    try {
-      const response = await fetch(`${this.uri}${router}`, {
-        headers: this.headers,
-        ...options,
-        body,
-      })
-      const data = response?.ok ? (await response?.json()) || {} : fetchOnError(response)
+    const response = await fetch(`${this.uri}${router}`, {
+      headers: this.headers,
+      ...options,
+      body,
+    })
 
-      return data
-    } catch (error) {
-      this.onError?.(error as Error)
-    }
+    const responseClone = response.clone()
+    const hasData = await responseClone.text()
+    const responseData = hasData ? await response.json() : {}
+
+    const data = response.ok ? responseData : fetchOnError(response)
+
+    return data
   },
 }
 
