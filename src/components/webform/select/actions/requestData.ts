@@ -8,7 +8,7 @@ interface requestDataInterface {
   headers?: Headers
   params?: { [key: string]: string | number }
   prevData?: DataType[]
-  responseText: string
+  responseText: string | Function
   responseValue: string
   rootPath?: string
   router: string
@@ -43,14 +43,15 @@ export const requestData = async ({
       params,
     })
 
-    const { array: items = [], path: pathFound } =
-      findArray(response, rootPath || responseText) || {}
+    const { array: items = [], path: pathFound } = findArray(response, rootPath || '') || {}
 
-    const textPath = responseText.replace(`${pathFound}.`, '')
     const valuePath = responseValue.replace(`${pathFound}.`, '')
 
     const content = items.map((item: Object) => ({
-      text: getByPath(item, textPath),
+      text:
+        typeof responseText === 'function'
+          ? responseText(item)
+          : getByPath(item, responseText.replace(`${pathFound}.`, '')),
       value: getByPath(item, valuePath),
     }))
 

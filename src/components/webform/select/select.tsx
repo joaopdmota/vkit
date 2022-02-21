@@ -69,6 +69,7 @@ const Select: React.FC<SelectType> = ({
     useStatus,
     useTextHelper,
     wrapperRef,
+    setSelecteds
   } = useSelect({
     autocomplete,
     onBlur,
@@ -79,6 +80,7 @@ const Select: React.FC<SelectType> = ({
     onKeyUp,
     status,
     textHelper,
+    value
   })
 
   const {
@@ -113,6 +115,7 @@ const Select: React.FC<SelectType> = ({
     requestUri,
     value,
     useSelecteds,
+    setSelecteds
   })
 
   const classNames = {
@@ -220,7 +223,7 @@ const Select: React.FC<SelectType> = ({
   )
 
   useEffect(() => {
-    if (value.length) {
+    if (value) {
       if (!Array.isArray(value)) {
         setValueSingle(value)
       }

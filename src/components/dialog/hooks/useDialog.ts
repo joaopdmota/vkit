@@ -3,11 +3,13 @@ import { useState, useCallback, useEffect } from 'react'
 interface UseDialogInterface {
   isAutoOpen?: boolean
   isSize: string
+  onClose: Function
 }
 
 const UseDialog = ({
   isAutoOpen,
   isSize,
+  onClose,
 }: UseDialogInterface): {
   useOpenDialog: boolean
   usePersistent: boolean
@@ -31,19 +33,23 @@ const UseDialog = ({
     })
   }, [])
 
-  const onCloseDialog = useCallback((isLock: boolean) => {
-    if (!isLock) {
-      setShowDialog(false)
-      setTimeout(() => {
-        setOpenDialog(false)
-      }, 500)
-    } else {
-      setPersistent(true)
-      setTimeout(() => {
-        setPersistent(false)
-      }, 500)
-    }
-  }, [])
+  const onCloseDialog = useCallback(
+    (isLock: boolean) => {
+      if (!isLock) {
+        setShowDialog(false)
+        setTimeout(() => {
+          setOpenDialog(false)
+        }, 500)
+        onClose()
+      } else {
+        setPersistent(true)
+        setTimeout(() => {
+          setPersistent(false)
+        }, 500)
+      }
+    },
+    [onClose],
+  )
 
   useEffect(() => {
     if (isAutoOpen) {
