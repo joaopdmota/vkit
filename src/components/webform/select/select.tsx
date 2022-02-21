@@ -55,6 +55,7 @@ const Select: React.FC<SelectType> = ({
   textHelper,
   textHelperTop,
   value,
+  onRequestFinish,
 }) => {
   const listItemHeight = 40
 
@@ -69,7 +70,7 @@ const Select: React.FC<SelectType> = ({
     useStatus,
     useTextHelper,
     wrapperRef,
-    setSelecteds
+    setSelecteds,
   } = useSelect({
     autocomplete,
     onBlur,
@@ -80,7 +81,7 @@ const Select: React.FC<SelectType> = ({
     onKeyUp,
     status,
     textHelper,
-    value
+    value,
   })
 
   const {
@@ -102,6 +103,7 @@ const Select: React.FC<SelectType> = ({
     useTermSelecteds,
   } = useList({
     autoRequest,
+    onRequestFinish,
     data,
     listItemHeight,
     requestHeaders,
@@ -115,7 +117,7 @@ const Select: React.FC<SelectType> = ({
     requestUri,
     value,
     useSelecteds,
-    setSelecteds
+    setSelecteds,
   })
 
   const classNames = {
@@ -210,7 +212,9 @@ const Select: React.FC<SelectType> = ({
     (newValue: string) => {
       const canAdd = useSelecteds?.every((item) => item.value !== newValue)
       if (canAdd) {
-        const selected = (data || []).find((item) => item.value === newValue)
+        const dataOptions = data || useContentList || []
+
+        const selected = dataOptions.find((item) => item.value === newValue)
 
         if (selected) {
           handles.onChange?.(selected, newValue, multiple)
@@ -219,7 +223,7 @@ const Select: React.FC<SelectType> = ({
         }
       }
     },
-    [handles, data, useSelecteds, multiple, onClear],
+    [handles, data, useSelecteds, multiple, onClear, useContentList],
   )
 
   useEffect(() => {
